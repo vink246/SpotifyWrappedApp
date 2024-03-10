@@ -85,6 +85,30 @@
         <!-- UpdateVerifyActivity -->
         <activity android:name=".UpdateVerifyActivity" />
 
+        <!-- FriendArtistCompDarkActivity -->
+        <activity android:name=".FriendArtistCompDarkActivity" />
+
+        <!-- FriendArtistCompLightActivity -->
+        <activity android:name=".FriendArtistCompLightActivity" />
+
+        <!-- FriendCompDarkActivity -->
+        <activity android:name=".FriendCompDarkActivity" />
+
+        <!-- FriendCompLightActivity -->
+        <activity android:name=".FriendCompLightActivity" />
+
+        <!-- TopArtistDarkActivity -->
+        <activity android:name=".TopArtistDarkActivity" />
+
+        <!-- TopArtistLightActivity -->
+        <activity android:name=".TopArtistLightActivity" />
+
+        <!-- WrappedDarkActivity -->
+        <activity android:name=".WrappedDarkActivity" />
+
+        <!-- WrappedLightActivity -->
+        <activity android:name=".WrappedLightActivity" />
+
     </application>
 
 </manifest>
