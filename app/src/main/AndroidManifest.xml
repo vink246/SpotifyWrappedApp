@@ -21,6 +21,70 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- LoginActivity -->
+        <activity android:name=".LoginActivity" />
+
+        <!-- LoginDarkActivity -->
+        <activity android:name=".LoginDarkActivity" />
+
+        <!-- CreateAccountActivity -->
+        <activity android:name=".CreateAccountActivity" />
+
+        <!-- CreateAccountDarkActivity -->
+        <activity android:name=".CreateAccountDarkActivity" />
+
+        <!-- CreateVerifyActivity -->
+        <activity android:name=".CreateVerifyActivity" />
+
+        <!-- DeleteAccountActivity -->
+        <activity android:name=".DeleteAccountActivity" />
+
+        <!-- DeleteAccountDarkActivity -->
+        <activity android:name=".DeleteAccountDarkActivity" />
+
+        <!-- DeleteVerifyActivity -->
+        <activity android:name=".DeleteVerifyActivity" />
+
+        <!-- SettingsDarkAltActivity -->
+        <activity android:name=".SettingsDarkAltActivity" />
+
+        <!-- SettingsDarkOneActivity -->
+        <activity android:name=".SettingsDarkOneActivity" />
+
+        <!-- SettingsDarkTwoActivity -->
+        <activity android:name=".SettingsDarkTwoActivity" />
+
+        <!-- SettingsDarkThreeActivity -->
+        <activity android:name=".SettingsDarkThreeActivity" />
+
+        <!-- SettingsDarkFourActivity -->
+        <activity android:name=".SettingsDarkFourActivity" />
+
+        <!-- SettingsLightAltActivity -->
+        <activity android:name=".SettingsLightAltActivity" />
+
+        <!-- SettingsLightOneActivity -->
+        <activity android:name=".SettingsLightOneActivity" />
+
+        <!-- SettingsLightTwoActivity -->
+        <activity android:name=".SettingsLightTwoActivity" />
+
+        <!-- SettingsLightThreeActivity -->
+        <activity android:name=".SettingsLightThreeActivity" />
+
+        <!-- SettingsLightFourActivity -->
+        <activity android:name=".SettingsLightFourActivity" />
+
+        <!-- UpdateAccountActivity -->
+        <activity android:name=".UpdateAccountActivity" />
+
+        <!-- UpdateAccountDarkActivity -->
+        <activity android:name=".UpdateAccountDarkActivity" />
+
+        <!-- UpdateVerifyActivity -->
+        <activity android:name=".UpdateVerifyActivity" />
+
     </application>
 
 </manifest>
