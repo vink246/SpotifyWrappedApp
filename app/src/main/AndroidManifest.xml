@@ -47,7 +47,16 @@
         <activity android:name=".DeleteVerifyActivity" />
 
         <!-- SettingsDarkAltActivity -->
-        <activity android:name=".SettingsDarkAltActivity" />
+        <activity android:name=".SettingsDarkAltActivity1" />
+
+        <!-- SettingsDarkAltActivity -->
+        <activity android:name=".SettingsDarkAltActivity2" />
+
+        <!-- SettingsDarkAltActivity -->
+        <activity android:name=".SettingsDarkAltActivity3" />
+
+        <!-- SettingsDarkAltActivity -->
+        <activity android:name=".SettingsDarkAltActivity4" />
 
         <!-- SettingsDarkOneActivity -->
         <activity android:name=".SettingsDarkOneActivity" />
@@ -62,7 +71,16 @@
         <activity android:name=".SettingsDarkFourActivity" />
 
         <!-- SettingsLightAltActivity -->
-        <activity android:name=".SettingsLightAltActivity" />
+        <activity android:name=".SettingsLightAltActivity1" />
+
+        <!-- SettingsLightAltActivity -->
+        <activity android:name=".SettingsLightAltActivity2" />
+
+        <!-- SettingsLightAltActivity -->
+        <activity android:name=".SettingsLightAltActivity3" />
+
+        <!-- SettingsLightAltActivity -->
+        <activity android:name=".SettingsLightAltActivity4" />
 
         <!-- SettingsLightOneActivity -->
         <activity android:name=".SettingsLightOneActivity" />

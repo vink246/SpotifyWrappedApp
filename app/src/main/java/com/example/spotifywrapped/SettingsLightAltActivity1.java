@@ -7,30 +7,30 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CreateAccountDarkActivity extends AppCompatActivity {
+public class SettingsLightAltActivity1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_account_dark);
+        setContentView(R.layout.settingslightalt1);
 
-        // Button to navigate to SettingsDarkAltActivity1
-        Button settingsButton1 = findViewById(R.id.button18);
-        settingsButton1.setOnClickListener(new View.OnClickListener() {
+        // Button to navigate to SettingsDarkAltActivity
+        Button settingsDarkButton = findViewById(R.id.button5);
+        settingsDarkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start SettingsDarkAltActivity1 when the button is clicked
-                startActivity(new Intent(CreateAccountDarkActivity.this, SettingsDarkAltActivity2.class));
+                // Start SettingsDarkAltActivity when the button is clicked
+                startActivity(new Intent(SettingsLightAltActivity1.this, SettingsDarkAltActivity1.class));
             }
         });
 
         // Button to navigate to LoginActivity
-        Button loginButton = findViewById(R.id.button20);
+        Button loginButton = findViewById(R.id.button6);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start LoginActivity when the button is clicked
-                startActivity(new Intent(CreateAccountDarkActivity.this, LoginDarkActivity.class));
+                startActivity(new Intent(SettingsLightAltActivity1.this, LoginActivity.class));
             }
         });
     }

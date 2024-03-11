@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int LOADING_SCREEN_DELAY = 3000; // Delay in milliseconds (3 seconds)
+    private static final int LOADING_SCREEN_DELAY = 1000; // Delay in milliseconds (3 seconds)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
