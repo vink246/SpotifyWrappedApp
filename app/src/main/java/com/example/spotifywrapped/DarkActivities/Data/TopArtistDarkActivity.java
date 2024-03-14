@@ -1,4 +1,4 @@
-package com.example.spotifywrapped.General.DarkActivities.Data;
+package com.example.spotifywrapped.DarkActivities.Data;
 
 import android.os.Bundle;
 
@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.R;
 
-public class WrappedDarkActivity extends AppCompatActivity {
+public class TopArtistDarkActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wrappeddark);
+        setContentView(R.layout.topartistdark);
     }
 }

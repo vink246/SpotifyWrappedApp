@@ -1,4 +1,4 @@
-package com.example.spotifywrapped.General.LightActivities.LoginRelated;
+package com.example.spotifywrapped.LightActivities.LoginRelated;
 
 import androidx.appcompat.app.AppCompatActivity;
 
