@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SpotifyWrapped"
         tools:targetApi="31">
         <activity
-            android:name="General.MainActivity"
+            android:name=".General.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,109 +23,56 @@
         </activity>
 
         <!-- LoginActivity -->
-        <activity android:name="LightActivities.LoginRelated.LoginActivity" />
-
-        <!-- LoginDarkActivity -->
-        <activity android:name="DarkActivities.LoginRelated.LoginDarkActivity" />
-
-        <!-- CreateAccountActivity -->
-        <activity android:name="LightActivities.LoginRelated.CreateAccountActivity" />
-
-        <!-- CreateAccountDarkActivity -->
-        <activity android:name="DarkActivities.LoginRelated.CreateAccountDarkActivity" />
-
-        <!-- CreateVerifyActivity -->
-        <activity android:name="General.CreateVerifyActivity" />
-
-        <!-- DeleteAccountActivity -->
-        <activity android:name="LightActivities.LoginRelated.DeleteAccountActivity" />
-
-        <!-- DeleteAccountDarkActivity -->
-        <activity android:name="DarkActivities.LoginRelated.DeleteAccountDarkActivity" />
-
-        <!-- DeleteVerifyActivity -->
-        <activity android:name="General.DeleteVerifyActivity" />
-
-        <!-- SettingsDarkAltActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkAltActivity1" />
-
-        <!-- SettingsDarkAltActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkAltActivity2" />
-
-        <!-- SettingsDarkAltActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkAltActivity3" />
-
-        <!-- SettingsDarkAltActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkAltActivity4" />
+        <activity android:name=".General.LightActivities.LoginRelated.LoginActivity" />
 
         <!-- SettingsDarkOneActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkOneActivity" />
+        <activity android:name=".General.DarkActivities.Settings.SettingsDarkOneActivity" />
 
         <!-- SettingsDarkTwoActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkTwoActivity" />
+        <activity android:name=".General.DarkActivities.Settings.SettingsDarkTwoActivity" />
 
         <!-- SettingsDarkThreeActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkThreeActivity" />
+        <activity android:name=".General.DarkActivities.Settings.SettingsDarkThreeActivity" />
 
         <!-- SettingsDarkFourActivity -->
-        <activity android:name="DarkActivities.Settings.SettingsDarkFourActivity" />
-
-        <!-- SettingsLightAltActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightAltActivity1" />
-
-        <!-- SettingsLightAltActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightAltActivity2" />
-
-        <!-- SettingsLightAltActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightAltActivity3" />
-
-        <!-- SettingsLightAltActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightAltActivity4" />
+        <activity android:name=".General.DarkActivities.Settings.SettingsDarkFourActivity" />
 
         <!-- SettingsLightOneActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightOneActivity" />
+        <activity android:name=".General.LightActivities.Settings.SettingsLightOneActivity" />
 
         <!-- SettingsLightTwoActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightTwoActivity" />
+        <activity android:name=".General.LightActivities.Settings.SettingsLightTwoActivity" />
 
         <!-- SettingsLightThreeActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightThreeActivity" />
+        <activity android:name=".General.LightActivities.Settings.SettingsLightThreeActivity" />
 
         <!-- SettingsLightFourActivity -->
-        <activity android:name="LightActivities.Settings.SettingsLightFourActivity" />
+        <activity android:name=".General.LightActivities.Settings.SettingsLightFourActivity" />
 
-        <!-- UpdateAccountActivity -->
-        <activity android:name="LightActivities.LoginRelated.UpdateAccountActivity" />
-
-        <!-- UpdateAccountDarkActivity -->
-        <activity android:name="DarkActivities.LoginRelated.UpdateAccountDarkActivity" />
-
-        <!-- UpdateVerifyActivity -->
-        <activity android:name="General.UpdateVerifyActivity" />
 
         <!-- FriendArtistCompDarkActivity -->
-        <activity android:name="DarkActivities.Data.FriendArtistCompDarkActivity" />
+        <activity android:name=".General.DarkActivities.Data.FriendArtistCompDarkActivity" />
 
         <!-- FriendArtistCompLightActivity -->
-        <activity android:name="LightActivities.Data.FriendArtistCompLightActivity" />
+        <activity android:name=".General.LightActivities.Data.FriendArtistCompLightActivity" />
 
         <!-- FriendCompDarkActivity -->
-        <activity android:name="DarkActivities.Data.FriendCompDarkActivity" />
+        <activity android:name=".General.DarkActivities.Data.FriendCompDarkActivity" />
 
         <!-- FriendCompLightActivity -->
-        <activity android:name="LightActivities.Data.FriendCompLightActivity" />
+        <activity android:name=".General.LightActivities.Data.FriendCompLightActivity" />
 
         <!-- TopArtistDarkActivity -->
-        <activity android:name="DarkActivities.Data.TopArtistDarkActivity" />
+        <activity android:name=".General.DarkActivities.Data.TopArtistDarkActivity" />
 
         <!-- TopArtistLightActivity -->
-        <activity android:name="LightActivities.Data.TopArtistLightActivity" />
+        <activity android:name=".General.LightActivities.Data.TopArtistLightActivity" />
 
         <!-- WrappedDarkActivity -->
-        <activity android:name="DarkActivities.Data.WrappedDarkActivity" />
+        <activity android:name=".General.DarkActivities.Data.WrappedDarkActivity" />
 
         <!-- WrappedLightActivity -->
-        <activity android:name="LightActivities.Data.WrappedLightActivity" />
+        <activity android:name=".General.LightActivities.Data.WrappedLightActivity" />
 
     </application>
 
