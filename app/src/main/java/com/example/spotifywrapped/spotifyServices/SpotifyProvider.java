@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.spotifywrapped.models.Artist;
+import com.example.spotifywrapped.models.Track;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
@@ -93,7 +95,7 @@ public class SpotifyProvider implements Serializable {
     /**
      * Asynchronous task to fetch the top tracks from the Spotify API.
      */
-    private static class FetchTopTracksTask extends AsyncTask<Integer, Void, ArrayList<String>> {
+    private static class FetchTopTracksTask extends AsyncTask<Integer, Void, ArrayList<Track>> {
 
         private OnTopTracksListener listener;
 
@@ -102,10 +104,10 @@ public class SpotifyProvider implements Serializable {
         }
 
         @Override
-        protected ArrayList<String> doInBackground(Integer... params) {
+        protected ArrayList<Track> doInBackground(Integer... params) {
             int numTracks = params[0];
             int startPos = params[1];
-            ArrayList<String> topTracks = new ArrayList<>();
+            ArrayList<Track> topTracks = new ArrayList<>();
 
             try {
                 URL url = new URL(String.format(Locale.ENGLISH, "https://api.spotify.com/v1/me/top/tracks?limit=%d&offset=%d", numTracks, startPos));
@@ -128,7 +130,18 @@ public class SpotifyProvider implements Serializable {
                     JSONArray items = jsonResponse.getJSONArray("items");
                     for (int i = 0; i < items.length(); i++) {
                         String trackName = items.getJSONObject(i).getString("name");
-                        topTracks.add(trackName);
+                        String image = items.getJSONObject(i).getJSONObject("album").getJSONArray("images").getJSONObject(0).getString("url");
+                        long length = items.getJSONObject(i).getInt("duration_ms");
+                        int popularity = items.getJSONObject(i).getInt("popularity");
+                        String uri = items.getJSONObject(i).getString("uri");
+                        String previewUrl = items.getJSONObject(i).getString("preview_url");
+                        ArrayList<String> artists = new ArrayList<>();
+                        JSONArray artistList = items.getJSONObject(i).getJSONArray("artists");
+                        for (int j = 0; j < artistList.length(); j++) {
+                            String artistName = artistList.getJSONObject(j).getString("name");
+                            artists.add(artistName);
+                        }
+                        topTracks.add(new Track(artists, length, uri, trackName, popularity, image, previewUrl));
                     }
 
                 } else {
@@ -144,7 +157,7 @@ public class SpotifyProvider implements Serializable {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> topTracks) {
+        protected void onPostExecute(ArrayList<Track> topTracks) {
             if (listener != null) {
                 listener.onTopTracksReceived(topTracks);
             }
@@ -160,7 +173,7 @@ public class SpotifyProvider implements Serializable {
          *
          * @param topTracks The list of top tracks.
          */
-        void onTopTracksReceived(ArrayList<String> topTracks);
+        void onTopTracksReceived(ArrayList<Track> topTracks);
     }
 
 }
