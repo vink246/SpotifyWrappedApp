@@ -75,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
                     spotifyProvider.getTopTracks(10, 0, topTracks -> {
                         Log.d("SpotifyProvider", topTracks.toString());
                     });
+                    // This is a test to get the top 10 artists
+                    spotifyProvider.getTopArtists(10, 0, topArtists -> {
+                        Log.d("SpotifyProvider", topArtists.toString());
+                    });
                     // TODO: Navigate to home page activity after
                     break;
 

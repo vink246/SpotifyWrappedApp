@@ -176,4 +176,97 @@ public class SpotifyProvider implements Serializable {
         void onTopTracksReceived(ArrayList<Track> topTracks);
     }
 
+    /**
+     * Retrieves the top artists from the Spotify API asynchronously and notifies the listener
+     * when the operation is complete.
+     *
+     * @param numArtists The number of top artists to retrieve.
+     * @param startPos   The starting position for retrieving top artists.
+     * @param listener   The listener to be notified when the top artists are received.
+     */
+    public void getTopArtists(int numArtists, int startPos, OnTopArtistsListener listener) {
+        new FetchTopArtistsTask(listener).execute(numArtists, startPos);
+    }
+
+    /**
+     * Asynchronous task to fetch the top artists from the Spotify API.
+     */
+    private static class FetchTopArtistsTask extends AsyncTask<Integer, Void, ArrayList<Artist>> {
+
+        private OnTopArtistsListener listener;
+
+        public FetchTopArtistsTask(OnTopArtistsListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        protected ArrayList<Artist> doInBackground(Integer... params) {
+            int numArtists = params[0];
+            int startPos = params[1];
+            ArrayList<Artist> topArtists = new ArrayList<>();
+
+            try {
+                URL url = new URL(String.format(Locale.ENGLISH, "https://api.spotify.com/v1/me/top/artists?limit=%d&offset=%d", numArtists, startPos));
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("Authorization", "Bearer " + accessToken);
+                int responseCode = con.getResponseCode();
+                System.out.println("GET Response Code :: " + responseCode);
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                    // Parse the response and add to topArtists ArrayList
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    JSONArray items = jsonResponse.getJSONArray("items");
+                    for (int i = 0; i < items.length(); i++) {
+                        String artistName = items.getJSONObject(i).getString("name");
+                        String image = items.getJSONObject(i).getJSONArray("images").getJSONObject(0).getString("url");
+                        int popularity = items.getJSONObject(i).getInt("popularity");
+                        ArrayList<String> genres = new ArrayList<>();
+                        JSONArray genreList = items.getJSONObject(i).getJSONArray("genres");
+                        for (int j = 0; j < genreList.length(); j++) {
+                            String genre = genreList.getString(j);
+                            genres.add(genre);
+                        }
+                        topArtists.add(new Artist(artistName, genres, popularity, image));
+                    }
+
+                } else {
+                    Log.d("SpotifyProvider", "GET request did not work");
+                }
+            } catch (IOException e) {
+                Log.d("SpotifyProvider", e.getMessage());
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            return topArtists;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Artist> topArtists) {
+            if (listener != null) {
+                listener.onTopArtistsReceived(topArtists);
+            }
+        }
+    }
+
+    /**
+     * Interface to listen for top artists retrieval events.
+     */
+    public interface OnTopArtistsListener {
+        /**
+         * Called when the top artists are received.
+         *
+         * @param topArtists The list of top artists.
+         */
+        void onTopArtistsReceived(ArrayList<Artist> topArtists);
+    }
+
 }
