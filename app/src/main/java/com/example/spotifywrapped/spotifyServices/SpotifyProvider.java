@@ -1,8 +1,11 @@
 package com.example.spotifywrapped.spotifyServices;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.android.appremote.api.ConnectionParams;
@@ -58,6 +61,18 @@ public class SpotifyProvider implements Serializable {
                     @Override
                     public void onFailure(Throwable throwable) {
                         Log.e("SpotifyProvider", throwable.getMessage(), throwable);
+                        try {
+                            Toast.makeText(context, "You need to install spotify on your device!",
+                                    Toast.LENGTH_LONG).show();
+                            Intent viewIntent =
+                                    new Intent("android.intent.action.VIEW",
+                                            Uri.parse("https://play.google.com/store/apps/details?id=com.spotify.music"));
+                            context.startActivity(viewIntent);
+                        } catch (Exception e) {
+                            Toast.makeText(context, "Unable to Connect",
+                                    Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
                     }
                 });
         SpotifyProvider.accessToken = accessToken;
