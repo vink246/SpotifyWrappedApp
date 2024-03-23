@@ -14,8 +14,6 @@ import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 
 public class HomeActivity extends AppCompatActivity {
 
-    SpotifyProvider spotifyProvider;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,17 +38,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, FriendCompLightActivity.class));
             }
-        });
-
-        spotifyProvider = SpotifyProvider.getInstance();
-
-        // This is a test to get the top 10 tracks (works but will be removed)
-        spotifyProvider.getTopTracks(10, 0, topTracks -> {
-            Log.d("SpotifyProvider", topTracks.toString());
-        });
-        // This is a test to get the top 10 artists
-        spotifyProvider.getTopArtists(10, 0, topArtists -> {
-            Log.d("SpotifyProvider", topArtists.toString());
         });
 
     }
