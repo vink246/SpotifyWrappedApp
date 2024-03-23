@@ -2,12 +2,13 @@ package com.example.spotifywrapped.models;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Represents an artist in the music library.
  */
-public class Artist {
+public class Artist implements Serializable {
     private String name;
     private ArrayList<String> genres;
     private int popularity;
