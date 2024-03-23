@@ -27,6 +27,9 @@
         <!-- LoginActivity -->
         <activity android:name=".LightActivities.LoginRelated.LoginActivity" />
 
+        <!-- HomeActivity -->
+        <activity android:name=".HomeActivity" />
+
         <!-- SettingsDarkOneActivity -->
         <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
 
