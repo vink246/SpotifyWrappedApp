@@ -3,15 +3,17 @@ package com.example.spotifywrapped;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SpotifyProvider.SpotifyProviderListener {
 
     private static final String CLIENT_ID = "3c860efb9e6541528afc754b801be36e";
 
@@ -68,23 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 // Response was successful and contains auth token
                 case TOKEN:
                     Log.d("MainActivity", response.getAccessToken());
-                    // Creating a new provider object
-                    SpotifyProvider spotifyProvider = new SpotifyProvider(CLIENT_ID, REDIRECT_URI, response.getAccessToken(),this);
-                    // TODO: figure out a way to pass the spotifyProvider instance through activities
-                    // This is a test to get the top 10 tracks (works but will be removed)
-                    spotifyProvider.getTopTracks(10, 0, topTracks -> {
-                        Log.d("SpotifyProvider", topTracks.toString());
-                    });
-                    // This is a test to get the top 10 artists
-                    spotifyProvider.getTopArtists(10, 0, topArtists -> {
-                        Log.d("SpotifyProvider", topArtists.toString());
-                    });
-                    // TODO: Navigate to home page activity after
+
+                    // initializing the provider
+                    SpotifyProvider.initialize(CLIENT_ID, REDIRECT_URI, response.getAccessToken(),this, this);
                     break;
 
                 // Auth flow returned an error
                 case ERROR:
-                    // TODO: Add a toast message for when authentication fails
+                    Toast.makeText(getApplicationContext(), "Error authenticating! Try restarting the app.",
+                            Toast.LENGTH_SHORT).show();
                     Log.d("MainActivity", response.getError());
                     // Handle error response
                     break;
@@ -94,5 +88,28 @@ public class MainActivity extends AppCompatActivity {
                     // Handle other cases (nothing for now)
             }
         }
+    }
+
+    @Override
+    public void onSpotifyProviderInitialized(SpotifyProvider spotifyProvider) {
+        // Check if provider is valid (if not valid we need to redirect to install spotify)
+        if (!spotifyProvider.isValid()) {
+            try {
+                Toast.makeText(getApplicationContext(), "You need to install Spotify on your device!",
+                        Toast.LENGTH_LONG).show();
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("https://play.google.com/store/apps/details?id=com.spotify.music"));
+                startActivity(viewIntent);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Unable to Connect",
+                        Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+            return;
+        }
+        // Once the provider is initialized, we navigate (only if it is valid)
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        startActivity(homeIntent);
     }
 }

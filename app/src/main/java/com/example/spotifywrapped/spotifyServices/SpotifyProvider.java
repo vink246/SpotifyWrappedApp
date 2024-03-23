@@ -31,21 +31,17 @@ import java.util.Locale;
  * This class allows connecting with the Spotify API and deals with retrieving
  * and modifying Spotify information and playing music in-app.
  */
-public class SpotifyProvider implements Serializable {
+public class SpotifyProvider {
 
+    private static SpotifyProvider instance; // Singleton instance
     private SpotifyAppRemote mSpotifyAppRemote;
     private static String accessToken;
+    private SpotifyProviderListener mListener;
 
-    /**
-     * Constructor that connects to the Spotify App Remote API and returns a SpotifyAppRemote object.
-     *
-     * @param clientID     The client ID for the Spotify App Remote connection.
-     * @param redirectURI  The redirect URI for the Spotify App Remote connection.
-     * @param accessToken  The access token for authenticating API requests.
-     * @param context      The context of the Android application.
-     */
-    public SpotifyProvider(String clientID, String redirectURI, String accessToken, Context context) {
-        // Set the connection parameters
+    // Private constructor to prevent direct instantiation
+    private SpotifyProvider(String clientID, String redirectURI, String accessToken, Context context, SpotifyProviderListener listener) {
+        this.mListener = listener;
+        // Initialization tasks here
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(clientID)
                         .setRedirectUri(redirectURI)
@@ -58,26 +54,49 @@ public class SpotifyProvider implements Serializable {
                     public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                         mSpotifyAppRemote = spotifyAppRemote;
                         Log.d("SpotifyProvider", "Connected! Yay!");
+                        if (mListener != null) {
+                            mListener.onSpotifyProviderInitialized(SpotifyProvider.this);
+                        }
                     }
 
                     @Override
                     public void onFailure(Throwable throwable) {
                         Log.e("SpotifyProvider", throwable.getMessage(), throwable);
-                        try {
-                            Toast.makeText(context, "You need to install spotify on your device!",
-                                    Toast.LENGTH_LONG).show();
-                            Intent viewIntent =
-                                    new Intent("android.intent.action.VIEW",
-                                            Uri.parse("https://play.google.com/store/apps/details?id=com.spotify.music"));
-                            context.startActivity(viewIntent);
-                        } catch (Exception e) {
-                            Toast.makeText(context, "Unable to Connect",
-                                    Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                        if (mListener != null) {
+                            mListener.onSpotifyProviderInitialized(SpotifyProvider.this);
                         }
                     }
                 });
         SpotifyProvider.accessToken = accessToken;
+    }
+
+    // Static method to initialize the Singleton instance
+    public static synchronized void initialize(String clientID, String redirectURI, String accessToken, Context context, SpotifyProviderListener listener) {
+        instance = new SpotifyProvider(clientID, redirectURI, accessToken, context, listener);
+    }
+
+    // Static method to get the Singleton instance
+    public static synchronized SpotifyProvider getInstance() {
+        return instance;
+    }
+
+    /**
+     * @return whether the provider object is valid
+     */
+    public boolean isValid() {
+        return mSpotifyAppRemote != null;
+    }
+
+    /**
+     * Interface to listen for SpotifyProvider initialization events.
+     */
+    public interface SpotifyProviderListener {
+        /**
+         * Called when the SpotifyProvider is initialized and connected.
+         *
+         * @param spotifyProvider The initialized SpotifyProvider object.
+         */
+        void onSpotifyProviderInitialized(SpotifyProvider spotifyProvider);
     }
 
     /**
