@@ -10,11 +10,13 @@ import java.util.ArrayList;
 
 public class SpotifyWrapped {
 
+    private SpotifyProvider spotifyProvider = SpotifyProvider.getInstance();
+
     public String summaryId;
     public String username;
     private String timespan;
-    private ArrayList<Track> topTracks;
-    private ArrayList<Artist> topArtists;
+    private ArrayList<Track> tracks;
+    private ArrayList<Artist> artists;
     private String topGenre;
     private int totalMinutes;
 
@@ -24,11 +26,27 @@ public class SpotifyWrapped {
        this.timespan = timespan;
        //TODO populate topTracks, topArtists, topGenre, and totalMinutes based on timespan
 
+        spotifyProvider.getTopTracks(5, 0, topTracks -> {
+            tracks = topTracks;
+            // add code to refresh the activity here
+        });
+        spotifyProvider.getTopArtists(5, 0, topArtists -> {
+            artists = topArtists;
+            // add code to refresh the activity here
+        });
+
+        topGenre = findTopGenre();
+
+        //TODO find way to get total minutes listened
+    }
+
+    private String findTopGenre() {
         ArrayList<String> genres = new ArrayList<>();
         ArrayList<String> tempGenres;
-        int genreIndex;
+        int genreIndex = 0;
+        int topCount = 0;
         ArrayList<Integer> genreCount = new ArrayList<>();
-        for (Artist artist : topArtists) {
+        for (Artist artist : artists) {
             tempGenres = artist.getGenres();
             for (int i = 0; i < tempGenres.size(); i++) {
                 genreIndex = genres.indexOf(tempGenres.get(i));
@@ -40,9 +58,12 @@ public class SpotifyWrapped {
                 }
             }
         }
-        //TODO find max genreCount and set topGenre to that one
+        for (int count : genreCount) {
+            if (count > topCount) {
+                genreIndex = genreCount.indexOf(count);
+                topCount = count;
+            }
+        }
+        return genres.get(genreIndex);
     }
-
-    //TODO constructor or error checking for new account (<5 songs/artists listened to)
-
 }
