@@ -1,12 +1,12 @@
 package com.example.spotifywrapped;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.spotify.sdk.android.auth.AuthorizationClient;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
             return;
         }
         // Once the provider is initialized, we navigate (only if it is valid)
-        Intent homeIntent = new Intent(this, HomeActivity.class);
+        Intent homeIntent = new Intent(this, WrapActivity.class);
         startActivity(homeIntent);
     }
 }

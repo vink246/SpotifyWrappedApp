@@ -1,10 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/main_dark"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="MainActivity"
-    android:background="@drawable/ten">
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/dSpinnerStartMonth"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#020202"
+        app:layout_constraintEnd_toStartOf="@+id/dSpinnerStartDay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/dSpinnerStartDay"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/dSpinnerStartYear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/dSpinnerStartYear"
+        android:layout_width="45dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="84dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/dSpinnerEndMonth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/dSpinnerEndMonth"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/dSpinnerEndDay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/dSpinnerEndYear"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/dSpinnerEndDay"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/dSpinnerEndYear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/dark_home_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dark_old_wrap_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dark_home_button" />
+
+    <Button
+        android:id="@+id/dark_public_wrap_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dark_old_wrap_button" />
+
+    <Button
+        android:id="@+id/dark_duo_wrap_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dark_public_wrap_button" />
+
+    <Button
+        android:id="@+id/dark_settings_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dark_duo_wrap_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

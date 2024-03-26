@@ -1,10 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/main_light"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="MainActivity"
-    android:background="@drawable/nine">
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/lSpinnerStartMonth"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/lSpinnerStartDay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/lSpinnerStartDay"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/lSpinnerStartYear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/lSpinnerStartYear"
+        android:layout_width="45dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="84dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/lSpinnerEndMonth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/lSpinnerEndMonth"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/lSpinnerEndDay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/lSpinnerEndYear"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/lSpinnerEndDay"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/lSpinnerEndYear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/light_home_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/light_old_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/light_home_button" />
+
+    <Button
+        android:id="@+id/light_public_wrap_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/light_old_button" />
+
+    <Button
+        android:id="@+id/light_duo_wrap_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/light_public_wrap_button" />
+
+    <Button
+        android:id="@+id/light_settings_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/light_duo_wrap_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
