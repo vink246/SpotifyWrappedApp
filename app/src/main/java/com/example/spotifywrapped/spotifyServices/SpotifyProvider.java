@@ -33,7 +33,7 @@ import java.util.Locale;
  */
 public class SpotifyProvider {
 
-    enum WrappedTerm {
+    public enum WrappedTerm {
         short_term,
         medium_term,
         long_term
