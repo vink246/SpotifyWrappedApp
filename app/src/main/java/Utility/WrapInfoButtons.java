@@ -4,7 +4,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+/**
+ * Utility class to manage spinner listeners and references for the date selection spinners.
+ */
 public class WrapInfoButtons {
+    // Spinners for start and end date selection
     private Spinner startMonthSpinner;
     private Spinner startDateSpinner;
     private Spinner startYearSpinner;
@@ -12,6 +16,16 @@ public class WrapInfoButtons {
     private Spinner endDateSpinner;
     private Spinner endYearSpinner;
 
+    /**
+     * Constructor to initialize WrapInfoButtons with spinner references and setup spinner listeners.
+     *
+     * @param startMonthSpinner Spinner for selecting the start month
+     * @param startDateSpinner  Spinner for selecting the start date
+     * @param startYearSpinner  Spinner for selecting the start year
+     * @param endMonthSpinner   Spinner for selecting the end month
+     * @param endDateSpinner    Spinner for selecting the end date
+     * @param endYearSpinner    Spinner for selecting the end year
+     */
     public WrapInfoButtons(Spinner startMonthSpinner, Spinner startDateSpinner, Spinner startYearSpinner,
                            Spinner endMonthSpinner, Spinner endDateSpinner, Spinner endYearSpinner) {
         this.startMonthSpinner = startMonthSpinner;
@@ -23,6 +37,7 @@ public class WrapInfoButtons {
         setupSpinnerListeners();
     }
 
+    // Method to setup listeners for all spinners
     public void setupSpinnerListeners() {
         setupSpinnerListener(startMonthSpinner);
         setupSpinnerListener(startDateSpinner);
@@ -32,6 +47,7 @@ public class WrapInfoButtons {
         setupSpinnerListener(endYearSpinner);
     }
 
+    // Method to setup listener for a spinner
     private void setupSpinnerListener(final Spinner spinner) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -46,8 +62,19 @@ public class WrapInfoButtons {
         });
     }
 
+    /**
+     * Method to update spinner references and re-setup listeners.
+     *
+     * @param startMonthSpinner Spinner for selecting the start month
+     * @param startDateSpinner  Spinner for selecting the start date
+     * @param startYearSpinner  Spinner for selecting the start year
+     * @param endMonthSpinner   Spinner for selecting the end month
+     * @param endDateSpinner    Spinner for selecting the end date
+     * @param endYearSpinner    Spinner for selecting the end year
+     */
     public void updateReferences(Spinner startMonthSpinner, Spinner startDateSpinner, Spinner startYearSpinner,
                                  Spinner endMonthSpinner, Spinner endDateSpinner, Spinner endYearSpinner) {
+        // Update spinner references
         this.startMonthSpinner = startMonthSpinner;
         this.startDateSpinner = startDateSpinner;
         this.startYearSpinner = startYearSpinner;

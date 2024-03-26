@@ -1,6 +1,11 @@
 package Utility;
 
+/**
+ * Utility class to encapsulate information about a date range.
+ * Provides methods to access and modify start and end dates.
+ */
 public class WrapInfo {
+    // Properties to store start and end date components
     private String startMonth;
     private int startDate;
     private int startYear;
@@ -8,6 +13,16 @@ public class WrapInfo {
     private int endDate;
     private int endYear;
 
+    /**
+     * Constructor to initialize WrapInfo with start and end date components.
+     *
+     * @param startMonth The month of the start date
+     * @param startDate  The day of the start date
+     * @param startYear  The year of the start date
+     * @param endMonth   The month of the end date
+     * @param endDate    The day of the end date
+     * @param endYear    The year of the end date
+     */
     public WrapInfo(String startMonth, int startDate, int startYear, String endMonth, int endDate, int endYear) {
         this.startMonth = startMonth;
         this.startDate = startDate;
@@ -17,7 +32,8 @@ public class WrapInfo {
         this.endYear = endYear;
     }
 
-    // Getter methods
+    // Getter methods for accessing date components
+
     public String getStartMonth() {
         return startMonth;
     }
@@ -42,7 +58,8 @@ public class WrapInfo {
         return endYear;
     }
 
-    // Setter methods (if needed)
+    // Setter methods (if needed) for modifying date components
+
     public void setStartMonth(String startMonth) {
         this.startMonth = startMonth;
     }

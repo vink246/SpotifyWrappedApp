@@ -1,7 +1,7 @@
 package com.example.spotifywrapped;
 
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
-
 import Utility.DarkModePreferenceManager;
 
 public class WrapActivity extends AppCompatActivity {
 
+    // Declaration of spinners and a button for settings
     private Spinner startMonthSpinner;
     private Spinner startDateSpinner;
     private Spinner startYearSpinner;
@@ -23,21 +23,66 @@ public class WrapActivity extends AppCompatActivity {
     private Spinner endYearSpinner;
     private Button settingsButton;
 
+    // Constants for SharedPreferences key names
+    private static final String PREFS_NAME = "WrapActivityPrefs";
+    private static final String START_MONTH_POSITION = "startMonthPosition";
+    private static final String START_DATE_POSITION = "startDatePosition";
+    private static final String START_YEAR_POSITION = "startYearPosition";
+    private static final String END_MONTH_POSITION = "endMonthPosition";
+    private static final String END_DATE_POSITION = "endDatePosition";
+    private static final String END_YEAR_POSITION = "endYearPosition";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Check the current theme and set the appropriate layout
         if (DarkModePreferenceManager.isDarkMode(getApplicationContext())) {
             setContentView(R.layout.wrappeddark);
             settingsButton = findViewById(R.id.dark_settings_button);
-            initializeSpinnersForDark();
+            initializeSpinnersForDark(); // Initialize spinners for the dark theme
         } else {
             setContentView(R.layout.wrappedlight);
             settingsButton = findViewById(R.id.light_settings_button);
-            initializeSpinnersForLight();
+            initializeSpinnersForLight(); // Initialize spinners for the light theme
         }
 
+        // Restore previously selected spinner values
+        restoreSpinnerSelections();
+
+        // Set up a click listener for the settings button to navigate to the SettingsActivity
         settingsButton.setOnClickListener(v -> navigateToSettingsActivity());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Save the current spinner selections when the activity is paused
+        saveSpinnerSelections();
+    }
+
+    // Save spinner selections to SharedPreferences
+    private void saveSpinnerSelections() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(START_MONTH_POSITION, startMonthSpinner.getSelectedItemPosition());
+        editor.putInt(START_DATE_POSITION, startDateSpinner.getSelectedItemPosition());
+        editor.putInt(START_YEAR_POSITION, startYearSpinner.getSelectedItemPosition());
+        editor.putInt(END_MONTH_POSITION, endMonthSpinner.getSelectedItemPosition());
+        editor.putInt(END_DATE_POSITION, endDateSpinner.getSelectedItemPosition());
+        editor.putInt(END_YEAR_POSITION, endYearSpinner.getSelectedItemPosition());
+        editor.apply();
+    }
+
+    // Restore spinner selections from SharedPreferences
+    private void restoreSpinnerSelections() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        startMonthSpinner.setSelection(prefs.getInt(START_MONTH_POSITION, 0));
+        startDateSpinner.setSelection(prefs.getInt(START_DATE_POSITION, 0));
+        startYearSpinner.setSelection(prefs.getInt(START_YEAR_POSITION, 0));
+        endMonthSpinner.setSelection(prefs.getInt(END_MONTH_POSITION, 0));
+        endDateSpinner.setSelection(prefs.getInt(END_DATE_POSITION, 0));
+        endYearSpinner.setSelection(prefs.getInt(END_YEAR_POSITION, 0));
     }
 
     private void initializeSpinnersForDark() {
@@ -93,6 +138,7 @@ public class WrapActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
+    // Navigate to SettingsActivity
     private void navigateToSettingsActivity() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
