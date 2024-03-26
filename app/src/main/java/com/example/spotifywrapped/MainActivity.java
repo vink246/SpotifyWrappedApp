@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
         }
         // Once the provider is initialized, we navigate (only if it is valid)
         Intent homeIntent = new Intent(this, WrappedDarkActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeIntent);
     }
 }
