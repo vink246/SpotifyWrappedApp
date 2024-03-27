@@ -36,6 +36,7 @@ public class WrappedDarkActivity extends BottomNavigationActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        // Set listener for bottom navigation items
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -59,6 +60,9 @@ public class WrappedDarkActivity extends BottomNavigationActivity {
                 return false;
             }
         });
+
+        // Highlight the initially selected item (assuming "Home" is initially selected)
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
 
     @Override
