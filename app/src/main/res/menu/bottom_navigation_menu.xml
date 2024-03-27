@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_home"
+        android:title="Home"
+        app:itemIconTint="@color/pink"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/home24px" />
+    <item
+        android:id="@+id/navigation_language"
+        android:title="Public Wrapped"
+        app:itemIconTint="@color/pink"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/language24px" />
+    <item
+        android:id="@+id/navigation_history"
+        android:title="Past Wrapped"
+        app:itemIconTint="@color/pink"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/history24px" />
+    <item
+        android:id="@+id/navigation_group"
+        android:title="Duo Wrapped"
+        app:itemIconTint="@color/pink"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/group24px" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:title="Settings"
+        app:itemIconTint="@color/pink"
+        app:labelVisibilityMode="labeled"
+        android:icon="@drawable/settings24px" />
+</menu>

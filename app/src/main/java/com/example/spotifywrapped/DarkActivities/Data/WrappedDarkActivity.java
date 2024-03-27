@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
+import com.example.spotifywrapped.BottomNavigationActivity;
 import com.example.spotifywrapped.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.view.MenuItem;
 
-public class WrappedDarkActivity extends AppCompatActivity {
+public class WrappedDarkActivity extends BottomNavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +33,38 @@ public class WrappedDarkActivity extends AppCompatActivity {
 
         // Set initial selection to "Short Term"
         spinner.setSelection(adapter.getPosition("Short Term"));
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.navigation_home) {
+                    // Handle Home selection
+                    return true;
+                } else if (itemId == R.id.navigation_group) {
+                    // Handle Group selection
+                    return true;
+                } else if (itemId == R.id.navigation_history) {
+                    // Handle History selection
+                    return true;
+                } else if (itemId == R.id.navigation_language) {
+                    // Handle Language selection
+                    return true;
+                } else if (itemId == R.id.navigation_settings) {
+                    // Handle Settings selection
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    protected void handleBottomNavigationItemSelected(MenuItem item) {
+        // This method should be implemented to handle bottom navigation item clicks.
+        // However, since we are handling item selection directly in the onCreate method,
+        // you can leave this method empty.
     }
 }
