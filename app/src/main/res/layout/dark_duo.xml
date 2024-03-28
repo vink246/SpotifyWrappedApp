@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/dark_duo"
+    android:layout_height="match_parent">
+
+    <!-- Search Bar and Invite Button -->
+
+    <!-- Duo Wrap Data -->
+
+    <!-- Buttons Container -->
+    <LinearLayout
+        android:id="@+id/searchAndInviteContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Search for a user..."
+            android:padding="8dp"
+            android:textColorHint="#A0FFFFFF"
+            android:textColor="#FFFFFF"
+            android:background="@android:color/transparent" />
+
+
+        <Button
+            android:id="@+id/inviteButton"
+            android:layout_width="135dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/dark_duo_wrap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/dark_duo_previous"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground" />
+
+        <Button
+            android:id="@+id/dark_duo_public"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/dark_duo_friends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/dark_duo_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
