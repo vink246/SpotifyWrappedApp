@@ -1,10 +1,15 @@
 package com.example.spotifywrapped.DarkActivities.Settings;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.spotifywrapped.AccountInfoActivity;
 import com.example.spotifywrapped.R;
 
 public class SettingsDarkOneActivity extends AppCompatActivity {
@@ -45,6 +50,17 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 switch3.setText(isChecked ? "On" : "Off");
+            }
+        });
+
+        // Initialize button and set OnClickListener
+        Button myAccountButton = findViewById(R.id.button);
+        myAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the accountinfo activity
+                Intent intent = new Intent(SettingsDarkOneActivity.this, AccountInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
