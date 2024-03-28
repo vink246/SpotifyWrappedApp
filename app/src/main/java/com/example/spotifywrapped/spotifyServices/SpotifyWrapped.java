@@ -1,5 +1,7 @@
 package com.example.spotifywrapped.spotifyServices;
 
+import android.widget.Switch;
+
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.Track;
 
@@ -14,30 +16,17 @@ public class SpotifyWrapped {
 
     public String summaryId;
     public String username;
-    private String timespan; // TODO consider enum here?
+    private SpotifyProvider.WrappedTerm timespan;
     private ArrayList<Track> tracks;
     private ArrayList<Artist> artists;
     private String topGenre;
     private int totalMinutes;
 
-    public SpotifyWrapped(String summaryId, String username, String timeSpan) {
+    public SpotifyWrapped(String summaryId, String username, String timespan) {
        setSummaryId(summaryId);
        setUsername(username);
-       this.timespan = timespan;
-       //TODO populate topTracks, topArtists, topGenre, and totalMinutes based on timespan
-
-        spotifyProvider.getTopTracks(5, 0, topTracks -> {
-            tracks = topTracks;
-            // add code to refresh the activity here
-        });
-        spotifyProvider.getTopArtists(5, 0, topArtists -> {
-            artists = topArtists;
-            // add code to refresh the activity here
-        });
-
-        this.topGenre = findTopGenre();
-
-        //TODO find way to get total minutes listened
+       setTimespan(timespan);
+       // populating tracks, artists, and topGenre is handled in setTimespan()
     }
 
     public Track getTopTrack() {
@@ -69,8 +58,28 @@ public class SpotifyWrapped {
     }
 
     public void setTimespan(String timespan) {
-        this.timespan = timespan;
-        // TODO repopulate variables based on new timespan (where is timespan in constructor?)
+        switch (timespan) {
+            case "short_term":
+                this.timespan = SpotifyProvider.WrappedTerm.short_term;
+                break;
+            case "medium_term":
+                this.timespan = SpotifyProvider.WrappedTerm.medium_term;
+                break;
+            case "long_term":
+            default:
+                this.timespan = SpotifyProvider.WrappedTerm.long_term;
+                break;
+        }
+
+        spotifyProvider.getTopTracks(5, 0, this.timespan, topTracks -> {
+            tracks = topTracks;
+            // add code to refresh the activity here
+        });
+        spotifyProvider.getTopArtists(5, 0, this.timespan, topArtists -> {
+            artists = topArtists;
+            // add code to refresh the activity here
+        });
+
         this.topGenre = findTopGenre();
     }
 
