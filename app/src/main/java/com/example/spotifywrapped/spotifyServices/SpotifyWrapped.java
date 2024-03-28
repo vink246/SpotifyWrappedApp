@@ -1,13 +1,8 @@
 package com.example.spotifywrapped.spotifyServices;
 
-import android.widget.Switch;
-
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.Track;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SpotifyWrapped {
