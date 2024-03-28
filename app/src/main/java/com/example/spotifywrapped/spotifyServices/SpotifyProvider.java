@@ -1,11 +1,8 @@
 package com.example.spotifywrapped.spotifyServices;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.SpotifyUser;
@@ -13,6 +10,7 @@ import com.example.spotifywrapped.models.Track;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
+import com.spotify.protocol.types.Uri;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +19,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -388,5 +385,12 @@ public class SpotifyProvider {
         void onUserInfoReceived(SpotifyUser user);
     }
 
+    public void playTrack(Track track) {
+        mSpotifyAppRemote.getPlayerApi().play(track.getUri());
+    }
+
+    public void pauseCurrentTrack() {
+        mSpotifyAppRemote.getPlayerApi().pause();
+    }
 
 }
