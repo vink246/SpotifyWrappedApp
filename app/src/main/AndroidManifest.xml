@@ -19,65 +19,21 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- LoginActivity -->
-        <activity android:name=".LightActivities.LoginRelated.LoginActivity" />
+        <!-- Declaration of WrapActivity -->
+        <activity android:name=".WrapActivity" />
 
-        <!-- HomeActivity -->
-        <activity android:name=".HomeActivity" />
+        <!-- Declaration of SettingsActivity -->
+        <activity android:name=".SettingsActivity" />
 
-        <!-- SettingsDarkOneActivity -->
-        <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
-
-        <!-- SettingsDarkTwoActivity -->
-        <activity android:name=".DarkActivities.Settings.SettingsDarkTwoActivity" />
-
-        <!-- SettingsDarkThreeActivity -->
-        <activity android:name=".DarkActivities.Settings.SettingsDarkThreeActivity" />
-
-        <!-- SettingsDarkFourActivity -->
-        <activity android:name=".DarkActivities.Settings.SettingsDarkFourActivity" />
-
-        <!-- SettingsLightOneActivity -->
-        <activity android:name=".LightActivities.Settings.SettingsLightOneActivity" />
-
-        <!-- SettingsLightTwoActivity -->
-        <activity android:name=".LightActivities.Settings.SettingsLightTwoActivity" />
-
-        <!-- SettingsLightThreeActivity -->
-        <activity android:name=".LightActivities.Settings.SettingsLightThreeActivity" />
-
-        <!-- SettingsLightFourActivity -->
-        <activity android:name=".LightActivities.Settings.SettingsLightFourActivity" />
-
-
-        <!-- FriendArtistCompDarkActivity -->
-        <activity android:name=".DarkActivities.Data.FriendArtistCompDarkActivity" />
-
-        <!-- FriendArtistCompLightActivity -->
-        <activity android:name=".LightActivities.Data.FriendArtistCompLightActivity" />
-
-        <!-- FriendCompDarkActivity -->
-        <activity android:name=".DarkActivities.Data.FriendCompDarkActivity" />
-
-        <!-- FriendCompLightActivity -->
-        <activity android:name=".LightActivities.Data.FriendCompLightActivity" />
-
-        <!-- TopArtistDarkActivity -->
-        <activity android:name=".DarkActivities.Data.TopArtistDarkActivity" />
-
-        <!-- TopArtistLightActivity -->
-        <activity android:name=".LightActivities.Data.TopArtistLightActivity" />
-
-        <!-- WrappedDarkActivity -->
-        <activity android:name=".DarkActivities.Data.WrappedDarkActivity" />
-
-        <!-- WrappedLightActivity -->
-        <activity android:name=".LightActivities.Data.WrappedLightActivity" />
+        <!-- Declaration of DuoWrapActivity -->
+        <activity
+            android:name=".DuoWrapActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
     </application>
 

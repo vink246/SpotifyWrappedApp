@@ -6,69 +6,69 @@
     android:layout_height="match_parent">
 
     <Spinner
-        android:id="@+id/dSpinnerStartMonth"
+        android:id="@+id/SpinnerStartMonth"
         android:layout_width="75dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:background="#020202"
-        app:layout_constraintEnd_toStartOf="@+id/dSpinnerStartDay"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/SpinnerStartDay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/dSpinnerStartDay"
+        android:id="@+id/SpinnerStartDay"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/dSpinnerStartYear"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/SpinnerStartYear"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/dSpinnerStartYear"
+        android:id="@+id/SpinnerStartYear"
         android:layout_width="45dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="84dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/dSpinnerEndMonth"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/SpinnerEndMonth"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/dSpinnerEndMonth"
+        android:id="@+id/SpinnerEndMonth"
         android:layout_width="75dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/dSpinnerEndDay"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/SpinnerEndDay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/dSpinnerEndYear"
+        android:id="@+id/SpinnerEndYear"
         android:layout_width="50dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#000000"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/dSpinnerEndDay"
+        android:id="@+id/SpinnerEndDay"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/dSpinnerEndYear"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/SpinnerEndYear"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/dark_home_button"
+        android:id="@+id/home_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
@@ -78,37 +78,37 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/dark_old_wrap_button"
+        android:id="@+id/previous_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dark_home_button" />
+        app:layout_constraintStart_toEndOf="@+id/home_button" />
 
     <Button
-        android:id="@+id/dark_public_wrap_button"
+        android:id="@+id/public_wrap_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dark_old_wrap_button" />
+        app:layout_constraintStart_toEndOf="@+id/previous_button" />
 
     <Button
-        android:id="@+id/dark_duo_wrap_button"
+        android:id="@+id/duo_wrap_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dark_public_wrap_button" />
+        app:layout_constraintStart_toEndOf="@+id/public_wrap_button" />
 
     <Button
-        android:id="@+id/dark_settings_button"
+        android:id="@+id/settings_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
@@ -117,6 +117,6 @@
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dark_duo_wrap_button" />
+        app:layout_constraintStart_toEndOf="@+id/duo_wrap_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

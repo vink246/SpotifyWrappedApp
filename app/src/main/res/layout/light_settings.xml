@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/nineteen"
     android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/light_dark_mode_button"
-        android:layout_width="212dp"
-        android:layout_height="107dp"
-        android:layout_marginTop="244dp"
-        android:background="?selectableItemBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/light_comment_notifications_button"
-        android:layout_width="377dp"
-        android:layout_height="87dp"
-        android:layout_marginTop="30dp"
-
-        android:background="?selectableItemBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/light_dark_mode_button" />
 
     <Button
         android:id="@+id/light_exit_button"
@@ -35,27 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/light_notifications_button" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
-    <Button
-        android:id="@+id/light_friend_request_button"
-        android:layout_width="238dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="36dp"
-        android:background="?selectableItemBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/light_comment_notifications_button" />
-
-    <Button
-        android:id="@+id/light_notifications_button"
-        android:layout_width="375dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="4dp"
-        android:background="?selectableItemBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/light_friend_request_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

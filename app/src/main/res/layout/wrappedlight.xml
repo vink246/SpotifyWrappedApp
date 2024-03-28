@@ -98,7 +98,7 @@
         app:layout_constraintStart_toEndOf="@+id/light_old_button" />
 
     <Button
-        android:id="@+id/light_duo_wrap_button"
+        android:id="@+id/duo_wrap_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
@@ -108,7 +108,7 @@
         app:layout_constraintStart_toEndOf="@+id/light_public_wrap_button" />
 
     <Button
-        android:id="@+id/light_settings_button"
+        android:id="@+id/settings_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"

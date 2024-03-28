@@ -1,63 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/twentyone"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/dark_light_mode_button"
-        android:layout_width="212dp"
-        android:layout_height="107dp"
-        android:background="?selectableItemBackground"
-        app:layout_constraintBottom_toTopOf="@+id/dark_comment_notification_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+    android:layout_height="match_parent"
+    android:background="@drawable/setting">
 
     <Button
         android:id="@+id/dark_comment_notification_button"
-        android:layout_width="375dp"
-        android:layout_height="86dp"
-        android:layout_marginBottom="32dp"
-
+        android:layout_width="373dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="44dp"
         android:background="?selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@+id/dark_friend_request_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dark_friend_request_button"
+        android:layout_width="372dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="120dp"
+        android:background="?selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/dark_exit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/dark_exit_button"
         android:layout_width="194dp"
         android:layout_height="87dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="68dp"
         android:background="?selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/dark_friend_request_button"
-        android:layout_width="227dp"
-        android:layout_height="84dp"
-        android:layout_marginBottom="4dp"
-        android:background="?selectableItemBackground"
-        app:layout_constraintBottom_toTopOf="@+id/dark_notifications_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.892"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/dark_notifications_button"
-        android:layout_width="375dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="12dp"
-        android:background="?selectableItemBackground"
-        app:layout_constraintBottom_toTopOf="@+id/dark_exit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
