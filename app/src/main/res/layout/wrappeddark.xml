@@ -7,7 +7,7 @@
 
     <Spinner
         android:id="@+id/SpinnerStartMonth"
-        android:layout_width="75dp"
+        android:layout_width="80dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -32,14 +32,14 @@
         android:layout_width="45dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="84dp"
+        android:layout_marginEnd="72dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/SpinnerEndMonth"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/SpinnerEndMonth"
-        android:layout_width="75dp"
+        android:layout_width="80dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
