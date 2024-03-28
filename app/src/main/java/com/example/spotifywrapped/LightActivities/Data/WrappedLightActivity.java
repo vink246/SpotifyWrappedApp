@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.R;
 
+
 public class WrappedLightActivity extends AppCompatActivity {
 
     @Override
@@ -14,3 +15,4 @@ public class WrappedLightActivity extends AppCompatActivity {
         setContentView(R.layout.wrappedlight);
     }
 }
+

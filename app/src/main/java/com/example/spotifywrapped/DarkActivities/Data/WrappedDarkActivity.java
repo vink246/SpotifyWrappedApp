@@ -64,7 +64,6 @@ public class WrappedDarkActivity extends BottomNavigationActivity {
         // Highlight the initially selected item (assuming "Home" is initially selected)
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
-
     @Override
     protected void handleBottomNavigationItemSelected(MenuItem item) {
         // This method should be implemented to handle bottom navigation item clicks.
