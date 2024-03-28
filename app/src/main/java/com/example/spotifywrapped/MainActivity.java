@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
             "user-top-read",
             "user-read-recently-played",
             "user-library-modify",
-            "user-library-read"
+            "user-library-read",
+            "user-read-email"
     };
 
     @Override
