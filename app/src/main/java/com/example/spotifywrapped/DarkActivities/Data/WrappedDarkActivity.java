@@ -26,5 +26,8 @@ public class WrappedDarkActivity extends AppCompatActivity {
         provider.getTopArtists(10, 0, SpotifyProvider.WrappedTerm.medium_term, topArtists -> {
             Log.d("WrappedDarkActivity", topArtists.toString());
         });
+        provider.getMyUserInfo(info -> {
+            Log.d("WrappedDarkActivity", info.toString());
+        });
     }
 }
