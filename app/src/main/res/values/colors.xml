@@ -14,4 +14,5 @@
     <color name="magenta">#B20F84</color>
     <color name="green">#5EB090</color>
     <color name="orange">#E2953D</color>
+    <color name="transparent">#00000000</color>
 </resources>
