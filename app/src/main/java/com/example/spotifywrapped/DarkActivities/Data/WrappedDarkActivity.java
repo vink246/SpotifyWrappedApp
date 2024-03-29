@@ -3,6 +3,9 @@ package com.example.spotifywrapped.DarkActivities.Data;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,25 @@ public class WrappedDarkActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
 
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        Spinner spinner = findViewById(R.id.spinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_items, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, android.view.View selectedItemView, int position, long id) {
+                String selectedItem = parentView.getItemAtPosition(position).toString();
+                // Handle the selected item
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing
+            }
+        });
     }
 
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
