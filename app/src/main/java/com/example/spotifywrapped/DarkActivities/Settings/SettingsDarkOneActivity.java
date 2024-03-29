@@ -10,6 +10,7 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.AccountInfoActivity;
+import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
 import com.example.spotifywrapped.R;
 
 public class SettingsDarkOneActivity extends AppCompatActivity {
@@ -61,6 +62,17 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
                 // Start the accountinfo activity
                 Intent intent = new Intent(SettingsDarkOneActivity.this, AccountInfoActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // Initialize button3 and set OnClickListener to navigate back to WrappedDarkActivity
+        Button backButton = findViewById(R.id.button3);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to WrappedDarkActivity
+                startActivity(new Intent(SettingsDarkOneActivity.this, WrappedDarkActivity.class));
+                finish(); // Finish current activity to prevent navigating back to it with the back button
             }
         });
     }

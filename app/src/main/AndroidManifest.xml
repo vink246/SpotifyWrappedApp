@@ -27,6 +27,18 @@
         <!-- HomeActivity -->
         <activity android:name=".HomeActivity" />
 
+        <!-- BottomNavigationActivity -->
+        <activity android:name=".BottomNavigationActivity" />
+
+        <!-- AccountInfoActivity -->
+        <activity android:name=".AccountInfoActivity" />
+
+        <!-- PastWrapDarkActivity -->
+        <activity android:name=".DarkActivities.Data.PastWrapDarkActivity" />
+
+        <!-- PublicWrapDarkActivity -->
+        <activity android:name=".DarkActivities.Data.PublicWrapDarkActivity" />
+
         <!-- SettingsDarkOneActivity -->
         <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
 

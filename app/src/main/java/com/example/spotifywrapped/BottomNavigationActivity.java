@@ -1,10 +1,17 @@
 package com.example.spotifywrapped;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.spotifywrapped.DarkActivities.Data.FriendArtistCompDarkActivity;
+import com.example.spotifywrapped.DarkActivities.Data.PastWrapDarkActivity;
+import com.example.spotifywrapped.DarkActivities.Data.PublicWrapDarkActivity;
+import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
+import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public abstract class BottomNavigationActivity extends AppCompatActivity {
@@ -19,19 +26,19 @@ public abstract class BottomNavigationActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
-                // Handle Home selection
+                startActivity(new Intent(this, WrappedDarkActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_group) {
-                // Handle Group selection
+                startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_history) {
-                // Handle History selection
+                startActivity(new Intent(this, PastWrapDarkActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_language) {
-                // Handle Language selection
+                startActivity(new Intent(this, PublicWrapDarkActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_settings) {
-                // Handle Settings selection
+                startActivity(new Intent(this, SettingsDarkOneActivity.class));
                 return true;
             }
             return false;
@@ -40,4 +47,3 @@ public abstract class BottomNavigationActivity extends AppCompatActivity {
 
     protected abstract void handleBottomNavigationItemSelected(MenuItem item);
 }
-
