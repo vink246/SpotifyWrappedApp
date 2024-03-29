@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_options">
+        <item>Short Term</item>
+        <item>Medium Term</item>
+        <item>Long Term</item>
+        <!-- Add more items as needed -->
+    </string-array>
+</resources>
