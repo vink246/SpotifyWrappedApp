@@ -1,17 +1,16 @@
 package com.example.spotifywrapped.spotifyServices;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.spotifywrapped.models.Artist;
+import com.example.spotifywrapped.models.SpotifyUser;
 import com.example.spotifywrapped.models.Track;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
+import com.spotify.protocol.types.Uri;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +19,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -308,6 +306,91 @@ public class SpotifyProvider {
          * @param topArtists The list of top artists.
          */
         void onTopArtistsReceived(ArrayList<Artist> topArtists);
+    }
+
+    /**
+     * Retrieves the current user's information from Spotify asynchronously and notifies the listener
+     * when the operation is complete.
+     *
+     * @param listener The listener to be notified when the user information is received.
+     */
+    public void getMyUserInfo(OnUserInfoListener listener) {
+        new FetchUserInfoTask(listener).execute();
+    }
+
+    /**
+     * Asynchronous task to fetch the current user's information from Spotify.
+     */
+    private static class FetchUserInfoTask extends AsyncTask<Void, Void, SpotifyUser> {
+
+        private OnUserInfoListener listener;
+
+        public FetchUserInfoTask(OnUserInfoListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        protected SpotifyUser doInBackground(Void... voids) {
+            SpotifyUser user = null;
+
+            try {
+                URL url = new URL("https://api.spotify.com/v1/me");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("Authorization", "Bearer " + accessToken);
+                int responseCode = con.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    String username = jsonResponse.getString("display_name");
+                    String email = jsonResponse.getString("email");
+                    String uri = jsonResponse.getString("uri");
+
+                    user = new SpotifyUser(username, email, uri);
+                } else {
+                    Log.d("SpotifyProvider", "GET request did not work");
+                }
+            } catch (IOException | JSONException e) {
+                Log.e("SpotifyProvider", e.getMessage(), e);
+            }
+
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(SpotifyUser user) {
+            if (listener != null) {
+                listener.onUserInfoReceived(user);
+            }
+        }
+    }
+
+    /**
+     * Interface to listen for user information retrieval events.
+     */
+    public interface OnUserInfoListener {
+        /**
+         * Called when the user information is received.
+         *
+         * @param user The SpotifyUser object containing user information.
+         */
+        void onUserInfoReceived(SpotifyUser user);
+    }
+
+    public void playTrack(Track track) {
+        mSpotifyAppRemote.getPlayerApi().play(track.getUri());
+    }
+
+    public void pauseCurrentTrack() {
+        mSpotifyAppRemote.getPlayerApi().pause();
     }
 
 }
