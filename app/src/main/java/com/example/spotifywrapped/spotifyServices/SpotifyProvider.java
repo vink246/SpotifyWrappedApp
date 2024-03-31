@@ -184,6 +184,7 @@ public class SpotifyProvider {
 
                 } else {
                     Log.d("SpotifyProvider", "GET request did not work");
+                    Log.d("SpotifyProvider", "Error: "+con.getResponseCode()+", "+con.getResponseMessage());
                 }
             } catch (IOException | JSONException e) {
                 Log.e("SpotifyProvider", e.getMessage(), e);
@@ -278,6 +279,7 @@ public class SpotifyProvider {
 
                 } else {
                     Log.d("SpotifyProvider", "GET request did not work");
+                    Log.d("SpotifyProvider", "Error: "+con.getResponseCode()+", "+con.getResponseMessage());
                 }
             } catch (IOException e) {
                 Log.d("SpotifyProvider", e.getMessage());
@@ -357,6 +359,7 @@ public class SpotifyProvider {
                     user = new SpotifyUser(username, email, uri);
                 } else {
                     Log.d("SpotifyProvider", "GET request did not work");
+                    Log.d("SpotifyProvider", "Error: "+con.getResponseCode()+", "+con.getResponseMessage());
                 }
             } catch (IOException | JSONException e) {
                 Log.e("SpotifyProvider", e.getMessage(), e);
