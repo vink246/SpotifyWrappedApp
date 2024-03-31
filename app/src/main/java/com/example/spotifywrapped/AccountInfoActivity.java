@@ -1,6 +1,7 @@
 package com.example.spotifywrapped;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +19,24 @@ public class AccountInfoActivity extends AppCompatActivity {
 
         // Initialize button4 and set OnClickListener to navigate to SettingsDarkOneActivity
         Button settingsButton = findViewById(R.id.button4);
+        Button editAccountButton = findViewById(R.id.button2);
+
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start SettingsDarkOneActivity
                 Intent intent = new Intent(AccountInfoActivity.this, SettingsDarkOneActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        editAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to spotify settings
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("spotify:internal:preferences"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.spotify.music"); // Specify the package name of the Spotify app
                 startActivity(intent);
             }
         });
