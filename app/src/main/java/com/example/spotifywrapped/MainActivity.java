@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
                 // Response was successful and contains auth token
                 case TOKEN:
                     Log.d("MainActivity", response.getAccessToken());
+                    Log.d("MainActivity", "Token expires in: " + response.getExpiresIn());
 
                     // initializing the provider
                     SpotifyProvider.initialize(CLIENT_ID, REDIRECT_URI, response.getAccessToken(),this, this);
