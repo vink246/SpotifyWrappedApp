@@ -15,7 +15,7 @@ public class SpotifyWrapped {
     private ArrayList<Track> tracks;
     private ArrayList<Artist> artists;
     private String topGenre;
-    private int totalMinutes;
+    //private int totalMinutes;
 
     public SpotifyWrapped(String summaryId, String username, String timespan) {
        setSummaryId(summaryId);
@@ -121,7 +121,7 @@ public class SpotifyWrapped {
                 artists.get(2).getName() + "\n4. " +
                 artists.get(3).getName() + "\n5. " +
                 artists.get(4).getName() + "\nTop Genre:\n" +
-                topGenre + "\nTotal Minutes Listened:\n" + totalMinutes;
+                topGenre;
 
 
     }
