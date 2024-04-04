@@ -36,16 +36,20 @@ public class Wrap implements Serializable {
     @PropertyName("likedBy")
     private List<String> likedBy;
 
+    @PropertyName("isPublic")
+    private boolean isPublic;
+
     public Wrap() {
     }
 
-    public Wrap(String summaryId, String username, SpotifyProvider.WrappedTerm timespan, List<Track> tracks, List<Artist> artists, String topGenre) {
+    public Wrap(String summaryId, String username, SpotifyProvider.WrappedTerm timespan, List<Track> tracks, List<Artist> artists, String topGenre, boolean isPublic) {
         this.summaryId = summaryId;
         this.username = username;
         this.timespan = timespan;
         this.tracks = tracks;
         this.artists = artists;
         this.topGenre = topGenre;
+        this.isPublic = isPublic;
     }
 
     // Getters and setters
@@ -119,5 +123,13 @@ public class Wrap implements Serializable {
 
     public void setLikedBy(List<String> likedBy) {
         this.likedBy = likedBy;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 }

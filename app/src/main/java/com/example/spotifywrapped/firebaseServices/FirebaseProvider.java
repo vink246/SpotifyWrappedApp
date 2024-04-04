@@ -64,6 +64,19 @@ public class FirebaseProvider {
         }
     }
 
+    // Method to fetch public wraps
+    public void getPublicWraps(OnSuccessListener<List<Wrap>> successListener) {
+        publicWrappedCollection.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            List<Wrap> publicWraps = new ArrayList<>();
+            for (Wrap wrap : queryDocumentSnapshots.toObjects(Wrap.class)) {
+                if (wrap.isPublic()) {
+                    publicWraps.add(wrap);
+                }
+            }
+            successListener.onSuccess(publicWraps);
+        }).addOnFailureListener(e -> Log.e("FirebaseProvider", "Error fetching public wraps", e));
+    }
+
     // Method to send a friend request
     public void sendFriendRequest(String requesterId, String recipientId) {
         DocumentReference requesterRef = usersCollection.document(requesterId);
