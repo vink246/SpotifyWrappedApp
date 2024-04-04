@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,8 +37,13 @@ public class WrappedDarkActivity extends AppCompatActivity {
             if (topArtists != null) Log.d("WrappedDarkActivity", topArtists.toString());
         });
         provider.getMyUserInfo(info -> {
-            if (info != null) Log.d("WrappedDarkActivity", info.toString());
+            if (info != null) {
+                Log.d("WrappedDarkActivity", info.toString());
+                // firebase provider tests:
+                FirebaseProvider.getInstance().addUser(info.getUsername(), info.getEmail());
+            }
         });
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
