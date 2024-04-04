@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.R;
-import com.example.spotifywrapped.User;
+import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;

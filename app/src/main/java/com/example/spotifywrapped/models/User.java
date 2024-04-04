@@ -1,4 +1,4 @@
-package com.example.spotifywrapped;
+package com.example.spotifywrapped.models;
 
 import com.google.firebase.firestore.PropertyName;
 import java.io.Serializable;

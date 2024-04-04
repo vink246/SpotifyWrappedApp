@@ -2,7 +2,7 @@ package com.example.spotifywrapped.firebaseServices;
 
 import android.util.Log;
 
-import com.example.spotifywrapped.User;
+import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.models.Wrap;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
