@@ -2,14 +2,19 @@ package com.example.spotifywrapped.firebaseServices;
 
 import android.util.Log;
 
+import com.example.spotifywrapped.User;
+import com.example.spotifywrapped.models.Wrap;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.PropertyName;
 import com.google.firebase.firestore.SetOptions;
 
-import java.io.Serializable;
+import org.w3c.dom.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseProvider {
     private static FirebaseProvider instance; // Singleton instance
@@ -35,36 +40,125 @@ public class FirebaseProvider {
         return instance;
     }
 
-    public void addUser(String username, String email) {
-        // Create a new user document with the specified data
-        DocumentReference newUserRef = usersCollection.document(username);
-        newUserRef.set(new User(username, email), SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Document added successfully
-                        Log.d("FirebaseProvider", "User added successfully!");
-                    }
-                });
+    // Updated method to add a User object to Firestore
+    public void addUser(User user) {
+        if (user != null && user.getUsername() != null) {
+            usersCollection.document(user.getUsername())
+                    .set(user, SetOptions.merge())
+                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "User added successfully!"))
+                    .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding user", e));
+        } else {
+            Log.e("FirebaseProvider", "User object or username is null");
+        }
     }
 
-    // Define a User class to represent user data
-    private static class User implements Serializable {
-        @PropertyName("username")
-        public String username;
-        @PropertyName("email")
-        public String email;
-
-        // Required empty constructor for Firestore deserialization
-        public User() {
-            // Default constructor required by Firestore
+    // Method to add a Wrap object to Firestore
+    public void addWrap(Wrap wrap) {
+        if (wrap != null && wrap.getSummaryId() != null) {
+            publicWrappedCollection.document(wrap.getSummaryId())
+                    .set(wrap, SetOptions.merge())
+                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "Wrap added successfully!"))
+                    .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding wrap", e));
+        } else {
+            Log.e("FirebaseProvider", "Wrap object or summary ID is null");
         }
-
-        public User(String username, String email) {
-            this.username = username;
-            this.email = email;
-        }
-
-        // Add getters and setters as needed
     }
+
+    // Method to send a friend request
+    public void sendFriendRequest(String requesterId, String recipientId) {
+        DocumentReference requesterRef = usersCollection.document(requesterId);
+        requesterRef.update("outgoingFriendRequests", FieldValue.arrayUnion(recipientId));
+        DocumentReference recipientRef = usersCollection.document(recipientId);
+        recipientRef.update("incomingFriendRequests", FieldValue.arrayUnion(requesterId));
+    }
+
+    // Method to accept a friend request
+    public void acceptFriendRequest(String requesterId, String accepterId) {
+        DocumentReference accepterRef = usersCollection.document(accepterId);
+        accepterRef.update("friends", FieldValue.arrayUnion(requesterId));
+        accepterRef.update("incomingFriendRequests", FieldValue.arrayRemove(requesterId));
+        DocumentReference requesterRef = usersCollection.document(requesterId);
+        requesterRef.update("friends", FieldValue.arrayUnion(accepterId));
+        requesterRef.update("outgoingFriendRequests", FieldValue.arrayRemove(accepterId));
+    }
+
+    // Method to reject a friend request
+    public void rejectFriendRequest(String requesterId, String rejecterId) {
+        DocumentReference rejecterRef = usersCollection.document(rejecterId);
+        rejecterRef.update("incomingFriendRequests", FieldValue.arrayRemove(requesterId));
+        DocumentReference requesterRef = usersCollection.document(requesterId);
+        requesterRef.update("outgoingFriendRequests", FieldValue.arrayRemove(rejecterId));
+    }
+
+    // Method to remove a friend
+    public void removeFriend(String userId, String friendId) {
+        DocumentReference userRef = usersCollection.document(userId);
+        userRef.update("friends", FieldValue.arrayRemove(friendId));
+        DocumentReference friendRef = usersCollection.document(friendId);
+        friendRef.update("friends", FieldValue.arrayRemove(userId));
+    }
+
+    // Method to save a Wrap to a User's profile
+    public void saveWrap(String userId, String wrapId) {
+        DocumentReference userRef = usersCollection.document(userId);
+        userRef.update("savedWraps", FieldValue.arrayUnion(wrapId));
+    }
+
+    // Method to remove a saved Wrap from a User's profile
+    public void unsaveWrap(String userId, String wrapId) {
+        DocumentReference userRef = usersCollection.document(userId);
+        userRef.update("savedWraps", FieldValue.arrayRemove(wrapId));
+    }
+
+    // If you need to fetch the saved wraps for display:
+    public void getSavedWraps(String userId, OnSuccessListener<List<Wrap>> successListener) {
+        usersCollection.document(userId).get().addOnSuccessListener(documentSnapshot -> {
+            User user = documentSnapshot.toObject(User.class);
+            if (user != null && user.getSavedWraps() != null) {
+                List<Wrap> savedWraps = new ArrayList<>();
+                for (String wrapId : user.getSavedWraps()) {
+                    publicWrappedCollection.document(wrapId).get().addOnSuccessListener(wrapSnapshot -> {
+                        Wrap wrap = wrapSnapshot.toObject(Wrap.class);
+                        if (wrap != null) {
+                            savedWraps.add(wrap);
+                            if (savedWraps.size() == user.getSavedWraps().size()) {
+                                successListener.onSuccess(savedWraps);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    // Comments for Wraps
+    public void addCommentToWrap(String wrapId, Comment comment) {
+        DocumentReference wrapRef = publicWrappedCollection.document(wrapId);
+        wrapRef.update("comments", FieldValue.arrayUnion(comment));
+    }
+
+    // Likes for Wraps
+    public void likeWrap(String userId, String wrapId) {
+        DocumentReference wrapRef = publicWrappedCollection.document(wrapId);
+        wrapRef.get().addOnSuccessListener(documentSnapshot -> {
+            Wrap wrap = documentSnapshot.toObject(Wrap.class);
+            if (wrap != null && !wrap.getLikedBy().contains(userId)) {
+                wrapRef.update("likesCount", wrap.getLikesCount() + 1);
+                wrapRef.update("likedBy", FieldValue.arrayUnion(userId));
+            }
+        });
+    }
+
+    // Unliking a Wrap
+    public void unlikeWrap(String userId, String wrapId) {
+        DocumentReference wrapRef = publicWrappedCollection.document(wrapId);
+        wrapRef.get().addOnSuccessListener(documentSnapshot -> {
+            Wrap wrap = documentSnapshot.toObject(Wrap.class);
+            if (wrap != null && wrap.getLikedBy().contains(userId)) {
+                wrapRef.update("likesCount", wrap.getLikesCount() - 1);
+                wrapRef.update("likedBy", FieldValue.arrayRemove(userId));
+            }
+        });
+    }
+
 }
