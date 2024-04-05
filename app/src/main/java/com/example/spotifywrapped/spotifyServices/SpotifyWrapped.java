@@ -1,9 +1,14 @@
 package com.example.spotifywrapped.spotifyServices;
 
+import android.util.Log;
+import android.widget.Switch;
+
 import com.example.spotifywrapped.models.Artist;
+import com.example.spotifywrapped.models.SpotifyUser;
 import com.example.spotifywrapped.models.Track;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SpotifyWrapped {
 
@@ -17,8 +22,8 @@ public class SpotifyWrapped {
     private String topGenre;
     //private int totalMinutes;
 
-    public SpotifyWrapped(String summaryId, String username, String timespan) {
-       setSummaryId(summaryId);
+    public SpotifyWrapped(SpotifyProvider.WrappedTerm timespan) {
+       setSummaryId();
        setUsername(username);
        setTimespan(timespan);
        // populating tracks, artists, and topGenre is handled in setTimespan()
@@ -43,28 +48,30 @@ public class SpotifyWrapped {
     public String getGenre() {
         return topGenre;
     }
+    public String getTimespan() {
+        switch (timespan) {
+            case long_term:
+                return "longterm";
+            case medium_term:
+                return "mediumterm";
+            case short_term:
+                return "shortterm";
+        }
+        return "mediumterm";
+    }
 
     public void setUsername(String username) {
-        this.username = username;
+        spotifyProvider.getMyUserInfo(info -> {
+            this.username = info.toString();
+        });
     }
 
-    public void setSummaryId(String summaryId) {
-        this.summaryId = summaryId;
+    public void setSummaryId() {
+        summaryId = username + new Date().toString() + getTimespan();
     }
 
-    public void setTimespan(String timespan) {
-        switch (timespan) {
-            case "short_term":
-                this.timespan = SpotifyProvider.WrappedTerm.short_term;
-                break;
-            case "medium_term":
-                this.timespan = SpotifyProvider.WrappedTerm.medium_term;
-                break;
-            case "long_term":
-            default:
-                this.timespan = SpotifyProvider.WrappedTerm.long_term;
-                break;
-        }
+    public void setTimespan(SpotifyProvider.WrappedTerm timespan) {
+        this.timespan = timespan;
 
         spotifyProvider.getTopTracks(5, 0, this.timespan, topTracks -> {
             tracks = topTracks;
