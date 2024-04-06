@@ -37,11 +37,12 @@ public class FriendRequestDarkActivity extends AppCompatActivity {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate back to WrappedDarkActivity
-                startActivity(new Intent(FriendRequestDarkActivity.this, WrappedDarkActivity.class));
+                // Navigate back to FriendArtistCompDarkActivity
+                startActivity(new Intent(FriendRequestDarkActivity.this, FriendArtistCompDarkActivity.class));
                 // Finish the current activity
                 finish();
             }
         });
+
     }
 }
