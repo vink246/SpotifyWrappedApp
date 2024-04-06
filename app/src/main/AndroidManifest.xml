@@ -42,6 +42,12 @@
         <!-- SettingsDarkOneActivity -->
         <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
 
+        <!-- FriendRequestDarkActivity -->
+        <activity android:name=".DarkActivities.Settings.FriendRequestDarkActivity" />
+
+        <!-- CheckFriendDarkActivity -->
+        <activity android:name=".DarkActivities.Settings.CheckFriendDarkActivity" />
+
         <!-- SettingsLightOneActivity -->
         <activity android:name=".LightActivities.Settings.SettingsLightOneActivity" />
 
