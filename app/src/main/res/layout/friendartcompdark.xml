@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/lightPink"
         app:menu="@menu/bottom_navigation_menu" />
-
     <Button
         android:id="@+id/inviteFriendButton"
         android:layout_width="0dp"
