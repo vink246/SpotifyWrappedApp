@@ -22,6 +22,9 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch switch3;
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private Switch switch4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
         switch1 = findViewById(R.id.switch1);
         switch2 = findViewById(R.id.switch2);
         switch3 = findViewById(R.id.switch3);
+        switch4 = findViewById(R.id.switch4);
 
         // Set listeners to switches
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -51,6 +55,13 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 switch3.setText(isChecked ? "On" : "Off");
+            }
+        });
+
+        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch4.setText(isChecked ? "Public" : "Private");
             }
         });
 
