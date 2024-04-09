@@ -118,10 +118,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
             if (info != null) {
                 Log.d("MainActivity", info.toString());
                 // Create a User object and set properties
-                User user = new User();
-                user.setUsername(info.getUsername());
-                user.setEmail(info.getEmail());
-                user.setPublic(false); // Set additional properties as needed
+                User user = new User(info.getUsername(), info.getEmail(), true);
                 // Add the user to Firestore
                 FirebaseProvider.getInstance().addUser(user);
             }

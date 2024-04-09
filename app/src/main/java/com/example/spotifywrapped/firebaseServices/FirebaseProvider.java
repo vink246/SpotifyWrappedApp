@@ -44,12 +44,33 @@ public class FirebaseProvider {
     public void addUser(User user) {
         if (user != null && user.getUsername() != null) {
             Log.d("FirebaseProvider", "Adding User...");
-            usersCollection.document(user.getUsername())
-                    .set(user, SetOptions.merge())
-                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "User added successfully!"))
-                    .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding user", e));
+
+            DocumentReference userRef = usersCollection.document(user.getUsername());
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    Log.d("FirebaseProvider", "User already exists in the database.");
+                } else {
+                    userRef.set(user, SetOptions.merge())
+                            .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "User added successfully!"))
+                            .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding user", e));
+                }
+            }).addOnFailureListener(e -> Log.e("FirebaseProvider", "Error checking user existence", e));
         } else {
             Log.e("FirebaseProvider", "User object or username is null");
+        }
+    }
+
+    public void setUserPublic(String username, boolean isPublic) {
+        if (username != null) {
+            Log.d("FirebaseProvider", "Updating User Public Status...");
+            // Get a reference to the user document by username
+            DocumentReference userRef = usersCollection.document(username);
+            // Update the 'isPublic' field using SetOptions.merge()
+            userRef.update("isPublic", isPublic)
+                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "User public status updated successfully!"))
+                    .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error updating user public status", e));
+        } else {
+            Log.e("FirebaseProvider", "Username is null");
         }
     }
 
