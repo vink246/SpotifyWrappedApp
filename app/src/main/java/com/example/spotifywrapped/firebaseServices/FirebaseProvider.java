@@ -43,6 +43,7 @@ public class FirebaseProvider {
     // Updated method to add a User object to Firestore
     public void addUser(User user) {
         if (user != null && user.getUsername() != null) {
+            Log.d("FirebaseProvider", "Adding User...");
             usersCollection.document(user.getUsername())
                     .set(user, SetOptions.merge())
                     .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "User added successfully!"))

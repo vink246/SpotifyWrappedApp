@@ -36,21 +36,6 @@ public class WrappedDarkActivity extends AppCompatActivity {
             if (topArtists != null) Log.d("WrappedDarkActivity", topArtists.toString());
         });
 
-        // Fetch user info and add/update the user in Firestore
-        provider.getMyUserInfo(info -> {
-            if (info != null) {
-                Log.d("WrappedDarkActivity", info.toString());
-                // Create a User object and set properties
-                User user = new User();
-                user.setUsername(info.getUsername());
-                user.setEmail(info.getEmail());
-                user.setPublic(true); // Set additional properties as needed
-
-                // Add the user to Firestore
-                FirebaseProvider.getInstance().addUser(user);
-            }
-        });
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);

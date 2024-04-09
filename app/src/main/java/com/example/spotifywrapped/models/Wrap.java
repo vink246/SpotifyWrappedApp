@@ -6,6 +6,7 @@ import com.google.firebase.firestore.PropertyName;
 import org.w3c.dom.Comment;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Wrap implements Serializable {
@@ -40,6 +41,10 @@ public class Wrap implements Serializable {
     private boolean isPublic;
 
     public Wrap() {
+        tracks = new ArrayList<>();
+        artists = new ArrayList<>();
+        comments = new ArrayList<>();
+        likedBy = new ArrayList<>();
     }
 
     public Wrap(String summaryId, String username, SpotifyProvider.WrappedTerm timespan, List<Track> tracks, List<Artist> artists, String topGenre, boolean isPublic) {
