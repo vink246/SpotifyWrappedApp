@@ -2,27 +2,54 @@ package com.example.spotifywrapped.DarkActivities.Data;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
+import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.DarkActivities.Data.WrappedAdapter;
+import com.example.spotifywrapped.DarkActivities.Data.WrappedItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PastWrapDarkActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerViewWrappedItems;
+    private WrappedAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pastwrappeddark);
+        setContentView(R.layout.activity_past_wrap_dark); // Ensure this is the name of your layout file with the RecyclerView
 
+        // Initialize RecyclerView for wrapped items
+        recyclerViewWrappedItems = findViewById(R.id.recycler_view_wrapped_items);
+        recyclerViewWrappedItems.setLayoutManager(new LinearLayoutManager(this));
+
+        // Create sample data
+        List<WrappedItem> items = new ArrayList<>();
+        items.add(new WrappedItem("Date Range 1", Arrays.asList("Lil baby\n", "Lil Uzi Vert\n", "NBA Youngboy\n", "Kanye\n", "Drake"), Arrays.asList("Song 1", "Song 2", "Song 3")));
+        // Add as many WrappedItem objects to the list as you need
+        items.add(new WrappedItem("Date Range 2", Arrays.asList("Artist A", "Artist B", "Artist C", "Artist D", "Artist E"), Arrays.asList("Song A", "Song B", "Song C")));
+        items.add(new WrappedItem("Date Range 3", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+        items.add(new WrappedItem("Date Range 4", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+
+        Log.d("PastWrapDarkActivity", "Number of items: " + items.size());
+        adapter = new WrappedAdapter(items);
+        recyclerViewWrappedItems.setAdapter(adapter);
+
+        // BottomNavigationView setup remains unchanged
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
-
         bottomNavigationView.setSelectedItemId(R.id.navigation_history);
     }
+
 
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
