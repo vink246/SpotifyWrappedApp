@@ -36,15 +36,29 @@ public class SpotifyWrapped {
     public ArrayList<Track> getTrackList() {
         return tracks;
     }
+    public String getTrackString() {
+        return "Top Songs:\n1. " +
+                tracks.get(0).getName() + "\n2. " +
+                tracks.get(1).getName() + "\n3. " +
+                tracks.get(2).getName() + "\n4. " +
+                tracks.get(3).getName() + "\n5. " +
+                tracks.get(4).getName();
+    }
 
     public Artist getTopArtist() {
         return artists.get(0);
     }
-
     public ArrayList<Artist> getArtistList() {
         return artists;
     }
-
+    public String getArtistString() {
+        return "Top Artists:\n1. " +
+                artists.get(0).getName() + "\n2. " +
+                artists.get(1).getName() + "\n3. " +
+                artists.get(2).getName() + "\n4. " +
+                artists.get(3).getName() + "\n5. " +
+                artists.get(4).getName();
+    }
     public String getGenre() {
         return topGenre;
     }

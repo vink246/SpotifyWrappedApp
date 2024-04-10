@@ -9,32 +9,48 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.SummaryAdapter;
 import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
+import com.example.spotifywrapped.spotifyServices.SpotifyWrapped;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 public class WrappedDarkActivity extends AppCompatActivity {
 
     SpotifyProvider provider;
+    SpotifyWrapped wrapped;
+    SummaryAdapter summaryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wrappeddark);
 
         provider = SpotifyProvider.getInstance();
 
-        provider.getTopTracks(10, 0, SpotifyProvider.WrappedTerm.medium_term, topTracks -> {
-            if (topTracks != null) Log.d("WrappedDarkActivity", topTracks.toString());
+        provider.getTopTracks(5, 0, SpotifyProvider.WrappedTerm.medium_term, topTracks -> {
+            if (topTracks != null) {
+                // populate tracks
+                provider.getTopArtists(5, 0, SpotifyProvider.WrappedTerm.medium_term, topArtists -> {
+                    if (topArtists != null) {
+                        // populate artists and genre
+                        initRecyclerView();
+                        setContentView(R.layout.wrappeddark);
+
+                    }
+                });
+
+
+            }
         });
 
-        provider.getTopArtists(10, 0, SpotifyProvider.WrappedTerm.medium_term, topArtists -> {
-            if (topArtists != null) Log.d("WrappedDarkActivity", topArtists.toString());
-        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
@@ -55,6 +71,21 @@ public class WrappedDarkActivity extends AppCompatActivity {
                 // Handle no selection
             }
         });
+    }
+
+    private void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.summaryText);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        summaryAdapter = new SummaryAdapter(wrapped, new SummaryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // do nothing?
+            }
+        });
+        recyclerView.setAdapter(summaryAdapter);
     }
 
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
