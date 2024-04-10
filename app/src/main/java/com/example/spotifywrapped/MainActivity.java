@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
+import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
@@ -111,6 +113,16 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
             }
             return;
         }
+        // Fetch user info and add/update the user in Firestore
+        spotifyProvider.getMyUserInfo(info -> {
+            if (info != null) {
+                Log.d("MainActivity", info.toString());
+                // Create a User object and set properties
+                User user = new User(info.getUsername(), info.getEmail(), true);
+                // Add the user to Firestore
+                FirebaseProvider.getInstance().addUser(user);
+            }
+        });
         // Once the provider is initialized, we navigate (only if it is valid)
         Intent homeIntent = new Intent(this, WrappedDarkActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

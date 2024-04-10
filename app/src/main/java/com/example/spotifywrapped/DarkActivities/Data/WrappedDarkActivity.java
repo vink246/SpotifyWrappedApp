@@ -8,10 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.models.User;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,42 +26,33 @@ public class WrappedDarkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wrappeddark);
 
-        // provider tests - can remove later
         provider = SpotifyProvider.getInstance();
 
         provider.getTopTracks(10, 0, SpotifyProvider.WrappedTerm.medium_term, topTracks -> {
             if (topTracks != null) Log.d("WrappedDarkActivity", topTracks.toString());
-            //provider.playTrack(topTracks.get(0));
         });
+
         provider.getTopArtists(10, 0, SpotifyProvider.WrappedTerm.medium_term, topArtists -> {
             if (topArtists != null) Log.d("WrappedDarkActivity", topArtists.toString());
         });
-        provider.getMyUserInfo(info -> {
-            if (info != null) Log.d("WrappedDarkActivity", info.toString());
-        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
-
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         Spinner spinner = findViewById(R.id.spinner);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinner_items, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_items, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, android.view.View selectedItemView, int position, long id) {
-                String selectedItem = parentView.getItemAtPosition(position).toString();
-                // Handle the selected item
+                // Handle spinner selection
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Do nothing
+                // Handle no selection
             }
         });
     }
