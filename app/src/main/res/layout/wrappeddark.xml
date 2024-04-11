@@ -66,7 +66,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/pink"
         android:text="Save"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="612dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
