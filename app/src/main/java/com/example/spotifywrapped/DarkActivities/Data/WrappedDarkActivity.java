@@ -12,15 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.R;
-import com.example.spotifywrapped.SummaryAdapter;
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.Track;
-import com.example.spotifywrapped.models.User;
-import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.spotifyServices.SpotifyWrapped;
@@ -123,6 +118,7 @@ public class WrappedDarkActivity extends AppCompatActivity {
 
     private void updateUI() {
         if (wrapped != null) {
+            provider.playTrack(wrapped.getTopTrack());
             // Update text views with wrapped data
             textViewTopSong.setText("Top Song: "+wrapped.getTopTrack().getName());
             textViewTopArtist.setText("Top Artist: "+wrapped.getTopArtist().getName());
@@ -151,15 +147,19 @@ public class WrappedDarkActivity extends AppCompatActivity {
         if (itemId == R.id.navigation_home) {
             // Do nothing as we are already in WrappedDarkActivity
         } else if (itemId == R.id.navigation_group) {
+            provider.pauseCurrentTrack();
             startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
             finish();
         } else if (itemId == R.id.navigation_history) {
+            provider.pauseCurrentTrack();
             startActivity(new Intent(this, PastWrapDarkActivity.class));
             finish();
         } else if (itemId == R.id.navigation_language) {
+            provider.pauseCurrentTrack();
             startActivity(new Intent(this, PublicWrapDarkActivity.class));
             finish();
         } else if (itemId == R.id.navigation_settings) {
+            provider.pauseCurrentTrack();
             startActivity(new Intent(this, SettingsDarkOneActivity.class));
             finish();
         }
