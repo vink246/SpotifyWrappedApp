@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/justblack">
+
+    <!-- Title: Friends -->
+    <TextView
+        android:id="@+id/textViewFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FRIENDS"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:fontFamily="@font/univers"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp"/>
+
+    <!-- RecyclerView for Friends -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFriends"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewFriends"/>
+
+    <!-- Title: Incoming Requests -->
+    <TextView
+        android:id="@+id/textViewRequests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INCOMING REQUESTS"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:fontFamily="@font/univers"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewFriends"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp"/>
+
+    <!-- RecyclerView for Incoming Requests -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewIncomingRequests"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRequests"/>
+
+    <!-- Button: Go Back to Friend Search -->
+    <Button
+        android:id="@+id/buttonGoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go Back to Friend Search"
+        android:background="@drawable/button_green_bg"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/poppinsmedium"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewIncomingRequests"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

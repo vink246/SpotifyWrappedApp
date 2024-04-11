@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/justblack">
+
+    <TextView
+        android:id="@+id/textViewDateRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Range"
+        android:fontFamily="@font/poppinsmedium"
+        android:textColor="@color/yellow"
+        android:textSize="18sp"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/textViewTopArtistsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TOP 5 ARTISTS"
+        android:background="@drawable/rounded_purple_bg"
+        android:textColor="@color/white"
+        android:fontFamily="@font/univers"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:gravity="center" />
+
+
+    <TextView
+        android:id="@+id/topArtists"
+        android:layout_width="220dp"
+        android:layout_height="258dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/univers"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewTopSongsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TOP 5 SONGS"
+        android:background="@drawable/rounded_yellow_bg"
+        android:textColor="@color/white"
+        android:fontFamily="@font/univers"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:gravity="center"
+        android:layout_marginTop="16dp" />
+
+
+    <TextView
+        android:id="@+id/topSongs"
+        android:layout_width="214dp"
+        android:layout_height="278dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/univers"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+</LinearLayout>

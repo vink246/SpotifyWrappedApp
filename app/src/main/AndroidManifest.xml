@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +15,7 @@
         android:theme="@style/Theme.SpotifyWrapped"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +23,59 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- HomeActivity -->
+        <activity android:name=".HomeActivity" />
+
+        <!-- BottomNavigationActivity -->
+        <activity android:name=".BottomNavigationActivity" />
+
+        <!-- AccountInfoActivity -->
+        <activity android:name=".AccountInfoActivity" />
+
+        <!-- PastWrapDarkActivity -->
+        <activity android:name=".DarkActivities.Data.PastWrapDarkActivity" />
+
+        <!-- PublicWrapDarkActivity -->
+        <activity android:name=".DarkActivities.Data.PublicWrapDarkActivity" />
+
+        <!-- SettingsDarkOneActivity -->
+        <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
+
+        <!-- FriendRequestDarkActivity -->
+        <activity android:name=".DarkActivities.Settings.FriendRequestDarkActivity" />
+
+        <!-- CheckFriendDarkActivity -->
+        <activity android:name=".DarkActivities.Settings.CheckFriendDarkActivity" />
+
+        <!-- SettingsLightOneActivity -->
+        <activity android:name=".LightActivities.Settings.SettingsLightOneActivity" />
+
+
+        <!-- FriendArtistCompDarkActivity -->
+        <activity android:name=".DarkActivities.Data.FriendArtistCompDarkActivity" />
+
+        <!-- FriendArtistCompLightActivity -->
+        <activity android:name=".LightActivities.Data.FriendArtistCompLightActivity" />
+
+        <!-- FriendCompDarkActivity -->
+        <activity android:name=".DarkActivities.Data.FriendCompDarkActivity" />
+
+        <!-- FriendCompLightActivity -->
+        <activity android:name=".LightActivities.Data.FriendCompLightActivity" />
+
+        <!-- TopArtistDarkActivity -->
+        <activity android:name=".DarkActivities.Data.TopArtistDarkActivity" />
+
+        <!-- TopArtistLightActivity -->
+        <activity android:name=".LightActivities.Data.TopArtistLightActivity" />
+
+        <!-- WrappedDarkActivity -->
+        <activity android:name=".DarkActivities.Data.WrappedDarkActivity" />
+
+        <!-- WrappedLightActivity -->
+        <activity android:name=".LightActivities.Data.WrappedLightActivity" />
+
     </application>
 
 </manifest>
