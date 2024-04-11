@@ -7,6 +7,7 @@ import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.SpotifyUser;
 import com.example.spotifywrapped.models.Track;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,7 +21,7 @@ public class SpotifyWrapped {
 
     public String summaryId;
     public String username;
-    private SpotifyProvider.WrappedTerm timespan;
+    public SpotifyProvider.WrappedTerm timespan;
     private ArrayList<Track> tracks;
     private ArrayList<Artist> artists;
     private String topGenre;
@@ -88,7 +89,7 @@ public class SpotifyWrapped {
     }
 
     public void setSummaryId() {
-        summaryId = username + new Date().toString() + getTimespan();
+        summaryId = username + " " + LocalDate.now() + " " + getTimespan();
     }
 
     public void setTimespan(SpotifyProvider.WrappedTerm timespan) {

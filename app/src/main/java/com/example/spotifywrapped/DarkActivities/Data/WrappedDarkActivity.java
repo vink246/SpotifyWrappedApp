@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -14,8 +16,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.Track;
+import com.example.spotifywrapped.models.Wrap;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.spotifyServices.SpotifyWrapped;
@@ -81,6 +85,27 @@ public class WrappedDarkActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // Handle no selection
+            }
+        });
+
+        // Find the button by its ID
+        Button yourButton = findViewById(R.id.saveButton);
+
+        // Set an OnClickListener for the button
+        yourButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (wrapped != null) {
+                    FirebaseProvider.getInstance().saveWrap(wrapped.username, new Wrap(
+                            wrapped.summaryId,
+                            wrapped.username,
+                            wrapped.timespan,
+                            wrapped.getTrackList(),
+                            wrapped.getArtistList(),
+                            wrapped.getGenre(),
+                            false
+                    ), getApplicationContext());
+                }
             }
         });
     }

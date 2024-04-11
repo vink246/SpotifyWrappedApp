@@ -13,7 +13,15 @@ import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivit
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.DarkActivities.Data.WrappedAdapter;
 import com.example.spotifywrapped.DarkActivities.Data.WrappedItem;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
+import com.example.spotifywrapped.models.Artist;
+import com.example.spotifywrapped.models.Track;
+import com.example.spotifywrapped.models.Wrap;
+import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +30,7 @@ public class PastWrapDarkActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewWrappedItems;
     private WrappedAdapter adapter;
+    private List<WrappedItem> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +41,43 @@ public class PastWrapDarkActivity extends AppCompatActivity {
         recyclerViewWrappedItems = findViewById(R.id.recycler_view_wrapped_items);
         recyclerViewWrappedItems.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create sample data
-        List<WrappedItem> items = new ArrayList<>();
-        items.add(new WrappedItem("Date Range 1", Arrays.asList("Lil baby\n", "Lil Uzi Vert\n", "NBA Youngboy\n", "Kanye\n", "Drake"), Arrays.asList("Song 1", "Song 2", "Song 3")));
-        // Add as many WrappedItem objects to the list as you need
-        items.add(new WrappedItem("Date Range 2", Arrays.asList("Artist A", "Artist B", "Artist C", "Artist D", "Artist E"), Arrays.asList("Song A", "Song B", "Song C")));
-        items.add(new WrappedItem("Date Range 3", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
-        items.add(new WrappedItem("Date Range 4", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+        SpotifyProvider.getInstance().getMyUserInfo(info -> {
+            FirebaseProvider.getInstance().getSavedWraps(info.getUsername(), wraps -> {
+                for (Wrap wrap: wraps.getResult()) {
+                    String[] idParts = wrap.getSummaryId().split(" ");
+                    String date = idParts[1];
+                    List<String> trackNames = new ArrayList<>();
+                    for (Track track : wrap.getTracks()) {
+                        trackNames.add(track.getName());
+                    }
+                    List<String> artistNames = new ArrayList<>();
+                    for (Artist artist : wrap.getArtists()) {
+                        artistNames.add(artist.getName());
+                    }
+                    LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+                    String startDate = "unknown";
+                    switch (wrap.getTimespan()){
+                        case long_term:
+                            startDate = parsedDate.minusYears(1).format(DateTimeFormatter.ISO_DATE);
+                            break;
+                        case medium_term:
+                            startDate = parsedDate.minusMonths(6).format(DateTimeFormatter.ISO_DATE);
+                            break;
+                        case short_term:
+                            startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
+                            break;
+                    }
+                    items.add(new WrappedItem(startDate+" to "+date, artistNames, trackNames));
+                }
+                adapter.notifyDataSetChanged();
+            });
+        });
+        // Create sample dat
+//        items.add(new WrappedItem("Date Range 1", Arrays.asList("Lil baby\n", "Lil Uzi Vert\n", "NBA Youngboy\n", "Kanye\n", "Drake"), Arrays.asList("Song 1", "Song 2", "Song 3")));
+//        // Add as many WrappedItem objects to the list as you need
+//        items.add(new WrappedItem("Date Range 2", Arrays.asList("Artist A", "Artist B", "Artist C", "Artist D", "Artist E"), Arrays.asList("Song A", "Song B", "Song C")));
+//        items.add(new WrappedItem("Date Range 3", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+//        items.add(new WrappedItem("Date Range 4", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
 
         Log.d("PastWrapDarkActivity", "Number of items: " + items.size());
         adapter = new WrappedAdapter(items);

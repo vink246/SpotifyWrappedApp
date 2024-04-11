@@ -25,7 +25,7 @@ public class User implements Serializable {
     public boolean isPublic;
 
     @PropertyName("savedWraps")
-    public List<String> savedWraps;
+    public List<Wrap> savedWraps;
 
     // Default constructor required for Firebase
     public User() {
@@ -97,11 +97,11 @@ public class User implements Serializable {
         this.isPublic = isPublic;
     }
 
-    public List<String> getSavedWraps() {
+    public List<Wrap> getSavedWraps() {
         return savedWraps;
     }
 
-    public void setSavedWraps(List<String> savedWraps) {
+    public void setSavedWraps(List<Wrap> savedWraps) {
         this.savedWraps = savedWraps;
     }
 }

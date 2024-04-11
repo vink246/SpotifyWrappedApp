@@ -1,20 +1,28 @@
 package com.example.spotifywrapped.firebaseServices;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.models.Wrap;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.android.gms.tasks.Task;
 
 import org.w3c.dom.Comment;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FirebaseProvider {
     private static FirebaseProvider instance; // Singleton instance
@@ -134,36 +142,62 @@ public class FirebaseProvider {
     }
 
     // Method to save a Wrap to a User's profile
-    public void saveWrap(String userId, String wrapId) {
+    public void saveWrap(String userId, Wrap wrap, Context context) {
         DocumentReference userRef = usersCollection.document(userId);
-        userRef.update("savedWraps", FieldValue.arrayUnion(wrapId));
+        // Check if the wrap with the same summaryId already exists
+        userRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<Wrap> savedWraps = documentSnapshot.toObject(User.class).getSavedWraps();
+                if (savedWraps != null) {
+                    boolean wrapExists = savedWraps.stream().anyMatch(savedWrap -> savedWrap.getSummaryId().equals(wrap.getSummaryId()));
+                    if (!wrapExists) {
+                        // Add the wrap to the array only if it doesn't already exist
+                        userRef.update("savedWraps", FieldValue.arrayUnion(wrap));
+                        Toast.makeText(context, "Wrap Saved!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Wrap has already been Saved!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } else {
+                Toast.makeText(context, "Unable to save: database error!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     // Method to remove a saved Wrap from a User's profile
-    public void unsaveWrap(String userId, String wrapId) {
+    public void unsaveWrap(String userId, Wrap wrap) {
         DocumentReference userRef = usersCollection.document(userId);
-        userRef.update("savedWraps", FieldValue.arrayRemove(wrapId));
+        userRef.update("savedWraps", FieldValue.arrayRemove(wrap));
     }
 
     // If you need to fetch the saved wraps for display:
-    public void getSavedWraps(String userId, OnSuccessListener<List<Wrap>> successListener) {
-        usersCollection.document(userId).get().addOnSuccessListener(documentSnapshot -> {
-            User user = documentSnapshot.toObject(User.class);
-            if (user != null && user.getSavedWraps() != null) {
-                List<Wrap> savedWraps = new ArrayList<>();
-                for (String wrapId : user.getSavedWraps()) {
-                    publicWrappedCollection.document(wrapId).get().addOnSuccessListener(wrapSnapshot -> {
-                        Wrap wrap = wrapSnapshot.toObject(Wrap.class);
-                        if (wrap != null) {
-                            savedWraps.add(wrap);
-                            if (savedWraps.size() == user.getSavedWraps().size()) {
-                                successListener.onSuccess(savedWraps);
+    public void getSavedWraps(String userId, OnCompleteListener<ArrayList<Wrap>> onCompleteListener) {
+        usersCollection.document(userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+                            ArrayList<Wrap> savedWraps = new ArrayList<>();
+                            List<Wrap> wrapList = documentSnapshot.toObject(User.class).getSavedWraps();
+
+                            if (wrapList != null) {
+                                savedWraps.addAll(wrapList);
                             }
+
+                            Task<ArrayList<Wrap>> taskResult = Tasks.forResult(savedWraps);
+                            onCompleteListener.onComplete(taskResult);
+                        } else {
+                            Log.d("FirebaseProvider", "No such document");
+                            Task<ArrayList<Wrap>> emptyTask = Tasks.forResult(new ArrayList<>());
+                            onCompleteListener.onComplete(emptyTask);
                         }
-                    });
-                }
-            }
-        });
+                    } else {
+                        Log.d("FirebaseProvider", "get failed with ", task.getException());
+                        onCompleteListener.onComplete(null);
+                    }
+                });
     }
 
     // Comments for Wraps

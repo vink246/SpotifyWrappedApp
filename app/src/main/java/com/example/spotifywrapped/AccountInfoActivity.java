@@ -5,10 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
+import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 
 public class AccountInfoActivity extends AppCompatActivity {
 
@@ -20,6 +22,14 @@ public class AccountInfoActivity extends AppCompatActivity {
         // Initialize button4 and set OnClickListener to navigate to SettingsDarkOneActivity
         Button settingsButton = findViewById(R.id.button4);
         Button editAccountButton = findViewById(R.id.button2);
+
+        TextView usernameView = findViewById(R.id.usernameTextView);
+        TextView emailView = findViewById(R.id.emailTextView);
+
+        SpotifyProvider.getInstance().getMyUserInfo(info -> {
+            usernameView.setText(info.getUsername());
+            emailView.setText(info.getEmail());
+        });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -32,8 +32,8 @@ public class WrappedAdapter extends RecyclerView.Adapter<WrappedAdapter.ViewHold
         Log.d("WrappedAdapter", "Item at position " + position + ": " + item.getTopArtists() + ", " + item.getTopSongs());
         holder.dateRange.setText(item.getDateRange());
         // You need to convert top artists and songs list to string or handle them appropriately
-        holder.topArtists.setText(String.join(", ", item.getTopArtists()));
-        holder.topSongs.setText(String.join(", ", item.getTopSongs()));
+        holder.topArtists.setText(String.join("\n", item.getTopArtists()));
+        holder.topSongs.setText(String.join("\n", item.getTopSongs()));
     }
 
     @Override
