@@ -134,7 +134,7 @@ public class Wrap implements Serializable {
      * A setter for tracks.
      * @param tracks Sets Wrap's tracks to whatever is inputted.
      */
-    public void setTracks(List<Track> tracks) {
+    public void  setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
 
