@@ -33,13 +33,13 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
 
         // Create sample data
         List<WrappedItem> items = new ArrayList<>();
-        items.add(new WrappedItem("Date Range 1", Arrays.asList("Lil baby\n", "Lil Uzi Vert\n", "NBA Youngboy\n", "Kanye\n", "Drake"), Arrays.asList("Song 1", "Song 2", "Song 3")));
+        items.add(new WrappedItem("Username 1", Arrays.asList("Lil baby\n", "Lil Uzi Vert\n", "NBA Youngboy\n", "Kanye\n", "Drake"), Arrays.asList("Song 1", "Song 2", "Song 3")));
         // Add as many WrappedItem objects to the list as you need
-        items.add(new WrappedItem("Date Range 2", Arrays.asList("Artist A", "Artist B", "Artist C", "Artist D", "Artist E"), Arrays.asList("Song A", "Song B", "Song C")));
-        items.add(new WrappedItem("Date Range 3", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
-        items.add(new WrappedItem("Date Range 4", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+        items.add(new WrappedItem("Username 2", Arrays.asList("Artist A", "Artist B", "Artist C", "Artist D", "Artist E"), Arrays.asList("Song A", "Song B", "Song C")));
+        items.add(new WrappedItem("Username 3", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+        items.add(new WrappedItem("Username 4", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
 
-        Log.d("PastWrapDarkActivity", "Number of items: " + items.size());
+        Log.d("PublicWrapDarkActivity", "Number of items: " + items.size());
         adapter = new WrappedAdapter(items);
         recyclerViewWrappedItems.setAdapter(adapter);
 
