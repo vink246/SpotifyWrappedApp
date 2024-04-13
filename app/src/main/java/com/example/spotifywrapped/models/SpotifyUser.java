@@ -9,6 +9,7 @@ public class SpotifyUser implements Serializable {
     private String username;
     private String email;
     private String uri;
+    private boolean premium;
 
     /**
      * Constructs a SpotifyUser object with the specified attributes.
@@ -17,10 +18,11 @@ public class SpotifyUser implements Serializable {
      * @param email    The email address of the Spotify user.
      * @param uri      The URI of the Spotify user.
      */
-    public SpotifyUser(String username, String email, String uri) {
+    public SpotifyUser(String username, String email, String uri, boolean premium) {
         this.username = username;
         this.email = email;
         this.uri = uri;
+        this.premium = premium;
     }
 
     /**
@@ -77,12 +79,31 @@ public class SpotifyUser implements Serializable {
         this.uri = uri;
     }
 
+    /**
+     * Gets the premium status of the Spotify user.
+     *
+     * @return True if the user has premium status, false otherwise.
+     */
+    public boolean isPremium() {
+        return premium;
+    }
+
+    /**
+     * Sets the premium status of the Spotify user.
+     *
+     * @param premium True to set the user as premium, false otherwise.
+     */
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
+
     @Override
     public String toString() {
         return "SpotifyUser{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", uri='" + uri + '\'' +
+                ", premium='" + premium + '\'' +
                 '}';
     }
 }
