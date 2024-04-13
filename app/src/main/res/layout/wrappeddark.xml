@@ -30,6 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/univers"
+                android:gravity="center"
                 android:text="Top Song"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
@@ -42,9 +44,12 @@
                 android:layout_below="@id/textViewTopSong"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/univers"
+                android:gravity="center"
                 android:text="Top Artist"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
+
 
             <!-- Display Top Genre -->
             <TextView
@@ -54,6 +59,8 @@
                 android:layout_below="@id/textViewTopArtist"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/univers"
+                android:gravity="center"
                 android:text="Top Genre"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
@@ -77,14 +84,26 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textViewTopSongsHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/univers"
+                        android:gravity="start"
+                        android:text="Top 5 Songs"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
                         android:id="@+id/textViewLeadingTopSongs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
+                        android:gravity="start"
                         android:text="Leading Top Songs"
+                        android:fontFamily="@font/poppinsmedium"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        android:gravity="center" /> <!-- Center the text -->
+                        android:textSize="16sp" /> <!-- Center the text -->
 
                     <!-- Add more text views here if needed -->
                 </LinearLayout>
@@ -99,14 +118,26 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textViewTopArtistsHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="start"
+                        android:fontFamily="@font/univers"
+                        android:text="Top 5 Artists"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
                         android:id="@+id/textViewLeadingTopArtists"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
+                        android:gravity="start"
+                        android:fontFamily="@font/poppinsmedium"
                         android:text="Leading Top Artists"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        android:gravity="center" /> <!-- Center the text -->
+                        android:textSize="16sp" /> <!-- Center the text -->
 
                     <!-- Add more text views here if needed -->
                 </LinearLayout>
