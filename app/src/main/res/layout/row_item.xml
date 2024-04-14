@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
+    <!-- TextView for displaying the name -->
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="match_parent"

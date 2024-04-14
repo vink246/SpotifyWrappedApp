@@ -7,6 +7,7 @@
     tools:context=".MainActivity"
     android:background="@drawable/justblack">
 
+    <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -18,6 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/lightPink"
         app:menu="@menu/bottom_navigation_menu" />
+
+    <!-- Button: Invite a Friend -->
     <Button
         android:id="@+id/inviteFriendButton"
         android:layout_width="0dp"
@@ -35,6 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!-- ScrollView -->
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -47,11 +51,13 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp">
 
+        <!-- LinearLayout inside ScrollView -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Combo 1 -->
             <LinearLayout
                 android:id="@+id/combo1"
                 android:layout_width="match_parent"
@@ -61,6 +67,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- Header -->
                 <TextView
                     android:id="@+id/header1"
                     android:layout_width="wrap_content"
@@ -71,6 +78,7 @@
                     android:textColor="@color/yellow"
                     android:textSize="18sp" />
 
+                <!-- Data -->
                 <TextView
                     android:id="@+id/data1"
                     android:layout_width="wrap_content"
@@ -82,6 +90,7 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+            <!-- Combo 2 -->
             <LinearLayout
                 android:id="@+id/combo2"
                 android:layout_width="match_parent"
@@ -91,6 +100,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- Header -->
                 <TextView
                     android:id="@+id/header2"
                     android:layout_width="wrap_content"
@@ -101,6 +111,7 @@
                     android:textColor="@color/purple"
                     android:textSize="18sp" />
 
+                <!-- Data -->
                 <TextView
                     android:id="@+id/data2"
                     android:layout_width="wrap_content"
@@ -112,6 +123,7 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+            <!-- Combo 3 -->
             <LinearLayout
                 android:id="@+id/combo3"
                 android:layout_width="match_parent"
@@ -121,6 +133,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- Header -->
                 <TextView
                     android:id="@+id/header3"
                     android:layout_width="wrap_content"
@@ -131,6 +144,7 @@
                     android:textColor="@color/yellow"
                     android:textSize="18sp" />
 
+                <!-- Data -->
                 <TextView
                     android:id="@+id/data3"
                     android:layout_width="wrap_content"
@@ -142,6 +156,7 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+            <!-- Combo 4 -->
             <LinearLayout
                 android:id="@+id/combo4"
                 android:layout_width="match_parent"
@@ -151,6 +166,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- Header -->
                 <TextView
                     android:id="@+id/header4"
                     android:layout_width="wrap_content"
@@ -161,6 +177,7 @@
                     android:textColor="@color/purple"
                     android:textSize="18sp" />
 
+                <!-- Data -->
                 <TextView
                     android:id="@+id/data4"
                     android:layout_width="wrap_content"

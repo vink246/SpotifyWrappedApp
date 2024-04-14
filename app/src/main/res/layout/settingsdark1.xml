@@ -7,6 +7,7 @@
     tools:context="MainActivity"
     android:background="@drawable/settings">
 
+    <!-- Switch for toggling private mode -->
     <Switch
         android:id="@+id/switch4"
         android:layout_width="wrap_content"
@@ -22,6 +23,7 @@
         app:layout_constraintVertical_bias="0.411"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+    <!-- Button for navigating to the user's account settings -->
     <Button
         android:id="@+id/button"
         android:layout_width="308dp"
@@ -37,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.525" />
 
+    <!-- Button for exiting the settings screen -->
     <Button
         android:id="@+id/button3"
         android:layout_width="308dp"
@@ -51,6 +54,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.679" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
