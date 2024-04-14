@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/blankdark">
+    android:background="@drawable/justblack">
 
     <Button
         android:id="@+id/button2"
@@ -60,7 +60,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_blue_bg"
+                android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
                 android:layout_marginBottom="16dp">
 
@@ -71,7 +71,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/univers"
                     android:text="ACCOUNT INFO"
-                    android:textColor="@color/lightPink"
+                    android:textColor="@color/green"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_blue_bg"
+                android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp">
 
@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_blue_bg"
+                android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_blue_bg"
+                android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
@@ -173,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_blue_bg"
+                android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp">
