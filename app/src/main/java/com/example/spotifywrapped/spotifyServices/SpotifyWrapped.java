@@ -1,32 +1,49 @@
 package com.example.spotifywrapped.spotifyServices;
 
-import android.util.Log;
-import android.widget.Switch;
-
 import com.example.spotifywrapped.models.Artist;
-import com.example.spotifywrapped.models.SpotifyUser;
 import com.example.spotifywrapped.models.Track;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Generates and maintains a SpotifyWrapped object.
+ */
 public class SpotifyWrapped {
 
+    /** Instance of SpotifyProvider (works with Spotify API) */
     private SpotifyProvider spotifyProvider = SpotifyProvider.getInstance();
 
+    /** Unique id of wrapped */
     public String summaryId;
-    public String username;
-    public SpotifyProvider.WrappedTerm timespan;
-    private ArrayList<Track> tracks;
-    private ArrayList<Artist> artists;
-    private String topGenre;
-    //private int totalMinutes;
 
+    /** Username of user */
+    public String username;
+
+    /** Timespan of wrapped data (short, medium, long */
+    public SpotifyProvider.WrappedTerm timespan;
+
+    /** List of user's top tracks */
+    private ArrayList<Track> tracks;
+
+    /** List of user's top artists */
+    private ArrayList<Artist> artists;
+
+    /** User's top genre */
+    private String topGenre;
+
+    /**
+     * Constructs a new SpotifyWrapped object by generating a summary id, setting username and timespan,
+     * and populating tracks, artists, and topGenre
+     *
+     * @param tracks list of top tracks
+     * @param artists list of top artists
+     * @param timespan timespan of data
+     * @param username username of user
+     */
     public SpotifyWrapped(ArrayList<Track> tracks, ArrayList<Artist> artists, SpotifyProvider.WrappedTerm timespan, String username) {
         this.timespan = timespan;
         this.username = username;
@@ -38,13 +55,30 @@ public class SpotifyWrapped {
         //setTimespan(timespan);
     }
 
+    /**
+     * Returns the user's top track
+     *
+     * @return user's top track
+     */
     public Track getTopTrack() {
         return tracks.get(0);
     }
 
+    /**
+     * Returns a sorted list of the user's top tracks
+     * Sorted in order of most listened by user with top track first
+     *
+     * @return list of user's top tracks
+     */
     public ArrayList<Track> getTrackList() {
         return tracks;
     }
+
+    /**
+     * Returns a formatted string of user's top tracks
+     *
+     * @return string of user's top tracks
+     */
     public String getTrackString() {
         return "Top Songs:\n1. " +
                 tracks.get(0).getName() + "\n2. " +
@@ -54,12 +88,30 @@ public class SpotifyWrapped {
                 tracks.get(4).getName();
     }
 
+    /**
+     * Returns user's top artist
+     *
+     * @return user's top artist
+     */
     public Artist getTopArtist() {
         return artists.get(0);
     }
+
+    /**
+     * Returns a sorted list of the user's top artists
+     * Sorted in order of most listened by user with top artist first
+     *
+     * @return list of user's top artists
+     */
     public ArrayList<Artist> getArtistList() {
         return artists;
     }
+
+    /**
+     * Returns a formatted string of user's top artists
+     *
+     * @return string of user's top artists
+     */
     public String getArtistString() {
         return "Top Artists:\n1. " +
                 artists.get(0).getName() + "\n2. " +
@@ -68,9 +120,22 @@ public class SpotifyWrapped {
                 artists.get(3).getName() + "\n5. " +
                 artists.get(4).getName();
     }
+
+    /**
+     * Returns user's top genre
+     *
+     * @return user's top genre
+     */
     public String getGenre() {
         return topGenre;
     }
+
+    /**
+     * Returns timespan of wrapped data in string format
+     * Will return longterm, mediumterm, or shortterm
+     *
+     * @return timespan of wrapped data
+     */
     public String getTimespan() {
         switch (timespan) {
             case long_term:
@@ -82,16 +147,32 @@ public class SpotifyWrapped {
         }
         return "mediumterm";
     }
+
+    /**
+     * Sets username based on parameter
+     *
+     * @param username username of user
+     */
     public void setUsername(String username) {
         spotifyProvider.getMyUserInfo(info -> {
             this.username = info.toString();
         });
     }
 
+    /**
+     * Generates summary id
+     * summaryId: username yyyy-mm-dd timespan
+     */
     public void setSummaryId() {
         summaryId = username + " " + LocalDate.now() + " " + getTimespan();
     }
 
+    /**
+     * Populates top tracks, top artists, and top genre based on data from SpotifyProvider
+     * Note: this is no longer used in our app due to issues with async tasks
+     *
+     * @param timespan timespan of wrapped
+     */
     public void setTimespan(SpotifyProvider.WrappedTerm timespan) {
         this.timespan = timespan;
 
@@ -107,10 +188,20 @@ public class SpotifyWrapped {
         this.topGenre = findTopGenre();
     }
 
+    /**
+     * Returns an image string of the top artist's profile image provided by Spotify API
+     *
+     * @return image string of top artist
+     */
     public String getImage() {
         return artists.get(0).getImage();
     }
 
+    /**
+     * Finds the user's top genre
+     *
+     * @return string of top genre
+     */
     private String findTopGenre() {
         ArrayList<String> genres = new ArrayList<>();
         for (Artist artist: artists) {
@@ -134,6 +225,11 @@ public class SpotifyWrapped {
         return mode;
     }
 
+    /**
+     * Formats wrapped data into string to be used for debugging purposes
+     *
+     * @return string of wrapped data
+     */
     public String toSting() {
         return "Top Songs:\n1. " +
                 tracks.get(0).getName() + "\n2. " +
