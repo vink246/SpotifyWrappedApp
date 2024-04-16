@@ -22,13 +22,18 @@ import org.w3c.dom.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides Firebase Firestore services for user management and data handling.
+ */
 public class FirebaseProvider {
     private static FirebaseProvider instance; // Singleton instance
     private FirebaseFirestore db;
     private CollectionReference usersCollection;
     private CollectionReference publicWrappedCollection;
 
-    // Private constructor to prevent direct instantiation
+    /**
+     * Private constructor to prevent direct instantiation.
+     */
     private FirebaseProvider() {
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();
@@ -38,7 +43,11 @@ public class FirebaseProvider {
         publicWrappedCollection = db.collection("public-wraps");
     }
 
-    // Static method to get the Singleton instance
+    /**
+     * Gets the singleton instance of FirebaseProvider.
+     *
+     * @return The FirebaseProvider instance.
+     */
     public static synchronized FirebaseProvider getInstance() {
         if (instance == null) {
             instance = new FirebaseProvider();
@@ -46,7 +55,11 @@ public class FirebaseProvider {
         return instance;
     }
 
-    // Updated method to add a User object to Firestore
+    /**
+     * Adds a user to Firestore.
+     *
+     * @param user The user object to add.
+     */
     public void addUser(User user) {
         if (user != null && user.getUsername() != null) {
             Log.d("FirebaseProvider", "Adding User...");
@@ -66,6 +79,12 @@ public class FirebaseProvider {
         }
     }
 
+    /**
+     * Updates the public status of a user.
+     *
+     * @param username The username of the user.
+     * @param isPublic The public status to set.
+     */
     public void setUserPublic(String username, boolean isPublic) {
         if (username != null) {
             Log.d("FirebaseProvider", "Updating User Public Status...");
@@ -105,7 +124,12 @@ public class FirebaseProvider {
         });
     }
 
-    // function to get whether a user is public or not
+    /**
+     * Fetches the public status of a user.
+     *
+     * @param username          The username of the user.
+     * @param onCompleteListener Listener for completion of the operation.
+     */
     public void getUserPublic(String username, OnCompleteListener<Boolean> onCompleteListener) {
         if (username != null) {
             Log.d("FirebaseProvider", "Fetching User Public Status...");
@@ -133,7 +157,13 @@ public class FirebaseProvider {
         }
     }
 
-    // Method to save a Wrap to a User's profile
+    /**
+     * Saves a wrap to a user's profile.
+     *
+     * @param userId  The ID of the user.
+     * @param wrap    The Wrap object to save.
+     * @param context The context for displaying messages.
+     */
     public void saveWrap(String userId, Wrap wrap, Context context) {
         DocumentReference userRef = usersCollection.document(userId);
         // Check if the wrap with the same summaryId already exists
@@ -171,7 +201,12 @@ public class FirebaseProvider {
         userRef.update("savedWraps", FieldValue.arrayRemove(wrap));
     }
 
-    // If you need to fetch the saved wraps for display:
+    /**
+     * Fetches the saved wraps for a user.
+     *
+     * @param userId             The ID of the user.
+     * @param onCompleteListener Listener to handle the completion of the task.
+     */
     public void getSavedWraps(String userId, OnCompleteListener<ArrayList<Wrap>> onCompleteListener) {
         usersCollection.document(userId)
                 .get()
@@ -200,7 +235,11 @@ public class FirebaseProvider {
                 });
     }
 
-    // Method to fetch public wraps
+    /**
+     * Fetches public wraps from the database.
+     *
+     * @param successListener Listener to handle the success of the task.
+     */
     public void getPublicWraps(OnSuccessListener<List<Wrap>> successListener) {
         publicWrappedCollection.get().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Wrap> publicWraps = new ArrayList<>();
