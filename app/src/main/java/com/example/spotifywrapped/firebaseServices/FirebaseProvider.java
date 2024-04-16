@@ -69,14 +69,67 @@ public class FirebaseProvider {
     public void setUserPublic(String username, boolean isPublic) {
         if (username != null) {
             Log.d("FirebaseProvider", "Updating User Public Status...");
-            // Get a reference to the user document by username
             DocumentReference userRef = usersCollection.document(username);
-            // Update the 'isPublic' field using SetOptions.merge()
             userRef.update("isPublic", isPublic)
-                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "User public status updated successfully!"))
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d("FirebaseProvider", "User public status updated successfully!");
+                        // Handle the public setting toggle
+                        handlePublicWrapsToggle(userRef, isPublic, username);
+                    })
                     .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error updating user public status", e));
         } else {
             Log.e("FirebaseProvider", "Username is null");
+        }
+    }
+
+    private void handlePublicWrapsToggle(DocumentReference userRef, boolean isPublic, String username) {
+        userRef.get().addOnSuccessListener(documentSnapshot -> {
+            User user = documentSnapshot.toObject(User.class);
+            if (user != null && user.getSavedWraps() != null) {
+                for (Wrap wrap : user.getSavedWraps()) {
+                    DocumentReference publicWrapRef = publicWrappedCollection.document(wrap.getSummaryId());
+                    if (isPublic) {
+                        // Publish wrap to public collection
+                        wrap.setPublic(true); // Ensure the wrap is marked as public
+                        publicWrapRef.set(wrap, SetOptions.merge())
+                                .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "Public Wrap added successfully for user " + username + " with summary ID: " + wrap.getSummaryId()))
+                                .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding public Wrap for user " + username, e));
+                    } else {
+                        // Remove wrap from public collection
+                        publicWrapRef.delete()
+                                .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "Public Wrap removed successfully for user " + username + " with summary ID: " + wrap.getSummaryId()))
+                                .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error removing public Wrap for user " + username, e));
+                    }
+                }
+            }
+        });
+    }
+
+    // function to get whether a user is public or not
+    public void getUserPublic(String username, OnCompleteListener<Boolean> onCompleteListener) {
+        if (username != null) {
+            Log.d("FirebaseProvider", "Fetching User Public Status...");
+            DocumentReference userRef = usersCollection.document(username);
+            userRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot.exists()) {
+                        Boolean isPublic = documentSnapshot.getBoolean("isPublic");
+                        Task<Boolean> taskResult = Tasks.forResult(isPublic);
+                        onCompleteListener.onComplete(taskResult);
+                    } else {
+                        Log.d("FirebaseProvider", "No such user exists");
+                        Task<Boolean> taskResult = Tasks.forResult(false); // Default to false if user does not exist
+                        onCompleteListener.onComplete(taskResult);
+                    }
+                } else {
+                    Log.e("FirebaseProvider", "Error fetching user public status", task.getException());
+                    onCompleteListener.onComplete(null);
+                }
+            });
+        } else {
+            Log.e("FirebaseProvider", "Username is null");
+            onCompleteListener.onComplete(Tasks.forResult(false));
         }
     }
 
@@ -87,11 +140,19 @@ public class FirebaseProvider {
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 List<Wrap> savedWraps = documentSnapshot.toObject(User.class).getSavedWraps();
+                boolean isPublic = documentSnapshot.toObject(User.class).isPublic();
                 if (savedWraps != null) {
                     boolean wrapExists = savedWraps.stream().anyMatch(savedWrap -> savedWrap.getSummaryId().equals(wrap.getSummaryId()));
                     if (!wrapExists) {
+                        if (isPublic) wrap.setPublic(true);
                         // Add the wrap to the array only if it doesn't already exist
                         userRef.update("savedWraps", FieldValue.arrayUnion(wrap));
+                        DocumentReference wrapRef = publicWrappedCollection.document(wrap.getSummaryId());
+                        if (isPublic) {
+                            wrapRef.set(wrap, SetOptions.merge())
+                                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "Public Wrap added successfully!"))
+                                    .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding public Wrap", e));
+                        }
                         Toast.makeText(context, "Wrap Saved!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Wrap has already been Saved!", Toast.LENGTH_SHORT).show();
@@ -137,20 +198,6 @@ public class FirebaseProvider {
                         onCompleteListener.onComplete(null);
                     }
                 });
-    }
-
-    //Useless code, can be use for as a base/framework
-
-    // Method to add a Wrap object to Firestore
-    public void addWrap(Wrap wrap) {
-        if (wrap != null && wrap.getSummaryId() != null) {
-            publicWrappedCollection.document(wrap.getSummaryId())
-                    .set(wrap, SetOptions.merge())
-                    .addOnSuccessListener(aVoid -> Log.d("FirebaseProvider", "Wrap added successfully!"))
-                    .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error adding wrap", e));
-        } else {
-            Log.e("FirebaseProvider", "Wrap object or summary ID is null");
-        }
     }
 
     // Method to fetch public wraps
