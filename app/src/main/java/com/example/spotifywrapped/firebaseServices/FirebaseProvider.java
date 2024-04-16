@@ -7,7 +7,6 @@ import android.widget.Toast;
 import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.models.Wrap;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
@@ -15,6 +14,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import org.w3c.dom.Comment;
@@ -200,51 +200,32 @@ public class FirebaseProvider {
                 });
     }
 
-    // Method to fetch public wraps
-    public void getPublicWraps(OnSuccessListener<List<Wrap>> successListener) {
-        publicWrappedCollection.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            List<Wrap> publicWraps = new ArrayList<>();
-            for (Wrap wrap : queryDocumentSnapshots.toObjects(Wrap.class)) {
-                if (wrap.isPublic()) {
-                    publicWraps.add(wrap);
-                }
-            }
-            successListener.onSuccess(publicWraps);
-        }).addOnFailureListener(e -> Log.e("FirebaseProvider", "Error fetching public wraps", e));
-    }
-
-    // Method to send a friend request
-    public void sendFriendRequest(String requesterId, String recipientId) {
-        DocumentReference requesterRef = usersCollection.document(requesterId);
-        requesterRef.update("outgoingFriendRequests", FieldValue.arrayUnion(recipientId));
-        DocumentReference recipientRef = usersCollection.document(recipientId);
-        recipientRef.update("incomingFriendRequests", FieldValue.arrayUnion(requesterId));
-    }
-
-    // Method to accept a friend request
-    public void acceptFriendRequest(String requesterId, String accepterId) {
-        DocumentReference accepterRef = usersCollection.document(accepterId);
-        accepterRef.update("friends", FieldValue.arrayUnion(requesterId));
-        accepterRef.update("incomingFriendRequests", FieldValue.arrayRemove(requesterId));
-        DocumentReference requesterRef = usersCollection.document(requesterId);
-        requesterRef.update("friends", FieldValue.arrayUnion(accepterId));
-        requesterRef.update("outgoingFriendRequests", FieldValue.arrayRemove(accepterId));
-    }
-
-    // Method to reject a friend request
-    public void rejectFriendRequest(String requesterId, String rejecterId) {
-        DocumentReference rejecterRef = usersCollection.document(rejecterId);
-        rejecterRef.update("incomingFriendRequests", FieldValue.arrayRemove(requesterId));
-        DocumentReference requesterRef = usersCollection.document(requesterId);
-        requesterRef.update("outgoingFriendRequests", FieldValue.arrayRemove(rejecterId));
-    }
-
-    // Method to remove a friend
-    public void removeFriend(String userId, String friendId) {
-        DocumentReference userRef = usersCollection.document(userId);
-        userRef.update("friends", FieldValue.arrayRemove(friendId));
-        DocumentReference friendRef = usersCollection.document(friendId);
-        friendRef.update("friends", FieldValue.arrayRemove(userId));
+    /**
+     * Retrieves public wraps from the Firebase Database.
+     *
+     * @param onCompleteListener Callback to handle the completion of the operation.
+     */
+    public void getPublicWraps(OnCompleteListener<ArrayList<Wrap>> onCompleteListener) {
+        // Access the collection containing public wraps in database
+        publicWrappedCollection.get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // If the task is successful, iterate through results
+                        ArrayList<Wrap> publicWraps = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Convert to a wrap object and add to list
+                            Wrap wrap = document.toObject(Wrap.class);
+                            publicWraps.add(wrap);
+                        }
+                        // Create a successful task result containing the list of public wraps
+                        Task<ArrayList<Wrap>> taskResult = Tasks.forResult(publicWraps);
+                        onCompleteListener.onComplete(taskResult);
+                    } else {
+                        // If the task failed, log the error
+                        Log.d("FirebaseProvider", "Error getting public wraps: ", task.getException());
+                        onCompleteListener.onComplete(null);
+                    }
+                });
     }
 
     // Comments for Wraps

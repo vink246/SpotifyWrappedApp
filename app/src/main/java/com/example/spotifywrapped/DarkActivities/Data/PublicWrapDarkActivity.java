@@ -4,68 +4,99 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.R;
-import com.example.spotifywrapped.DarkActivities.Data.WrappedAdapter;
-import com.example.spotifywrapped.DarkActivities.Data.WrappedItem;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
+import com.example.spotifywrapped.models.Artist;
+import com.example.spotifywrapped.models.Track;
+import com.example.spotifywrapped.models.Wrap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PublicWrapDarkActivity extends AppCompatActivity {
+
     private RecyclerView recyclerViewWrappedItems;
-    private WrappedAdapter adapter;
+    private WrappedAdapterPublic adapter;
+    private List<PublicWrappedItem> items = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_wrap_dark);
 
-
-        // Initialize RecyclerView for wrapped items
         recyclerViewWrappedItems = findViewById(R.id.recycler_view_wrapped_items_two);
         recyclerViewWrappedItems.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create sample data
-        List<WrappedItem> items = new ArrayList<>();
-        items.add(new WrappedItem("Username 1", Arrays.asList("Lil baby\n", "Lil Uzi Vert\n", "NBA Youngboy\n", "Kanye\n", "Drake"), Arrays.asList("Song 1", "Song 2", "Song 3")));
-        // Add as many WrappedItem objects to the list as you need
-        items.add(new WrappedItem("Username 2", Arrays.asList("Artist A", "Artist B", "Artist C", "Artist D", "Artist E"), Arrays.asList("Song A", "Song B", "Song C")));
-        items.add(new WrappedItem("Username 3", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
-        items.add(new WrappedItem("Username 4", Arrays.asList("Artist A", "Artist B", "Artist C"), Arrays.asList("Song A", "Song B", "Song C")));
+        // Fetch public wraps from Firebase
+        FirebaseProvider.getInstance().getPublicWraps(wraps -> {
+            if (wraps != null) {
+                for (Wrap wrap : wraps.getResult()) {
+                    // Parsing Summary IDs for usernames
+                    String[] idParts = wrap.getSummaryId().split(" ");
+                    String username = idParts[0]; // Extract username from summary ID
+                    Log.d("PublicWrapDarkActivity", "Username extracted: " + username);
+                    // Get track names
+                    List<String> trackNames = new ArrayList<>();
+                    for (Track track : wrap.getTracks()) {
+                        trackNames.add(track.getName());
+                    }
+                    // Get artist names
+                    List<String> artistNames = new ArrayList<>();
+                    for (Artist artist : wrap.getArtists()) {
+                        artistNames.add(artist.getName());
+                    }
+                    // Create a new PublicWrappedItem and add it to the list.
+                    items.add(new PublicWrappedItem(username, artistNames, trackNames));
+                }
+                // Notify adapter of data change
+                adapter.notifyDataSetChanged();
+            } else {
+                Log.d("PublicWrapDarkActivity", "Failed to fetch public wraps");
+            }
+        });
 
-        Log.d("PublicWrapDarkActivity", "Number of items: " + items.size());
-        adapter = new WrappedAdapter(items);
+        adapter = new WrappedAdapterPublic(items);
         recyclerViewWrappedItems.setAdapter(adapter);
 
-        // BottomNavigationView setup remains unchanged
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
         bottomNavigationView.setSelectedItemId(R.id.navigation_language);
     }
 
+    /**
+     * Handles navigation item selection in the bottom navigation view.
+     *
+     * @param item The selected menu item.
+     * @return True if the navigation item selection was handled successfully, else  false.
+     */
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.navigation_language) {
-            return true; // Already in this activity, do nothing
+            return true;
         } else if (itemId == R.id.navigation_home) {
+            // Navigates to WrappedDarkActivity
             startActivity(new Intent(this, WrappedDarkActivity.class));
             finish();
             return true;
         } else if (itemId == R.id.navigation_group) {
+            // Navigates to FriendArtistCompDarkActivity
             startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
             finish();
             return true;
         } else if (itemId == R.id.navigation_history) {
+            // Navigates to PastWrapDarkActivity
             startActivity(new Intent(this, PastWrapDarkActivity.class));
             finish();
             return true;
         } else if (itemId == R.id.navigation_settings) {
+            // Navigates to SettingsDarkOneActivity
             startActivity(new Intent(this, SettingsDarkOneActivity.class));
             finish();
             return true;
