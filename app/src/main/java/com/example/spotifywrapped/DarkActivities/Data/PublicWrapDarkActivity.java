@@ -30,17 +30,18 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_wrap_dark);
-
         recyclerViewWrappedItems = findViewById(R.id.recycler_view_wrapped_items_two);
         recyclerViewWrappedItems.setLayoutManager(new LinearLayoutManager(this));
-
+        adapter = new WrappedAdapterPublic(items);
+        recyclerViewWrappedItems.setAdapter(adapter);
         // Fetch public wraps from Firebase
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             if (wraps != null) {
-                for (Wrap wrap : wraps.getResult()) {
+                for (Wrap wrap : wraps) {
                     // Parsing Summary IDs for usernames
                     String[] idParts = wrap.getSummaryId().split(" ");
-                    String username = idParts[0]; // Extract username from summary ID
+                    // Extract username from summary ID
+                    String username = idParts[0];
                     Log.d("PublicWrapDarkActivity", "Username extracted: " + username);
                     // Get track names
                     List<String> trackNames = new ArrayList<>();
@@ -61,10 +62,6 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
                 Log.d("PublicWrapDarkActivity", "Failed to fetch public wraps");
             }
         });
-
-        adapter = new WrappedAdapterPublic(items);
-        recyclerViewWrappedItems.setAdapter(adapter);
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
         bottomNavigationView.setSelectedItemId(R.id.navigation_language);

@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.example.spotifywrapped.models.User;
 import com.example.spotifywrapped.models.Wrap;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
@@ -14,7 +15,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import org.w3c.dom.Comment;
@@ -199,33 +199,27 @@ public class FirebaseProvider {
                     }
                 });
     }
-
     /**
-     * Retrieves public wraps from the Firebase Database.
+     * Fetches the public wraps from the Firebase collection.
      *
-     * @param onCompleteListener Callback to handle the completion of the operation.
+     * @param successListener Listener to be called upon successful retrieval of public wraps.
+     *                        The listener will receive a list of public wraps.
      */
-    public void getPublicWraps(OnCompleteListener<ArrayList<Wrap>> onCompleteListener) {
-        // Access the collection containing public wraps in database
+    public void getPublicWraps(OnSuccessListener<List<Wrap>> successListener) {
+        // Get the public wraps collection from Firebase Database.
         publicWrappedCollection.get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // If the task is successful, iterate through results
-                        ArrayList<Wrap> publicWraps = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Convert to a wrap object and add to list
-                            Wrap wrap = document.toObject(Wrap.class);
-                            publicWraps.add(wrap);
-                        }
-                        // Create a successful task result containing the list of public wraps
-                        Task<ArrayList<Wrap>> taskResult = Tasks.forResult(publicWraps);
-                        onCompleteListener.onComplete(taskResult);
-                    } else {
-                        // If the task failed, log the error
-                        Log.d("FirebaseProvider", "Error getting public wraps: ", task.getException());
-                        onCompleteListener.onComplete(null);
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Initialize a list for public wraps
+                    List<Wrap> publicWraps = new ArrayList<>();
+                    // Iterate through the query to Wrap objects
+                    for (Wrap wrap : queryDocumentSnapshots.toObjects(Wrap.class)) {
+                        // Add the Wrap object to the list
+                        publicWraps.add(wrap);
                     }
-                });
+                    // Notify the success listener with the list of public wraps
+                    successListener.onSuccess(publicWraps);
+                })
+                .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error fetching public wraps", e));
     }
 
     // Comments for Wraps
