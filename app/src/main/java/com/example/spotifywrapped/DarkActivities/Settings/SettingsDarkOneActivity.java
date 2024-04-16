@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.spotifywrapped.AccountInfoActivity;
 import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
+import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 
 public class SettingsDarkOneActivity extends AppCompatActivity {
 
@@ -25,6 +27,8 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch switch4;
 
+    private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +37,20 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
         // Initialize switches
         switch4 = findViewById(R.id.switch4);
 
+        SpotifyProvider.getInstance().getMyUserInfo(info -> {
+            username = info.getUsername();
+            FirebaseProvider.getInstance().getUserPublic(info.getUsername(), isPublic -> {
+                switch4.setText(isPublic.getResult()? "Public" : "Private");
+                switch4.setChecked(isPublic.getResult());
+            });
+        });
+
         // Set listeners to switches
         switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 switch4.setText(isChecked ? "Public" : "Private");
+                FirebaseProvider.getInstance().setUserPublic(username, isChecked);
             }
         });
 
