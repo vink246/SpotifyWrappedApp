@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.spotifywrapped.R;
 
-public class SettingsDark1Fragment extends Fragment {
+public class TopSongListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.settingsdark1, container, false);
+        return inflater.inflate(R.layout.top_songlist, container, false);
     }
 }

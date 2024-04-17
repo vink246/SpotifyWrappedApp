@@ -18,13 +18,15 @@ public class YourPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new WrappedDarkFragment();
             case 1:
-                return new PublicWrapDarkFragment();
+                return new TopSongListFragment();
             case 2:
-                return new PastWrappedDarkFragment();
+                return new TopSongFragment();
             case 3:
-                return new FriendArtCompDarkFragment();
+                return new TopArtistListFragment();
             case 4:
-                return new SettingsDark1Fragment();
+                return new TopArtistFragment();
+            case 5:
+                return new TopGenreFragment();
             default:
                 return null;
         }
@@ -32,6 +34,6 @@ public class YourPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 5; // Total number of fragments
+        return 6; // Total number of fragments
     }
 }

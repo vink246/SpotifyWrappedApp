@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="MainActivity"
     android:background="@drawable/settings">
-
     <!-- Switch for toggling private mode -->
     <Switch
         android:id="@+id/switch4"
