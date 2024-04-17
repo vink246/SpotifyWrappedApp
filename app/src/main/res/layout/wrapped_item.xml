@@ -1,78 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
     android:background="@drawable/justblack">
 
-    <!-- White border layout -->
+    <!-- Date Range TextView -->
+    <TextView
+        android:id="@+id/textViewDateRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Range"
+        android:fontFamily="@font/poppinsmedium"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_gravity="end" />
+
+    <!-- Artists Title Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_pink_bg">
+        android:background="@drawable/rounded_purple_bg"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:padding="16dp">
 
-        <!-- DateRange TextView -->
-        <TextView
-            android:id="@+id/textViewDateRange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date Range"
-            android:fontFamily="@font/poppinsmedium"
-            android:textColor="@color/yellow"
-            android:textSize="18sp"
-            android:layout_gravity="end" />
-
-        <!-- Top Artists Title TextView -->
         <TextView
             android:id="@+id/textViewTopArtistsTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TOP 5 ARTISTS"
-            android:background="@drawable/rounded_purple_bg"
-            android:textColor="@color/black"
+            android:textColor="@color/yellow"
             android:fontFamily="@font/univers"
             android:textSize="16sp"
-            android:padding="16dp"
             android:gravity="center" />
+    </LinearLayout>
 
-        <!-- Top Artists TextView -->
+    <!-- Artists Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_yellow_bg"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
+
         <TextView
             android:id="@+id/topArtists"
-            android:layout_width="220dp"
-            android:layout_height="258dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/univers"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <!-- Top Songs Title TextView -->
-        <TextView
-            android:id="@+id/textViewTopSongsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TOP 5 SONGS"
-            android:background="@drawable/rounded_yellow_bg"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppinsmedium"
+            android:textSize="25sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+    </LinearLayout>
+
+    <!-- Songs Title Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_purple_bg"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginBottom="8dp"
+        android:padding="16dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/textViewTopSongsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOP 5 SONGS"
+            android:textColor="@color/yellow"
             android:fontFamily="@font/univers"
             android:textSize="16sp"
-            android:padding="8dp"
-            android:gravity="center"
-            android:layout_marginTop="16dp" />
+            android:gravity="center" />
+    </LinearLayout>
 
-        <!-- Top Songs TextView -->
+    <!-- Songs Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_yellow_bg"
+        android:orientation="vertical"
+        android:padding="16dp">
+
         <TextView
             android:id="@+id/topSongs"
-            android:layout_width="214dp"
-            android:layout_height="278dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/univers"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="14sp" />
-
+            android:fontFamily="@font/univers"
+            android:textSize="25sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
     </LinearLayout>
-</FrameLayout>
+
+</LinearLayout>

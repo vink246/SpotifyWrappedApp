@@ -23,7 +23,7 @@
         android:id="@+id/searchEditText"
         android:layout_width="337dp"
         android:layout_height="56dp"
-        android:background="@drawable/rounded_pink_bg"
+        android:background="@drawable/rounded_pink2_bg"
         android:fontFamily="@font/poppinsmedium"
         android:hint="Search for a user..."
         android:padding="12dp"
