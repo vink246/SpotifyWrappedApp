@@ -39,15 +39,6 @@
         <!-- SettingsDarkOneActivity -->
         <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
 
-        <!-- FriendRequestDarkActivity -->
-        <activity android:name=".DarkActivities.Settings.FriendRequestDarkActivity" />
-
-        <!-- CheckFriendDarkActivity -->
-        <activity android:name=".DarkActivities.Settings.CheckFriendDarkActivity" />
-
-        <!-- FriendArtistCompDarkActivity -->
-        <activity android:name=".DarkActivities.Data.FriendArtistCompDarkActivity" />
-
         <!-- WrappedDarkActivity -->
         <activity android:name=".DarkActivities.Data.WrappedDarkActivity" />
 

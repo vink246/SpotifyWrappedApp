@@ -184,10 +184,6 @@ public class WrappedDarkActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.navigation_home) {
             // Do nothing as we are already in WrappedDarkActivity
-        } else if (itemId == R.id.navigation_group) {
-            provider.pauseCurrentTrack();
-            startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
-            finish();
         } else if (itemId == R.id.navigation_history) {
             provider.pauseCurrentTrack();
             startActivity(new Intent(this, PastWrapDarkActivity.class));
