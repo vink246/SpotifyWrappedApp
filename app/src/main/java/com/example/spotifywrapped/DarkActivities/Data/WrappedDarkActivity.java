@@ -45,7 +45,7 @@ public class WrappedDarkActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wrappeddark);
+        setContentView(R.layout.top_songlist);
         ViewPager viewPager = findViewById(R.id.viewPager);
         YourPagerAdapter adapter2 = new YourPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter2);
