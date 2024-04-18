@@ -18,33 +18,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 
-    <!-- Search EditText -->
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="337dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_green_bg"
-        android:fontFamily="@font/poppinsmedium"
-        android:hint="Search for a user..."
-        android:padding="12dp"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!-- RecyclerView for displaying wrapped items -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_wrapped_items_two"
+        android:id="@+id/recycler_view_wrapped_items"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

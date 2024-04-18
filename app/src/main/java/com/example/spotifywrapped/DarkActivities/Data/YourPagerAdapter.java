@@ -22,8 +22,6 @@ public class YourPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return new PastWrappedDarkFragment();
             case 3:
-                return new FriendArtCompDarkFragment();
-            case 4:
                 return new SettingsDark1Fragment();
             default:
                 return null;
