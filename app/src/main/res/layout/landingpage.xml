@@ -1,60 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/yellow">
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-202dp">
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/generateButton"
-        android:layout_width="358dp"
-        android:layout_height="114dp"
-        android:background="@drawable/rounded_purple_bg"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Generate Wrapped"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        tools:layout_editor_absoluteX="205dp"
-        tools:layout_editor_absoluteY="842dp" />
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/justblack">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinsblack"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/univers"
         android:text="GENERATE A WRAPPED:"
         android:textAlignment="center"
         android:textColor="@color/yellow"
-        android:textSize="96sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+        android:textSize="34sp" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="316dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="128dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/spinner_background"
-        android:fontFamily="@font/poppinsmedium"
+        android:fontFamily="@font/univers"
         android:popupBackground="@color/white"
         android:prompt="@string/select_term"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/generateButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/white" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/generateButton"
+        android:layout_width="308dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_purple_bg"
+        android:fontFamily="@font/univers"
+        android:text="Generate"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+</LinearLayout>
