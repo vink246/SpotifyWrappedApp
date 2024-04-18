@@ -10,11 +10,11 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/yellow"
-        android:backgroundTint="@color/yellow"
+        android:background="@color/black"
+        android:backgroundTint="@color/black"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="-202dp">
 
     </LinearLayout>
 
@@ -23,27 +23,38 @@
         android:layout_width="358dp"
         android:layout_height="114dp"
         android:background="@drawable/rounded_purple_bg"
+        android:fontFamily="@font/poppinsbold"
         android:text="Generate Wrapped"
         android:textColor="@color/white"
         android:textSize="34sp"
         tools:layout_editor_absoluteX="205dp"
         tools:layout_editor_absoluteY="842dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsblack"
+        android:text="GENERATE A WRAPPED:"
+        android:textAlignment="center"
+        android:textColor="@color/yellow"
+        android:textSize="96sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="316dp"
         android:layout_height="78dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginBottom="128dp"
         android:background="@drawable/spinner_background"
         android:fontFamily="@font/poppinsmedium"
         android:popupBackground="@color/white"
         android:prompt="@string/select_term"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/generateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
