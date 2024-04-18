@@ -49,6 +49,13 @@ public class WrappedDarkActivity extends AppCompatActivity {
         //ViewPager viewPager = findViewById(R.id.viewPager);
         //YourPagerAdapter adapter2 = new YourPagerAdapter(getSupportFragmentManager());
         //viewPager.setAdapter(adapter2);
+        // Initialize ViewPager
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        YourPagerAdapter adapter2 = new YourPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter2);
+
+        // Set the initial fragment to be TopSongListFragment
+        viewPager.setCurrentItem(0); // 0 corresponds to TopSongListFragment
         provider = SpotifyProvider.getInstance();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
