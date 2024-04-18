@@ -241,49 +241,20 @@ public class FirebaseProvider {
      * @param successListener Listener to handle the success of the task.
      */
     public void getPublicWraps(OnSuccessListener<List<Wrap>> successListener) {
-        publicWrappedCollection.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            List<Wrap> publicWraps = new ArrayList<>();
-            for (Wrap wrap : queryDocumentSnapshots.toObjects(Wrap.class)) {
-                if (wrap.isPublic()) {
-                    publicWraps.add(wrap);
-                }
-            }
-            successListener.onSuccess(publicWraps);
-        }).addOnFailureListener(e -> Log.e("FirebaseProvider", "Error fetching public wraps", e));
-    }
-
-    // Method to send a friend request
-    public void sendFriendRequest(String requesterId, String recipientId) {
-        DocumentReference requesterRef = usersCollection.document(requesterId);
-        requesterRef.update("outgoingFriendRequests", FieldValue.arrayUnion(recipientId));
-        DocumentReference recipientRef = usersCollection.document(recipientId);
-        recipientRef.update("incomingFriendRequests", FieldValue.arrayUnion(requesterId));
-    }
-
-    // Method to accept a friend request
-    public void acceptFriendRequest(String requesterId, String accepterId) {
-        DocumentReference accepterRef = usersCollection.document(accepterId);
-        accepterRef.update("friends", FieldValue.arrayUnion(requesterId));
-        accepterRef.update("incomingFriendRequests", FieldValue.arrayRemove(requesterId));
-        DocumentReference requesterRef = usersCollection.document(requesterId);
-        requesterRef.update("friends", FieldValue.arrayUnion(accepterId));
-        requesterRef.update("outgoingFriendRequests", FieldValue.arrayRemove(accepterId));
-    }
-
-    // Method to reject a friend request
-    public void rejectFriendRequest(String requesterId, String rejecterId) {
-        DocumentReference rejecterRef = usersCollection.document(rejecterId);
-        rejecterRef.update("incomingFriendRequests", FieldValue.arrayRemove(requesterId));
-        DocumentReference requesterRef = usersCollection.document(requesterId);
-        requesterRef.update("outgoingFriendRequests", FieldValue.arrayRemove(rejecterId));
-    }
-
-    // Method to remove a friend
-    public void removeFriend(String userId, String friendId) {
-        DocumentReference userRef = usersCollection.document(userId);
-        userRef.update("friends", FieldValue.arrayRemove(friendId));
-        DocumentReference friendRef = usersCollection.document(friendId);
-        friendRef.update("friends", FieldValue.arrayRemove(userId));
+        // Get the public wraps collection from Firebase Database.
+        publicWrappedCollection.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Initialize a list for public wraps
+                    List<Wrap> publicWraps = new ArrayList<>();
+                    // Iterate through the query to Wrap objects
+                    for (Wrap wrap : queryDocumentSnapshots.toObjects(Wrap.class)) {
+                        // Add the Wrap object to the list
+                        publicWraps.add(wrap);
+                    }
+                    // Notify the success listener with the list of public wraps
+                    successListener.onSuccess(publicWraps);
+                })
+                .addOnFailureListener(e -> Log.e("FirebaseProvider", "Error fetching public wraps", e));
     }
 
     // Comments for Wraps
