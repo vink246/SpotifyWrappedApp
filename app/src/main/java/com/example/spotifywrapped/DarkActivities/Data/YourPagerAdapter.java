@@ -16,17 +16,17 @@ public class YourPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new WrappedDarkFragment();
-            case 1:
                 return new TopSongListFragment();
-            case 2:
+            case 1:
                 return new TopSongFragment();
-            case 3:
+            case 2:
                 return new TopArtistListFragment();
-            case 4:
+            case 3:
                 return new TopArtistFragment();
-            case 5:
+            case 4:
                 return new TopGenreFragment();
+            case 5:
+                return new WrappedDarkFragment();
             default:
                 return null;
         }
