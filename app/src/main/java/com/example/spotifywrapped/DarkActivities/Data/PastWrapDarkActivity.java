@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -194,6 +195,23 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         AlertDialog alertDialog = builder.create();
         // Allow dismissal by touching outside
         alertDialog.setCanceledOnTouchOutside(true);
+
+        // Add close button programmatically
+        Button buttonClose = new Button(this);
+        buttonClose.setText("Close");
+        buttonClose.setTextColor(getResources().getColor(android.R.color.white));
+        buttonClose.setBackgroundResource(R.color.purple);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(0, 16, 0, 0);
+        buttonClose.setTypeface(getResources().getFont(R.font.univers));
+        buttonClose.setLayoutParams(layoutParams);
+        buttonClose.setOnClickListener(view -> alertDialog.dismiss());
+        ((LinearLayout) dialogView).addView(buttonClose);
+
         alertDialog.show();
     }
+
 }

@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:fontFamily="@font/poppinsmedium"
             android:text="Date Range"
             android:textColor="@color/white"
