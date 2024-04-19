@@ -1,13 +1,15 @@
 package com.example.spotifywrapped.DarkActivities.Data;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.R;
@@ -17,49 +19,51 @@ import com.example.spotifywrapped.models.Track;
 import com.example.spotifywrapped.models.Wrap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublicWrapDarkActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewWrappedItems;
-    private WrappedAdapterPublic adapter;
-    private List<PublicWrappedItem> items = new ArrayList<>();
+public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlockAdapter2.OnDateBlockClickListener {
+    private RecyclerView recyclerViewDateBlocks;
+    private DateBlockAdapter2 adapter;
+    private List<String> dateRanges = new ArrayList<>();
+    private List<String> userNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_wrap_dark);
-        recyclerViewWrappedItems = findViewById(R.id.recycler_view_wrapped_items_two);
-        recyclerViewWrappedItems.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new WrappedAdapterPublic(items);
-        recyclerViewWrappedItems.setAdapter(adapter);
+        // Initialize RecyclerView for date blocks
+        recyclerViewDateBlocks = findViewById(R.id.recycler_view_wrapped_items_two);
+        recyclerViewDateBlocks.setLayoutManager(new LinearLayoutManager(this));
         // Fetch public wraps from Firebase
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             if (wraps != null) {
                 for (Wrap wrap : wraps) {
-                    // Parsing Summary IDs for usernames
+                    // Parsing Summary IDs for usernames and dates
                     String[] idParts = wrap.getSummaryId().split(" ");
-                    // Extract username from summary ID
                     String username = idParts[0];
-                    Log.d("PublicWrapDarkActivity", "Username extracted: " + username);
-                    // Get track names
+                    String date = idParts[1];
+                    // Extract track names
                     List<String> trackNames = new ArrayList<>();
                     for (Track track : wrap.getTracks()) {
                         trackNames.add(track.getName());
                     }
-                    // Get artist names
+                    // Extract artist names
                     List<String> artistNames = new ArrayList<>();
                     for (Artist artist : wrap.getArtists()) {
                         artistNames.add(artist.getName());
                     }
-                    // Create a new PublicWrappedItem and add it to the list.
-                    items.add(new PublicWrappedItem(username, artistNames, trackNames));
+                    // Add username and date to lists
+                    userNames.add(username);
+                    dateRanges.add(date);
                 }
-                // Notify adapter of data change
-                adapter.notifyDataSetChanged();
+                // Initialize and set adapter for RecyclerView
+                adapter = new DateBlockAdapter2(dateRanges, userNames);
+                adapter.setOnDateBlockClickListener(this);
+                recyclerViewDateBlocks.setAdapter(adapter);
             } else {
-                Log.d("PublicWrapDarkActivity", "Failed to fetch public wraps");
             }
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -67,12 +71,6 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.navigation_language);
     }
 
-    /**
-     * Handles navigation item selection in the bottom navigation view.
-     *
-     * @param item The selected menu item.
-     * @return True if the navigation item selection was handled successfully, else  false.
-     */
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.navigation_language) {
@@ -100,4 +98,11 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    // try to attempt to implement handle click on date block :(
+    @Override
+    public void onDateBlockClick(String dateRange) {
+        // Gl soldier
+    }
 }
+

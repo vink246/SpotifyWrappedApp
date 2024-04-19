@@ -65,7 +65,7 @@ public class WrappedAdapterPublic extends RecyclerView.Adapter<WrappedAdapterPub
 
         ViewHolder(View itemView) {
             super(itemView);
-            username = itemView.findViewById(R.id.textViewUsername);
+            username = itemView.findViewById(R.id.textViewUser);
             topArtists = itemView.findViewById(R.id.topArtists);
             topSongs = itemView.findViewById(R.id.topSongs);
         }
