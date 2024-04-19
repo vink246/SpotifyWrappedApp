@@ -2,8 +2,11 @@ package com.example.spotifywrapped.DarkActivities.Data;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +28,11 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
     private RecyclerView recyclerViewWrappedItems;
     private WrappedAdapterPublic adapter;
     private List<PublicWrappedItem> items = new ArrayList<>();
+    private EditText searchbar;
+
+    private List<Wrap> allWraps;
+
+    private String searchTerm = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +42,31 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
         recyclerViewWrappedItems.setLayoutManager(new LinearLayoutManager(this));
         adapter = new WrappedAdapterPublic(items);
         recyclerViewWrappedItems.setAdapter(adapter);
-        // Fetch public wraps from Firebase
-        FirebaseProvider.getInstance().getPublicWraps(wraps -> {
-            if (wraps != null) {
-                for (Wrap wrap : wraps) {
+        searchbar = findViewById(R.id.searchEditText);
+        searchbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Placeholder
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Placeholder
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // This is where you get the text value after any changes
+                searchTerm = s.toString();
+                Log.d("PublicWrapDarkActivity", "Search term updated: " + searchTerm);
+                items.clear();
+                for (Wrap wrap : allWraps) {
                     // Parsing Summary IDs for usernames
                     String[] idParts = wrap.getSummaryId().split(" ");
                     // Extract username from summary ID
                     String username = idParts[0];
                     Log.d("PublicWrapDarkActivity", "Username extracted: " + username);
+                    String date = idParts[1];
                     // Get track names
                     List<String> trackNames = new ArrayList<>();
                     for (Track track : wrap.getTracks()) {
@@ -53,8 +77,41 @@ public class PublicWrapDarkActivity extends AppCompatActivity {
                     for (Artist artist : wrap.getArtists()) {
                         artistNames.add(artist.getName());
                     }
-                    // Create a new PublicWrappedItem and add it to the list.
-                    items.add(new PublicWrappedItem(username, artistNames, trackNames));
+                    // Add item if searchTerm is contained in username or date, or if searchTerm is empty
+                    if (searchTerm.isEmpty() || username.toLowerCase().contains(searchTerm.toLowerCase()) || date.contains(searchTerm.toLowerCase())) {
+                        items.add(new PublicWrappedItem(username, artistNames, trackNames));
+                    }
+                }
+                // Notify adapter of data change
+                adapter.notifyDataSetChanged();
+                // Here you can also add code to filter your adapter based on the searchTerm
+            }
+        });
+        // Fetch public wraps from Firebase
+        FirebaseProvider.getInstance().getPublicWraps(wraps -> {
+            if (wraps != null) {
+                allWraps = wraps;
+                for (Wrap wrap : wraps) {
+                    // Parsing Summary IDs for usernames
+                    String[] idParts = wrap.getSummaryId().split(" ");
+                    // Extract username from summary ID
+                    String username = idParts[0];
+                    Log.d("PublicWrapDarkActivity", "Username extracted: " + username);
+                    String date = idParts[1];
+                    // Get track names
+                    List<String> trackNames = new ArrayList<>();
+                    for (Track track : wrap.getTracks()) {
+                        trackNames.add(track.getName());
+                    }
+                    // Get artist names
+                    List<String> artistNames = new ArrayList<>();
+                    for (Artist artist : wrap.getArtists()) {
+                        artistNames.add(artist.getName());
+                    }
+                    // Add item if searchTerm is contained in username or date, or if searchTerm is empty
+                    if (searchTerm.isEmpty() || username.contains(searchTerm) || date.contains(searchTerm)) {
+                        items.add(new PublicWrappedItem(username, artistNames, trackNames));
+                    }
                 }
                 // Notify adapter of data change
                 adapter.notifyDataSetChanged();
