@@ -14,9 +14,10 @@ import java.util.List;
 
 public class DateBlockAdapter extends RecyclerView.Adapter<DateBlockAdapter.DateBlockViewHolder> {
 
-    private List<String> dateRanges; // List of date ranges
-    private OnDateBlockClickListener listener; // Listener for date block clicks
-
+    // List of date ranges
+    private List<String> dateRanges;
+    // Listener for date block clicks
+    private OnDateBlockClickListener listener;
     // Constructor to initialize the adapter with a list of date ranges
     public DateBlockAdapter(List<String> dateRanges) {
         this.dateRanges = dateRanges;

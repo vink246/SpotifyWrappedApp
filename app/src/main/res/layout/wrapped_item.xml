@@ -42,23 +42,13 @@
 
     <!-- Artists Content -->
     <LinearLayout
+        android:id="@+id/topArtists"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_yellow_bg"
         android:orientation="vertical"
         android:padding="16dp"
         android:layout_marginBottom="8dp">
-
-        <TextView
-            android:id="@+id/topArtists"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:fontFamily="@font/univers"
-            android:textSize="25sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
     </LinearLayout>
 
     <!-- Songs Title Layout -->
@@ -85,22 +75,12 @@
 
     <!-- Songs Content -->
     <LinearLayout
+        android:id="@+id/topSongs"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_yellow_bg"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <TextView
-            android:id="@+id/topSongs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:fontFamily="@font/univers"
-            android:textSize="25sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
     </LinearLayout>
 
 </LinearLayout>
