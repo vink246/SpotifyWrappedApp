@@ -11,25 +11,15 @@
         android:background="@drawable/rounded_purple_bg"
         android:padding="8dp">
         <TextView
-            android:id="@+id/textViewUser"
+            android:id="@+id/textViewDateRange2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:fontFamily="@font/poppinsmedium"
-            android:text="User Name"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textViewDateRange"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppinsmedium"
-            android:gravity="center"
             android:text="Date Range"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
     </LinearLayout>
 </LinearLayout>

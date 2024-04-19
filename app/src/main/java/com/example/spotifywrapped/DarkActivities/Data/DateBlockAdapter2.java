@@ -16,19 +16,18 @@ public class DateBlockAdapter2 extends RecyclerView.Adapter<DateBlockAdapter2.Da
 
     // List of date ranges
     private List<String> dateRanges;
-    // List of user names.
-    private List<String> userNames;
     // Listener for date block clicks
     private OnDateBlockClickListener listener;
     // Constructor to initialize the adapter with a list of date ranges
-    public DateBlockAdapter2(List<String> dateRanges, List<String> userNames) {
+    public DateBlockAdapter2(List<String> dateRanges) {
         this.dateRanges = dateRanges;
-        this.userNames = userNames;
     }
+
     // Setter method to set the listener for date block clicks
     public void setOnDateBlockClickListener(OnDateBlockClickListener listener) {
         this.listener = listener;
     }
+
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
@@ -38,16 +37,14 @@ public class DateBlockAdapter2 extends RecyclerView.Adapter<DateBlockAdapter2.Da
                 .inflate(R.layout.date_block2, parent, false);
         return new DateBlockViewHolder(itemView);
     }
+
+    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull DateBlockViewHolder holder, int position) {
-        // Check if the position is valid for both lists
-        if (position < dateRanges.size() && position < userNames.size()) {
-            // Get the date range and username at the specified position
-            String dateRange = dateRanges.get(position);
-            String userName = userNames.get(position);
-            // Bind the date range and username to the view holder
-            holder.bind(dateRange, userName);
-        }
+        // Get the date range at the specified position
+        String dateRange = dateRanges.get(position);
+        // Bind the date range to the view holder
+        holder.bind(dateRange);
     }
 
     // Return the size of the dataset (invoked by the layout manager)
@@ -64,14 +61,12 @@ public class DateBlockAdapter2 extends RecyclerView.Adapter<DateBlockAdapter2.Da
     // ViewHolder class to hold references to the views for each item in the RecyclerView
     class DateBlockViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewDateRange;
-        private TextView textViewUser;
 
         // Constructor to initialize the views
         public DateBlockViewHolder(@NonNull View itemView) {
             super(itemView);
             // Find and initialize the TextView for the date range
-            textViewDateRange = itemView.findViewById(R.id.textViewDateRange);
-            textViewUser = itemView.findViewById(R.id.textViewUser);
+            textViewDateRange = itemView.findViewById(R.id.textViewDateRange2);
             // Set click listener for the itemView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,9 +76,7 @@ public class DateBlockAdapter2 extends RecyclerView.Adapter<DateBlockAdapter2.Da
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             String dateRange = dateRanges.get(position);
-                            String userName = userNames.get(position);
                             listener.onDateBlockClick(dateRange);
-                            listener.onDateBlockClick(userName);
                         }
                     }
                 }
@@ -91,10 +84,8 @@ public class DateBlockAdapter2 extends RecyclerView.Adapter<DateBlockAdapter2.Da
         }
 
         // Method to bind data to the views
-        public void bind(String dateRange, String userName) {
+        public void bind(String dateRange) {
             textViewDateRange.setText(dateRange);
-            textViewUser.setText(userName);
-
         }
     }
 }
