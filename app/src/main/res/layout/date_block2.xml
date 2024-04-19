@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/rounded_purple_bg"
+        android:background="@drawable/rounded_teal_bg"
         android:padding="8dp">
         <TextView
             android:id="@+id/textViewDateRange2"
@@ -20,6 +20,5 @@
             android:text="Date Range"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
     </LinearLayout>
 </LinearLayout>
