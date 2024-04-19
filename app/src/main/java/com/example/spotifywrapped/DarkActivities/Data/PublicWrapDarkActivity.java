@@ -75,9 +75,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 String dateRange = startDate + " to " + date;
 
                 // Check if the date range is already in the list
-                if (!dateRanges.contains(dateRange)) {
                     dateRanges.add(dateRange);
-                }
             }
 
             // Initialize and set adapter for RecyclerView
