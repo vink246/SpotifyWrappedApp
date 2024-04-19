@@ -74,7 +74,11 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                             startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
                             break;
                     }
-                    String dateRange = startDate + " to " + date;
+                    //String dateRange = startDate + " to " + date;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                    date = parsedDate.format(formatter);
+                    startDate = LocalDate.parse(startDate).format(formatter);
+                    String dateRange = startDate + " - " + date;
                     dateRanges.add(dateRange);
                 }
 
@@ -133,7 +137,10 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                             startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
                             break;
                     }
-                    String fullDateRange = startDate + " to " + wrapDateRange;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                    wrapDateRange = parsedDate.format(formatter);
+                    startDate = LocalDate.parse(startDate).format(formatter);
+                    String fullDateRange = startDate + " - " + wrapDateRange;
 
                     // Check if the retrieved wrap corresponds to the selected date range
                     if (dateRange.equals(fullDateRange)) {
