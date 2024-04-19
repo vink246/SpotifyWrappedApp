@@ -55,8 +55,9 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     private void retrieveAndPopulateDateRanges() {
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             for (Wrap wrap : wraps) {
-                // Extract date from Wrap
+                // Extract date and username from Wrap summary ID
                 String[] idParts = wrap.getSummaryId().split(" ");
+                String username = idParts[0];
                 String date = idParts[1];
                 LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
                 String startDate = "unknown";
@@ -72,7 +73,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                         startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
                         break;
                 }
-                String dateRange = startDate + " to " + date;
+                String dateRange = username + "\n " + startDate + " to " + date;
 
                 // Check if the date range is already in the list
                 dateRanges.add(dateRange);
@@ -113,6 +114,10 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     // Method to handle click on date block
     @Override
     public void onDateBlockClick(String dateRange) {
+        // Split the dateRange string to extract only the date range
+        String[] parts = dateRange.split("\n");
+        String selectedDateRange = parts[1].trim(); // Extract the date range (remove leading/trailing spaces)
+
         // Retrieve the data for the selected date range
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             for (Wrap wrap : wraps) {
@@ -136,7 +141,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 String fullDateRange = startDate + " to " + wrapDate;
 
                 // Check if the retrieved wrap corresponds to the selected date range
-                if (dateRange.equals(fullDateRange)) {
+                if (selectedDateRange.equals(fullDateRange)) {
                     // Extract artist names from Artist objects
                     List<String> artistNames = new ArrayList<>();
                     for (Artist artist : wrap.getArtists()) {
