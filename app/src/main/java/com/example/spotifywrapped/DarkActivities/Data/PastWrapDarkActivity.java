@@ -75,11 +75,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                             break;
                     }
                     String dateRange = startDate + " to " + date;
-
-                    // Check if the date range is already in the list
-                    if (!dateRanges.contains(dateRange)) {
-                        dateRanges.add(dateRange);
-                    }
+                    dateRanges.add(dateRange);
                 }
 
                 // Initialize and set adapter for RecyclerView
