@@ -7,39 +7,6 @@
     tools:context=".MainActivity"
     android:background="@drawable/justblack">
 
-    <!-- Button for editing account or logging out -->
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/button_green_bg"
-        android:fontFamily="@font/univers"
-        android:textSize="10dp"
-        android:text="Edit Account/Logout"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Button for exiting account info -->
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_red_bg"
-        android:fontFamily="@font/univers"
-        android:textSize="10dp"
-        android:text="Exit Account Info"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"/>
-
     <!-- ScrollView containing account information -->
     <ScrollView
         android:layout_width="0dp"
@@ -51,7 +18,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Linear layout to hold account information -->
         <LinearLayout
@@ -88,7 +55,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="16dp">
 
                 <!-- Label for username -->
                 <TextView
@@ -120,8 +87,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/rounded_pink_bg"
                 android:padding="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="16dp">
 
                 <!-- Label for email -->
                 <TextView
@@ -146,71 +112,33 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <!-- Friends Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Button for editing account or logging out -->
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="375dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_pink_bg"
-                android:padding="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_green_bg"
+                android:fontFamily="@font/univers"
+                android:text="Edit Account/Logout"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                android:layout_marginBottom="16dp" />
 
-                <!-- Label for friends -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Friends"
-                    android:fontFamily="@font/univers"
-                    android:textColor="@color/yellow"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-
-                <!-- Number of friends -->
-                <TextView
-                    android:id="@+id/friendsTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="25"
-                    android:fontFamily="@font/poppinsmedium"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <!-- Get Followed Artists Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Button for exiting account info -->
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="375dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_pink_bg"
-                android:padding="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp">
+                android:layout_gravity="center"
+                android:background="@drawable/button_red_bg"
+                android:fontFamily="@font/univers"
+                android:text="Exit Account Info"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                android:layout_marginBottom="16dp" />
 
-                <!-- Label for followed artists -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Get Followed Artists"
-                    android:fontFamily="@font/univers"
-                    android:textColor="@color/yellow"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-
-                <!-- Number of followed artists -->
-                <TextView
-                    android:id="@+id/followedArtistsTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10"
-                    android:fontFamily="@font/poppinsmedium"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:gravity="center" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

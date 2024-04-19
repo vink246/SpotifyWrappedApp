@@ -4,15 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.R;
-import com.example.spotifywrapped.DarkActivities.Data.WrappedAdapter;
-import com.example.spotifywrapped.DarkActivities.Data.WrappedItem;
 import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.Track;
@@ -23,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PastWrapDarkActivity extends AppCompatActivity {
@@ -67,7 +64,7 @@ public class PastWrapDarkActivity extends AppCompatActivity {
                             startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
                             break;
                     }
-                    items.add(new WrappedItem(startDate+" to "+date, artistNames, trackNames));
+                    items.add(0, new WrappedItem(startDate+" to "+date, artistNames, trackNames));
                 }
                 adapter.notifyDataSetChanged();
             });
@@ -96,10 +93,6 @@ public class PastWrapDarkActivity extends AppCompatActivity {
             return true; // Already in this activity, do nothing
         } else if (itemId == R.id.navigation_home) {
             startActivity(new Intent(this, WrappedDarkActivity.class));
-            finish();
-            return true;
-        } else if (itemId == R.id.navigation_group) {
-            startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
             finish();
             return true;
         } else if (itemId == R.id.navigation_language) {

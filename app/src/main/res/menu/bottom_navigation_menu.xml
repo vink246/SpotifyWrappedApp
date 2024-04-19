@@ -19,13 +19,6 @@
         app:itemIconTint="@color/pink"
         app:labelVisibilityMode="labeled"
         android:icon="@drawable/language24px" />
-
-    <item
-        android:id="@+id/navigation_group"
-        android:title="Duo Wrapped"
-        app:itemIconTint="@color/pink"
-        app:labelVisibilityMode="labeled"
-        android:icon="@drawable/group24px" />
     <item
         android:id="@+id/navigation_settings"
         android:title="Settings"
