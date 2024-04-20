@@ -5,6 +5,48 @@
     android:layout_height="match_parent"
     android:background="@drawable/justblack">
 
+    <!-- Public Wraps Title TextView -->
+    <TextView
+        android:id="@+id/textViewPublicWrapsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Public Wraps"
+        android:fontFamily="@font/univers"
+        android:textColor="@color/purple"
+        android:textSize="24sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Search EditText -->
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
+        android:fontFamily="@font/poppinsmedium"
+        android:hint="Search for a user..."
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPublicWrapsTitle" />
+
+    <!-- RecyclerView for displaying wrapped items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_date_blocks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchEditText" />
+
     <!-- Bottom navigation view -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -17,34 +59,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
-
-    <!-- Search EditText -->
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="337dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_green_bg"
-        android:fontFamily="@font/poppinsmedium"
-        android:hint="Search for a user..."
-        android:padding="12dp"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- RecyclerView for displaying wrapped items -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_wrapped_items_two"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
-        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

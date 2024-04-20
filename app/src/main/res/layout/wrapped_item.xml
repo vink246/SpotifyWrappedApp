@@ -12,11 +12,11 @@
         android:id="@+id/textViewDateRange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date Range"
+        android:layout_gravity="end"
         android:fontFamily="@font/univers"
+        android:text="Date Range"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_gravity="center" />
+        android:textSize="14sp" />
 
     <!-- Artists Title Layout -->
     <LinearLayout
@@ -42,22 +42,13 @@
 
     <!-- Artists Content -->
     <LinearLayout
+        android:id="@+id/topArtists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_yellow_bg"
         android:orientation="vertical"
         android:padding="16dp"
         android:layout_marginBottom="8dp">
-
-        <TextView
-            android:id="@+id/topArtists"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:fontFamily="@font/univers"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
     </LinearLayout>
 
     <!-- Songs Title Layout -->
@@ -84,21 +75,12 @@
 
     <!-- Songs Content -->
     <LinearLayout
+        android:id="@+id/topSongs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_yellow_bg"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <TextView
-            android:id="@+id/topSongs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:fontFamily="@font/univers"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
     </LinearLayout>
 
 </LinearLayout>
