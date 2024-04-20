@@ -100,10 +100,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             startActivity(new Intent(this, WrappedDarkActivity.class));
             finish();
             return true;
-        } else if (itemId == R.id.navigation_group) {
-            startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
-            finish();
-            return true;
         } else if (itemId == R.id.navigation_language) {
             startActivity(new Intent(this, PublicWrapDarkActivity.class));
             finish();
