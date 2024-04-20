@@ -76,7 +76,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
                 date = parsedDate.format(formatter);
                 startDate = LocalDate.parse(startDate).format(formatter);
-                String dateRange = username + "\n " + startDate + " - " + date;
+                String dateRange = username + "\n" + startDate + " - " + date;
 
                 // Check if the date range is already in the list
                 dateRanges.add(dateRange);
@@ -126,7 +126,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
             for (Wrap wrap : wraps) {
                 // Extract date from Wrap
                 String[] idParts = wrap.getSummaryId().split(" ");
-                String username = idParts[0];
+                //String username = idParts[0];
                 String wrapDate = idParts[1];
                 LocalDate parsedDate = LocalDate.parse(wrapDate, DateTimeFormatter.ISO_DATE);
                 String startDate = "unknown";
@@ -145,7 +145,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
                 wrapDate = parsedDate.format(formatter);
                 startDate = LocalDate.parse(startDate).format(formatter);
-                String fullDateRange = username + "\n" + startDate + " - " + wrapDate;
+                String fullDateRange = startDate + " - " + wrapDate;
 
                 // Check if the retrieved wrap corresponds to the selected date range
                 if (selectedDateRange.equals(fullDateRange)) {
