@@ -55,8 +55,9 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     private void retrieveAndPopulateDateRanges() {
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             for (Wrap wrap : wraps) {
-                // Extract date from Wrap
+                // Extract date and username from Wrap summary ID
                 String[] idParts = wrap.getSummaryId().split(" ");
+                String username = idParts[0];
                 String date = idParts[1];
                 LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
                 String startDate = "unknown";
@@ -75,8 +76,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
                 date = parsedDate.format(formatter);
                 startDate = LocalDate.parse(startDate).format(formatter);
-                String dateRange = startDate + " - " + date;
-                //String dateRange = startDate + " to " + date;
+                String dateRange = username + "\n " + startDate + " - " + date;
 
                 // Check if the date range is already in the list
                 dateRanges.add(dateRange);
@@ -117,11 +117,16 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     // Method to handle click on date block
     @Override
     public void onDateBlockClick(String dateRange) {
+        // Split the dateRange string to extract only the date range
+        String[] parts = dateRange.split("\n");
+        String selectedDateRange = parts[1].trim(); // Extract the date range (remove leading/trailing spaces)
+
         // Retrieve the data for the selected date range
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             for (Wrap wrap : wraps) {
                 // Extract date from Wrap
                 String[] idParts = wrap.getSummaryId().split(" ");
+                String username = idParts[0];
                 String wrapDate = idParts[1];
                 LocalDate parsedDate = LocalDate.parse(wrapDate, DateTimeFormatter.ISO_DATE);
                 String startDate = "unknown";
@@ -140,10 +145,10 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
                 wrapDate = parsedDate.format(formatter);
                 startDate = LocalDate.parse(startDate).format(formatter);
-                String fullDateRange = startDate + " - " + wrapDate;
+                String fullDateRange = username + "\n" + startDate + " - " + wrapDate;
 
                 // Check if the retrieved wrap corresponds to the selected date range
-                if (dateRange.equals(fullDateRange)) {
+                if (selectedDateRange.equals(fullDateRange)) {
                     // Extract artist names from Artist objects
                     List<String> artistNames = new ArrayList<>();
                     for (Artist artist : wrap.getArtists()) {
