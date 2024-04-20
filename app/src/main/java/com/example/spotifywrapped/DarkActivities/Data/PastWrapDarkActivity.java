@@ -39,14 +39,11 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_wrap_dark);
-
         // Initialize RecyclerView for date blocks
         recyclerViewDateBlocks = findViewById(R.id.recycler_view_date_blocks);
         recyclerViewDateBlocks.setLayoutManager(new LinearLayoutManager(this));
-
         // Retrieve and populate date ranges
         retrieveAndPopulateDateRanges();
-
         // Setup bottom navigation view
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
@@ -82,7 +79,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                     String dateRange = startDate + " - " + date;
                     dateRanges.add(dateRange);
                 }
-
                 // Initialize and set adapter for RecyclerView
                 adapter = new DateBlockAdapter(dateRanges);
                 adapter.setOnDateBlockClickListener(this);
@@ -90,7 +86,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             });
         });
     }
-
     // Method to handle bottom navigation item selection
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -115,7 +110,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         }
         return false;
     }
-
     // Method to handle click on date block
     @Override
     public void onDateBlockClick(String dateRange) {
@@ -137,12 +131,10 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                         case short_term:
                             startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
                             break;
-                    }
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
                     wrapDateRange = parsedDate.format(formatter);
                     startDate = LocalDate.parse(startDate).format(formatter);
                     String fullDateRange = startDate + " - " + wrapDateRange;
-
                     // Check if the retrieved wrap corresponds to the selected date range
                     if (dateRange.equals(fullDateRange)) {
                         // Extract artist names from Artist objects
@@ -150,13 +142,11 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                         for (Artist artist : wrap.getArtists()) {
                             artistNames.add(artist.getName());
                         }
-
                         // Extract track names from Track objects
                         List<String> trackNames = new ArrayList<>();
                         for (Track track : wrap.getTracks()) {
                             trackNames.add(track.getName());
                         }
-
                         // Populate the popup with data
                         showPopup(fullDateRange, artistNames, trackNames);
                         break;
@@ -165,28 +155,22 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             });
         });
     }
-
     // Method to show the popup with wrap details
     private void showPopup(String dateRange, List<String> artistNames, List<String> trackNames) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.wrapped_item, null);
         builder.setView(dialogView);
-
         // Access views from the inflated layout
         TextView textViewDateRange = dialogView.findViewById(R.id.textViewDateRange);
         LinearLayout layoutTopArtists = dialogView.findViewById(R.id.topArtists);
         LinearLayout layoutTopSongs = dialogView.findViewById(R.id.topSongs);
-
         // Populate the layout with data
         textViewDateRange.setText(dateRange);
-
         // Set font for the TextViews
         Typeface fancy = getResources().getFont(R.font.univers);
-
         // Set font for date range TextView
         textViewDateRange.setTypeface(fancy);
-
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
@@ -194,7 +178,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             textViewArtist.setTypeface(fancy);
             layoutTopArtists.addView(textViewArtist);
         }
-
         // Populate songs
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
@@ -202,13 +185,11 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             textViewTrack.setTypeface(fancy);
             layoutTopSongs.addView(textViewTrack);
         }
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         // Allow dismissal by touching outside
         alertDialog.setCanceledOnTouchOutside(true);
-
-        // Add close button programmatically
+        // Add close button here for pop up.
         Button buttonClose = new Button(this);
         buttonClose.setText("Close");
         buttonClose.setTextColor(getResources().getColor(android.R.color.white));
@@ -222,7 +203,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         buttonClose.setLayoutParams(layoutParams);
         buttonClose.setOnClickListener(view -> alertDialog.dismiss());
         ((LinearLayout) dialogView).addView(buttonClose);
-
         alertDialog.show();
     }
 

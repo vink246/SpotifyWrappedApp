@@ -8,7 +8,6 @@
     android:background="@drawable/justblack">
 
     <!-- Date Range TextView -->
-
     <TextView
         android:id="@+id/textViewUserName"
         android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
         android:text="User Name"
         android:textColor="@color/white"
         android:textSize="18sp" />
-
     <TextView
         android:id="@+id/textViewDateRange"
         android:layout_width="wrap_content"
