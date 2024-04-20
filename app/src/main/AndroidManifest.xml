@@ -33,6 +33,9 @@
         <!-- PastWrapDarkActivity -->
         <activity android:name=".DarkActivities.Data.PastWrapDarkActivity" />
 
+        <!-- LandingPageActivity -->
+        <activity android:name=".DarkActivities.Data.LandingPageActivity" />
+
         <!-- PublicWrapDarkActivity -->
         <activity android:name=".DarkActivities.Data.PublicWrapDarkActivity" />
 
