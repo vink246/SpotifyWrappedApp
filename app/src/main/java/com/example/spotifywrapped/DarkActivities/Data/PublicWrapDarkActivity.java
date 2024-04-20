@@ -3,10 +3,14 @@ package com.example.spotifywrapped.DarkActivities.Data;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,6 +36,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     private RecyclerView recyclerViewDateBlocks;
     private DateBlockAdapter2 adapter;
     private List<String> dateRanges = new ArrayList<>();
+    private List<String> filteredDateRanges = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,21 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
 
         // Retrieve and populate date ranges
         retrieveAndPopulateDateRanges();
+
+        // Setup search functionality
+        EditText searchEditText = findViewById(R.id.searchEditText);
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filterDateRanges(editable.toString());
+            }
+        });
 
         // Setup bottom navigation view
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -61,7 +81,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 String date = idParts[1];
                 LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
                 String startDate = "unknown";
-                // Determine start date based on timespan
+                // Determine start date based on time-span.
                 switch (wrap.getTimespan()) {
                     case long_term:
                         startDate = parsedDate.minusYears(1).format(DateTimeFormatter.ISO_DATE);
@@ -82,11 +102,32 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 dateRanges.add(dateRange);
             }
 
+            // Set original date ranges to filtered date ranges initially
+            filteredDateRanges.addAll(dateRanges);
+
             // Initialize and set adapter for RecyclerView
-            adapter = new DateBlockAdapter2(dateRanges);
+            adapter = new DateBlockAdapter2(filteredDateRanges);
             adapter.setOnDateBlockClickListener(this);
             recyclerViewDateBlocks.setAdapter(adapter);
         });
+    }
+
+    // Method to filter date ranges based on search query
+    private void filterDateRanges(String query) {
+        filteredDateRanges.clear();
+        if (TextUtils.isEmpty(query)) {
+            // If the query is empty, show all date ranges
+            filteredDateRanges.addAll(dateRanges);
+        } else {
+            // Iterate through all date ranges to find matches
+            for (String dateRange : dateRanges) {
+                if (dateRange.toLowerCase().contains(query.toLowerCase())) {
+                    filteredDateRanges.add(dateRange);
+                }
+            }
+        }
+        // Update RecyclerView with filtered data
+        adapter.notifyDataSetChanged();
     }
 
     // Method to handle bottom navigation item selection
@@ -105,7 +146,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
             finish();
             return true;
         } else if (itemId == R.id.navigation_language) {
-            return true; // Already in this activity, do nothing
+            return true;
         } else if (itemId == R.id.navigation_settings) {
             startActivity(new Intent(this, SettingsDarkOneActivity.class));
             finish();
@@ -117,9 +158,11 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     // Method to handle click on date block
     @Override
     public void onDateBlockClick(String dateRange) {
-        // Split the dateRange string to extract only the date range
+        // Split the dateRange string to extract only the date range since username is added here for
+        // public wraps
         String[] parts = dateRange.split("\n");
-        String selectedDateRange = parts[1].trim(); // Extract the date range (remove leading/trailing spaces)
+        // Extract the date range (remove leading/trailing spaces).
+        String selectedDateRange = parts[1].trim();
 
         // Retrieve the data for the selected date range
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
@@ -130,7 +173,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 String wrapDate = idParts[1];
                 LocalDate parsedDate = LocalDate.parse(wrapDate, DateTimeFormatter.ISO_DATE);
                 String startDate = "unknown";
-                // Determine start date based on timespan
+                // Determine start date based on time-span.
                 switch (wrap.getTimespan()) {
                     case long_term:
                         startDate = parsedDate.minusYears(1).format(DateTimeFormatter.ISO_DATE);
@@ -163,7 +206,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
 
                     // Populate the popup with data
                     showPopup(fullDateRange, artistNames, trackNames);
-                    break; // Stop looping once the data for the selected date range is found
+                    break;
                 }
             }
         });
