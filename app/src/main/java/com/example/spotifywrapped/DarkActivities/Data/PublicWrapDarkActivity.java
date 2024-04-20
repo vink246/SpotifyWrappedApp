@@ -43,35 +43,28 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_wrap_dark);
-
         // Initialize RecyclerView for date blocks
         recyclerViewDateBlocks = findViewById(R.id.recycler_view_date_blocks);
         recyclerViewDateBlocks.setLayoutManager(new LinearLayoutManager(this));
-
         // Retrieve and populate date ranges
         retrieveAndPopulateDateRanges();
-
         // Setup search functionality
         EditText searchEditText = findViewById(R.id.searchEditText);
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
             @Override
             public void afterTextChanged(Editable editable) {
                 filterDateRanges(editable.toString());
             }
         });
-
         // Setup bottom navigation view
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
         bottomNavigationView.setSelectedItemId(R.id.navigation_language);
     }
-
     // Method to retrieve and populate date ranges
     private void retrieveAndPopulateDateRanges() {
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
@@ -98,21 +91,16 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 date = parsedDate.format(formatter);
                 startDate = LocalDate.parse(startDate).format(formatter);
                 String dateRange = username + "\n" + startDate + " - " + date;
-
-                // Check if the date range is already in the list
                 dateRanges.add(dateRange);
             }
-
             // Set original date ranges to filtered date ranges initially
             filteredDateRanges.addAll(dateRanges);
-
             // Initialize and set adapter for RecyclerView
             adapter = new DateBlockAdapter2(filteredDateRanges);
             adapter.setOnDateBlockClickListener(this);
             recyclerViewDateBlocks.setAdapter(adapter);
         });
     }
-
     // Method to filter date ranges based on search query
     private void filterDateRanges(String query) {
         filteredDateRanges.clear();
@@ -155,17 +143,14 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
         }
         return false;
     }
-
     // Method to handle click on date block
     @Override
     public void onDateBlockClick(String dateRange) {
-        // Split the dateRange string to extract only the date range since username is added here for
-        // public wraps
+        // Split the dateRange string to extract only the date range since username is added here for public wraps
         String[] parts = dateRange.split("\n");
         // Extract the date range (remove leading/trailing spaces).
         String selectedDateRange = parts[1].trim();
         String username = parts[0].trim(); // Extract the username
-
         // Retrieve the data for the selected date range
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
             for (Wrap wrap : wraps) {
@@ -191,7 +176,6 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                 wrapDate = parsedDate.format(formatter);
                 startDate = LocalDate.parse(startDate).format(formatter);
                 String fullDateRange = startDate + " - " + wrapDate;
-
                 // Check if the retrieved wrap corresponds to the selected date range
                 if (selectedDateRange.equals(fullDateRange)) {
                     // Extract artist names from Artist objects
@@ -199,15 +183,13 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                     for (Artist artist : wrap.getArtists()) {
                         artistNames.add(artist.getName());
                     }
-
                     // Extract track names from Track objects
                     List<String> trackNames = new ArrayList<>();
                     for (Track track : wrap.getTracks()) {
                         trackNames.add(track.getName());
                     }
-
                     // Populate the popup with data
-                    showPopup(fullDateRange, artistNames, trackNames, username); // Pass the username parameter
+                    showPopup(fullDateRange, artistNames, trackNames, username);
                     break;
                 }
             }
@@ -221,43 +203,36 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.wrapped_item_public, null);
         builder.setView(dialogView);
-
         // Access views from the inflated layout
         TextView textViewDateRange = dialogView.findViewById(R.id.textViewDateRange);
         TextView textViewUserName = dialogView.findViewById(R.id.textViewUserName);
         LinearLayout layoutTopArtists = dialogView.findViewById(R.id.topArtists);
         LinearLayout layoutTopSongs = dialogView.findViewById(R.id.topSongs);
-
         // Populate the layout with data
         textViewDateRange.setText(dateRange);
         textViewUserName.setText(username);
-
-        Typeface font = getResources().getFont(R.font.poppinsmedium);
-        textViewDateRange.setTypeface(font);
-        textViewUserName.setTypeface(font);
-
+        Typeface fancy = getResources().getFont(R.font.univers);
+        textViewDateRange.setTypeface(fancy);
+        textViewUserName.setTypeface(fancy);
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
             textViewArtist.setText(artistName);
-            textViewArtist.setTypeface(font);
+            textViewArtist.setTypeface(fancy);
             layoutTopArtists.addView(textViewArtist);
         }
-
-// Populate songs
+        // Populate songs
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
             textViewTrack.setText(trackName);
-            textViewTrack.setTypeface(font);
+            textViewTrack.setTypeface(fancy);
             layoutTopSongs.addView(textViewTrack);
         }
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         // Allow dismissal by touching outside
         alertDialog.setCanceledOnTouchOutside(true);
-
-        // Add close button programmatically
+        // Add close button.
         Button buttonClose = new Button(this);
         buttonClose.setText("Close");
         buttonClose.setTextColor(getResources().getColor(android.R.color.white));
@@ -271,8 +246,6 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
         buttonClose.setLayoutParams(layoutParams);
         buttonClose.setOnClickListener(view -> alertDialog.dismiss());
         ((LinearLayout) dialogView).addView(buttonClose);
-
         alertDialog.show();
     }
-
 }

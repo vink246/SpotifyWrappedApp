@@ -142,7 +142,6 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                     wrapDateRange = parsedDate.format(formatter);
                     startDate = LocalDate.parse(startDate).format(formatter);
                     String fullDateRange = startDate + " - " + wrapDateRange;
-
                     // Check if the retrieved wrap corresponds to the selected date range
                     if (dateRange.equals(fullDateRange)) {
                         // Extract artist names from Artist objects
@@ -150,13 +149,11 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                         for (Artist artist : wrap.getArtists()) {
                             artistNames.add(artist.getName());
                         }
-
                         // Extract track names from Track objects
                         List<String> trackNames = new ArrayList<>();
                         for (Track track : wrap.getTracks()) {
                             trackNames.add(track.getName());
                         }
-
                         // Populate the popup with data
                         showPopup(fullDateRange, artistNames, trackNames);
                         break;
@@ -165,50 +162,41 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             });
         });
     }
-
     // Method to show the popup with wrap details
     private void showPopup(String dateRange, List<String> artistNames, List<String> trackNames) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.wrapped_item, null);
         builder.setView(dialogView);
-
         // Access views from the inflated layout
         TextView textViewDateRange = dialogView.findViewById(R.id.textViewDateRange);
         LinearLayout layoutTopArtists = dialogView.findViewById(R.id.topArtists);
         LinearLayout layoutTopSongs = dialogView.findViewById(R.id.topSongs);
-
         // Populate the layout with data
         textViewDateRange.setText(dateRange);
-
         // Set font for the TextViews
-        Typeface font = getResources().getFont(R.font.poppinsmedium);
-
+        Typeface fancy = getResources().getFont(R.font.univers);
         // Set font for date range TextView
-        textViewDateRange.setTypeface(font);
-
+        textViewDateRange.setTypeface(fancy);
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
             textViewArtist.setText(artistName);
-            textViewArtist.setTypeface(font);
+            textViewArtist.setTypeface(fancy);
             layoutTopArtists.addView(textViewArtist);
         }
-
         // Populate songs
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
             textViewTrack.setText(trackName);
-            textViewTrack.setTypeface(font);
+            textViewTrack.setTypeface(fancy);
             layoutTopSongs.addView(textViewTrack);
         }
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         // Allow dismissal by touching outside
         alertDialog.setCanceledOnTouchOutside(true);
-
-        // Add close button programmatically
+        // Add close button here for pop up.
         Button buttonClose = new Button(this);
         buttonClose.setText("Close");
         buttonClose.setTextColor(getResources().getColor(android.R.color.white));
@@ -218,11 +206,10 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(0, 16, 0, 0);
-        buttonClose.setTypeface(font);
+        buttonClose.setTypeface(fancy);
         buttonClose.setLayoutParams(layoutParams);
         buttonClose.setOnClickListener(view -> alertDialog.dismiss());
         ((LinearLayout) dialogView).addView(buttonClose);
-
         alertDialog.show();
     }
 
