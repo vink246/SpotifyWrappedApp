@@ -113,7 +113,7 @@
                         android:text="Leading Top Songs"
                         android:fontFamily="@font/poppinsmedium"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp" /> <!-- Center the text -->
+                        android:textSize="16sp" />
 
                     <!-- Add more text views here if needed -->
                 </LinearLayout>
@@ -147,7 +147,7 @@
                         android:fontFamily="@font/poppinsmedium"
                         android:text="Leading Top Artists"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp" /> <!-- Center the text -->
+                        android:textSize="16sp" />
 
                     <!-- Add more text views here if needed -->
                 </LinearLayout>

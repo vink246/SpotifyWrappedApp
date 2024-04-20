@@ -6,20 +6,17 @@
     android:paddingTop="16dp"
     android:background="@drawable/justblack">
 
-    <!-- Title TextView -->
     <TextView
-    android:id="@+id/textViewTitle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="My Wraps"
-    android:textColor="@android:color/white"
-    android:textSize="24sp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    app:layout_constraintBottom_toTopOf="@id/recycler_view_date_blocks" />
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Wraps"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_date_blocks" />
 
     <!-- RecyclerView for displaying date blocks -->
     <androidx.recyclerview.widget.RecyclerView

@@ -5,18 +5,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/justblack">
 
-    <!-- Bottom navigation view -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
+    <!-- Public Wraps Title TextView -->
+    <TextView
+        android:id="@+id/textViewPublicWrapsTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/lightPink"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text="Public Wraps"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Search EditText -->
     <EditText
@@ -32,7 +33,7 @@
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textViewPublicWrapsTitle" />
 
     <!-- RecyclerView for displaying wrapped items -->
     <androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,19 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+        app:layout_constraintTop_toBottomOf="@id/searchEditText" />
+
+    <!-- Bottom navigation view -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/lightPink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

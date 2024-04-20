@@ -2,6 +2,7 @@ package com.example.spotifywrapped.DarkActivities.Data;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -163,6 +164,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
         String[] parts = dateRange.split("\n");
         // Extract the date range (remove leading/trailing spaces).
         String selectedDateRange = parts[1].trim();
+        String username = parts[0].trim(); // Extract the username
 
         // Retrieve the data for the selected date range
         FirebaseProvider.getInstance().getPublicWraps(wraps -> {
@@ -205,39 +207,48 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
                     }
 
                     // Populate the popup with data
-                    showPopup(fullDateRange, artistNames, trackNames);
+                    showPopup(fullDateRange, artistNames, trackNames, username); // Pass the username parameter
                     break;
                 }
             }
         });
     }
 
+
     // Method to show the popup with wrap details
-    private void showPopup(String dateRange, List<String> artistNames, List<String> trackNames) {
+    private void showPopup(String dateRange, List<String> artistNames, List<String> trackNames, String username) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.wrapped_item, null);
+        View dialogView = inflater.inflate(R.layout.wrapped_item_public, null);
         builder.setView(dialogView);
 
         // Access views from the inflated layout
         TextView textViewDateRange = dialogView.findViewById(R.id.textViewDateRange);
+        TextView textViewUserName = dialogView.findViewById(R.id.textViewUserName);
         LinearLayout layoutTopArtists = dialogView.findViewById(R.id.topArtists);
         LinearLayout layoutTopSongs = dialogView.findViewById(R.id.topSongs);
 
         // Populate the layout with data
         textViewDateRange.setText(dateRange);
+        textViewUserName.setText(username);
+
+        Typeface font = getResources().getFont(R.font.poppinsmedium);
+        textViewDateRange.setTypeface(font);
+        textViewUserName.setTypeface(font);
 
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
             textViewArtist.setText(artistName);
+            textViewArtist.setTypeface(font);
             layoutTopArtists.addView(textViewArtist);
         }
 
-        // Populate songs
+// Populate songs
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
             textViewTrack.setText(trackName);
+            textViewTrack.setTypeface(font);
             layoutTopSongs.addView(textViewTrack);
         }
 
@@ -263,4 +274,5 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
 
         alertDialog.show();
     }
+
 }

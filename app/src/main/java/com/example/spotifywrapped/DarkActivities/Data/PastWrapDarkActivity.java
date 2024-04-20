@@ -2,6 +2,7 @@ package com.example.spotifywrapped.DarkActivities.Data;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -158,7 +159,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
 
                         // Populate the popup with data
                         showPopup(fullDateRange, artistNames, trackNames);
-                        break; // Stop looping once the data for the selected date range is found
+                        break;
                     }
                 }
             });
@@ -180,10 +181,17 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         // Populate the layout with data
         textViewDateRange.setText(dateRange);
 
+        // Set font for the TextViews
+        Typeface font = getResources().getFont(R.font.poppinsmedium);
+
+        // Set font for date range TextView
+        textViewDateRange.setTypeface(font);
+
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
             textViewArtist.setText(artistName);
+            textViewArtist.setTypeface(font);
             layoutTopArtists.addView(textViewArtist);
         }
 
@@ -191,6 +199,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
             textViewTrack.setText(trackName);
+            textViewTrack.setTypeface(font);
             layoutTopSongs.addView(textViewTrack);
         }
 
@@ -209,12 +218,13 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(0, 16, 0, 0);
-        buttonClose.setTypeface(getResources().getFont(R.font.univers));
+        buttonClose.setTypeface(font);
         buttonClose.setLayoutParams(layoutParams);
         buttonClose.setOnClickListener(view -> alertDialog.dismiss());
         ((LinearLayout) dialogView).addView(buttonClose);
 
         alertDialog.show();
     }
+
 
 }

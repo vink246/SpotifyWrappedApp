@@ -12,11 +12,11 @@
         android:id="@+id/textViewDateRange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date Range"
+        android:layout_gravity="end"
         android:fontFamily="@font/poppinsmedium"
+        android:text="Date Range"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_gravity="end" />
+        android:textSize="14sp" />
 
     <!-- Artists Title Layout -->
     <LinearLayout
