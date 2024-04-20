@@ -13,6 +13,7 @@
         android:text="My Wraps"
         android:textColor="@android:color/white"
         android:textSize="24sp"
+        android:fontFamily="@font/univers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

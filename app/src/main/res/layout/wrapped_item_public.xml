@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/poppinsmedium"
+        android:fontFamily="@font/univers"
         android:text="User Name"
         android:textColor="@color/white"
         android:textSize="18sp" />
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:fontFamily="@font/poppinsmedium"
+        android:fontFamily="@font/univers"
         android:text="Date Range"
         android:textColor="@color/white"
         android:textSize="14sp" />

@@ -182,16 +182,16 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         textViewDateRange.setText(dateRange);
 
         // Set font for the TextViews
-        Typeface font = getResources().getFont(R.font.poppinsmedium);
+        Typeface fancy = getResources().getFont(R.font.univers);
 
         // Set font for date range TextView
-        textViewDateRange.setTypeface(font);
+        textViewDateRange.setTypeface(fancy);
 
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
             textViewArtist.setText(artistName);
-            textViewArtist.setTypeface(font);
+            textViewArtist.setTypeface(fancy);
             layoutTopArtists.addView(textViewArtist);
         }
 
@@ -199,7 +199,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
             textViewTrack.setText(trackName);
-            textViewTrack.setTypeface(font);
+            textViewTrack.setTypeface(fancy);
             layoutTopSongs.addView(textViewTrack);
         }
 
@@ -218,7 +218,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(0, 16, 0, 0);
-        buttonClose.setTypeface(font);
+        buttonClose.setTypeface(fancy);
         buttonClose.setLayoutParams(layoutParams);
         buttonClose.setOnClickListener(view -> alertDialog.dismiss());
         ((LinearLayout) dialogView).addView(buttonClose);

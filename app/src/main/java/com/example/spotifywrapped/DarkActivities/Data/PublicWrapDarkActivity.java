@@ -232,15 +232,15 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
         textViewDateRange.setText(dateRange);
         textViewUserName.setText(username);
 
-        Typeface font = getResources().getFont(R.font.poppinsmedium);
-        textViewDateRange.setTypeface(font);
-        textViewUserName.setTypeface(font);
+        Typeface fancy = getResources().getFont(R.font.univers);
+        textViewDateRange.setTypeface(fancy);
+        textViewUserName.setTypeface(fancy);
 
         // Populate artists
         for (String artistName : artistNames) {
             TextView textViewArtist = new TextView(this);
             textViewArtist.setText(artistName);
-            textViewArtist.setTypeface(font);
+            textViewArtist.setTypeface(fancy);
             layoutTopArtists.addView(textViewArtist);
         }
 
@@ -248,7 +248,7 @@ public class PublicWrapDarkActivity extends AppCompatActivity implements DateBlo
         for (String trackName : trackNames) {
             TextView textViewTrack = new TextView(this);
             textViewTrack.setText(trackName);
-            textViewTrack.setTypeface(font);
+            textViewTrack.setTypeface(fancy);
             layoutTopSongs.addView(textViewTrack);
         }
 

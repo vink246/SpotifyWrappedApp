@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Public Wraps"
         android:textColor="@android:color/white"
+        android:fontFamily="@font/univers"
         android:textSize="24sp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
