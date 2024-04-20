@@ -92,6 +92,16 @@ public class WrappedDarkActivity extends AppCompatActivity {
             }
         });
 
+        // Retrieve the selected term from the intent extras
+        String selectedTerm = getIntent().getStringExtra("selected_term");
+        // Set the spinner selection based on the selected term
+        if (selectedTerm != null) {
+            int position = adapter.getPosition(selectedTerm);
+            if (position != -1) {
+                spinner.setSelection(position);
+            }
+        }
+
         // Find the button by its ID
         Button yourButton = findViewById(R.id.saveButton);
 
