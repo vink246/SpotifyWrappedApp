@@ -39,11 +39,14 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_wrap_dark);
+
         // Initialize RecyclerView for date blocks
         recyclerViewDateBlocks = findViewById(R.id.recycler_view_date_blocks);
         recyclerViewDateBlocks.setLayoutManager(new LinearLayoutManager(this));
+
         // Retrieve and populate date ranges
         retrieveAndPopulateDateRanges();
+
         // Setup bottom navigation view
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
@@ -79,6 +82,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                     String dateRange = startDate + " - " + date;
                     dateRanges.add(dateRange);
                 }
+
                 // Initialize and set adapter for RecyclerView
                 adapter = new DateBlockAdapter(dateRanges);
                 adapter.setOnDateBlockClickListener(this);
@@ -86,6 +90,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
             });
         });
     }
+
     // Method to handle bottom navigation item selection
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -110,6 +115,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         }
         return false;
     }
+
     // Method to handle click on date block
     @Override
     public void onDateBlockClick(String dateRange) {
@@ -131,6 +137,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
                         case short_term:
                             startDate = parsedDate.minusWeeks(4).format(DateTimeFormatter.ISO_DATE);
                             break;
+                    }
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
                     wrapDateRange = parsedDate.format(formatter);
                     startDate = LocalDate.parse(startDate).format(formatter);
