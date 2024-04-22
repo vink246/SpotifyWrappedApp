@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.spotifywrapped.AccountInfoActivity;
+import com.example.spotifywrapped.DarkActivities.Data.LandingPageActivity;
 import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
@@ -103,7 +104,7 @@ public class SettingsDarkOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate back to WrappedDarkActivity
-                startActivity(new Intent(SettingsDarkOneActivity.this, WrappedDarkActivity.class));
+                startActivity(new Intent(SettingsDarkOneActivity.this, LandingPageActivity.class));
                 finish(); // Finish current activity to prevent navigating back to it with the back button
             }
         });

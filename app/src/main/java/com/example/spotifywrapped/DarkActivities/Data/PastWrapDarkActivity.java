@@ -97,7 +97,7 @@ public class PastWrapDarkActivity extends AppCompatActivity implements DateBlock
         if (itemId == R.id.navigation_history) {
             return true; // Already in this activity, do nothing
         } else if (itemId == R.id.navigation_home) {
-            startActivity(new Intent(this, WrappedDarkActivity.class));
+            startActivity(new Intent(this, LandingPageActivity.class));
             finish();
             return true;
         } else if (itemId == R.id.navigation_language) {
