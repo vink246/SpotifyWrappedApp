@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.models.Artist;
+import com.example.spotifywrapped.models.Track;
 import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.spotifyServices.SpotifyWrapped;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,6 +36,8 @@ public class WrapSwipeActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
+        wrapped = (SpotifyWrapped) getIntent().getSerializableExtra("wrapped");
+
         setupViewPager();
     }
 
@@ -43,24 +47,57 @@ public class WrapSwipeActivity extends AppCompatActivity {
             public Fragment createFragment(int position) {
                 switch (position) {
                     case 0:
+                        provider.playTrack(wrapped.getTrackList().get(1));
                         return new TopSongListFragment();
                     case 1:
+                        provider.playTrack(wrapped.getTopTrack());
                         return new TopSongFragment();
                     case 2:
+                        provider.playTrack(getSongFromArtist(wrapped.getArtistList().get(1)));
                         return new TopArtistListFragment();
-                    default:
+                    case 3:
+                        provider.playTrack(getSongFromArtist(wrapped.getTopArtist()));
+                        return new TopArtistFragment();
+                    case 4:
+                        Track toPlay = getTrackByGenre(wrapped.getGenre());
+                        if (toPlay != null) {
+                            provider.playTrack(toPlay);
+                        }
                         return new TopGenreFragment();
-//                    default:
-//                        return new SummaryFragment();
+                    default:
+                        provider.playTrack(wrapped.getTopTrack());
+                        return new TopGenreFragment();
                 }
             }
 
             @Override
             public int getItemCount() {
-                return 4;
+                return 6;
             }
         };
         viewPager.setAdapter(adapter);
+    }
+
+    private Track getSongFromArtist(Artist artist) {
+        for (Track track: wrapped.getTrackList()) {
+            if (track.getArtists().contains(artist.getName())) {
+                return track;
+            }
+        }
+        return wrapped.getTopTrack();
+    }
+
+    private Track getTrackByGenre(String genre) {
+        for (Track track : wrapped.getTrackList()) {
+            for (String artistName : track.getArtists()) {
+                for (Artist artist : wrapped.getArtistList()) {
+                    if (artist.getName().equals(artistName) && artist.getGenres().contains(genre)) {
+                        return track;
+                    }
+                }
+            }
+        }
+        return null; // Genre not found in the SpotifyWrapped object
     }
 
     private boolean handleBottomNavigationItemSelected(MenuItem item) {
