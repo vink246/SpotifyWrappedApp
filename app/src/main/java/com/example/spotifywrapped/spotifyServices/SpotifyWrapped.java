@@ -3,6 +3,7 @@ package com.example.spotifywrapped.spotifyServices;
 import com.example.spotifywrapped.models.Artist;
 import com.example.spotifywrapped.models.Track;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,10 +13,10 @@ import java.util.Map;
 /**
  * Generates and maintains a SpotifyWrapped object.
  */
-public class SpotifyWrapped {
+public class SpotifyWrapped implements Serializable {
 
     /** Instance of SpotifyProvider (works with Spotify API) */
-    private SpotifyProvider spotifyProvider = SpotifyProvider.getInstance();
+    private transient SpotifyProvider spotifyProvider = SpotifyProvider.getInstance();
 
     /** Unique id of wrapped */
     public String summaryId;
