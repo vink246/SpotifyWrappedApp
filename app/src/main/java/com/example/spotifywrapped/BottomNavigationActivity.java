@@ -6,6 +6,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.spotifywrapped.DarkActivities.Data.LandingPageActivity;
 import com.example.spotifywrapped.DarkActivities.Data.PastWrapDarkActivity;
 import com.example.spotifywrapped.DarkActivities.Data.PublicWrapDarkActivity;
 import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
@@ -24,7 +25,7 @@ public abstract class BottomNavigationActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
-                startActivity(new Intent(this, WrappedDarkActivity.class));
+                startActivity(new Intent(this, LandingPageActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_history) {
                 startActivity(new Intent(this, PastWrapDarkActivity.class));

@@ -15,36 +15,24 @@
         android:theme="@style/Theme.SpotifyWrapped"
         tools:targetApi="31">
         <activity
-            android:name="MainActivity"
+            android:name=".DarkActivities.Data.WrapSwipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- BottomNavigationActivity -->
-        <activity android:name=".BottomNavigationActivity" />
-
-        <!-- AccountInfoActivity -->
-        <activity android:name=".AccountInfoActivity" />
-
-        <!-- PastWrapDarkActivity -->
-        <activity android:name=".DarkActivities.Data.PastWrapDarkActivity" />
-
-        <!-- LandingPageActivity -->
-        <activity android:name=".DarkActivities.Data.LandingPageActivity" />
-
-        <!-- PublicWrapDarkActivity -->
-        <activity android:name=".DarkActivities.Data.PublicWrapDarkActivity" />
-
-        <!-- SettingsDarkOneActivity -->
-        <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
-
-        <!-- WrappedDarkActivity -->
+        </activity> <!-- BottomNavigationActivity -->
+        <activity android:name=".BottomNavigationActivity" /> <!-- AccountInfoActivity -->
+        <activity android:name=".AccountInfoActivity" /> <!-- PastWrapDarkActivity -->
+        <activity android:name=".DarkActivities.Data.PastWrapDarkActivity" /> <!-- LandingPageActivity -->
+        <activity android:name=".DarkActivities.Data.LandingPageActivity" /> <!-- PublicWrapDarkActivity -->
+        <activity android:name=".DarkActivities.Data.PublicWrapDarkActivity" /> <!-- SettingsDarkOneActivity -->
+        <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" /> <!-- WrappedDarkActivity -->
         <activity android:name=".DarkActivities.Data.WrappedDarkActivity" />
-
     </application>
 
 </manifest>
