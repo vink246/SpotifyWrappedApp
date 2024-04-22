@@ -8,6 +8,19 @@
     android:background="@drawable/wrappeddark"
     tools:context=".MainActivity">
 
+    <!-- ViewPager for swiping between fragments -->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.viewpager.widget.ViewPager>
+
     <RelativeLayout
         android:id="@+id/wrappedLayout"
         android:layout_width="match_parent"
@@ -156,9 +169,36 @@
                 <!-- Add more text views here if needed -->
             </LinearLayout>
 
+
         </LinearLayout>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pink"
+        android:fontFamily="@font/univers"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pink"
+        android:fontFamily="@font/univers"
+        android:text="Return"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/saveButton" />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
