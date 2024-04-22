@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <TextView
-            android:id="@+id/topSong"
+            android:id="@+id/topArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Top Artist:"
@@ -48,7 +48,7 @@
             android:textSize="60sp" />
 
         <TextView
-            android:id="@+id/songName"
+            android:id="@+id/artistName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
