@@ -50,15 +50,18 @@
                     android:textColor="@color/white"
                     android:textSize="96sp" />
 
+
                 <TextView
                     android:id="@+id/artist2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/white"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
+
+
             </LinearLayout>
         </LinearLayout>
 
@@ -89,12 +92,13 @@
 
                 <TextView
                     android:id="@+id/artist3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
             </LinearLayout>
         </LinearLayout>
 
@@ -125,12 +129,13 @@
 
                 <TextView
                     android:id="@+id/artist4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/white"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
 
             </LinearLayout>
         </LinearLayout>
@@ -162,12 +167,13 @@
 
                 <TextView
                     android:id="@+id/artist5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
             </LinearLayout>
 
         </LinearLayout>
