@@ -1,20 +1,52 @@
 package com.example.spotifywrapped.DarkActivities.Data;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
+import com.example.spotifywrapped.models.Wrap;
 
 public class SummaryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.summary, container, false);
+        Button saveButton = rootView.findViewById(R.id.saveButton);
+        Button returnButton = rootView.findViewById(R.id.returnButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (WrapSwipeActivity.wrapped != null) {
+                    FirebaseProvider.getInstance().saveWrap(WrapSwipeActivity.wrapped.username, new Wrap(
+                            WrapSwipeActivity.wrapped.summaryId,
+                            WrapSwipeActivity.wrapped.username,
+                            WrapSwipeActivity.wrapped.timespan,
+                            WrapSwipeActivity.wrapped.getTrackList(),
+                            WrapSwipeActivity.wrapped.getArtistList(),
+                            WrapSwipeActivity.wrapped.getGenre(),
+                            false
+                    ), getActivity());
+                }
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LandingPageActivity.class);
+                // Start the activity
+                startActivity(intent);
+            }
+        });
         TextView topSong = rootView.findViewById(R.id.textSongTitle);
         topSong.setText("Top Song: \n\n" + WrapSwipeActivity.wrapped.getTopTrack().getName());
         TextView topArtist = rootView.findViewById(R.id.textArtistTitle);
