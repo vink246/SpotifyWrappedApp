@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
@@ -53,9 +54,11 @@ public class WrapSwipeActivity extends AppCompatActivity {
                         provider.playTrack(wrapped.getTopTrack());
                         return new TopSongFragment();
                     case 2:
+                        Log.d("WrapSwipeActivity", getSongFromArtist(wrapped.getArtistList().get(1)).toString());
                         provider.playTrack(getSongFromArtist(wrapped.getArtistList().get(1)));
                         return new TopArtistListFragment();
                     case 3:
+                        Log.d("WrapSwipeActivity", getSongFromArtist(wrapped.getTopArtist()).toString());
                         provider.playTrack(getSongFromArtist(wrapped.getTopArtist()));
                         return new TopArtistFragment();
                     case 4:
