@@ -21,7 +21,7 @@ public class TopArtistFragment extends Fragment {
         //setContentView(R.layout.top_artist);
         final View rootView = inflater.inflate(R.layout.top_artist, container, false);
         TextView name = rootView.findViewById(R.id.artistName);
-        name.setText(WrapSwipeActivity.wrapped.getTopArtist().getName());
+        name.setText("\n" + WrapSwipeActivity.wrapped.getTopArtist().getName());
         ImageView image = rootView.findViewById(R.id.imageView2);
         Picasso.get().load(WrapSwipeActivity.wrapped.getTopArtist().getImage()).into(image);
 

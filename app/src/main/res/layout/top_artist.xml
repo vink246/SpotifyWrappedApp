@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <!-- ViewPager for swiping between fragments -->
     <androidx.viewpager.widget.ViewPager
@@ -42,15 +43,17 @@
             android:id="@+id/topArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/univers"
             android:text="Top Artist:"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="60sp" />
+            android:textSize="48sp" />
 
         <TextView
             android:id="@+id/artistName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/univers"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHighlight="@color/orange"

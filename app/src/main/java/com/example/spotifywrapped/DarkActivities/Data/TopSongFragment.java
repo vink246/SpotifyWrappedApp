@@ -19,7 +19,7 @@ public class TopSongFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.top_song, container, false);
         TextView name = rootView.findViewById(R.id.songName);
-        name.setText(WrapSwipeActivity.wrapped.getTopTrack().getName());
+        name.setText("\n" + WrapSwipeActivity.wrapped.getTopTrack().getName());
         ImageView image = rootView.findViewById(R.id.imageView3);
         Picasso.get().load(WrapSwipeActivity.wrapped.getTopTrack().getImage()).into(image);
         return rootView;    }
