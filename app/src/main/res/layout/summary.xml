@@ -61,7 +61,7 @@
         <TextView
             android:id="@+id/textArtistTitle"
             android:layout_width="371dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="46dp"
             android:fontFamily="@font/univers"
@@ -70,16 +70,6 @@
             android:textColor="@color/yellow"
             android:textSize="16sp" />
         <!-- Additional Text Field 1 -->
-        <TextView
-            android:id="@+id/artistname"
-            android:layout_width="314dp"
-            android:layout_height="37dp"
-            android:layout_below="@id/textArtistTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/univers"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
 
         <!-- Additional Text Field 2 -->
         <TextView
@@ -96,18 +86,6 @@
             android:textSize="16sp" />
 
         <!-- Additional Text Field 3 -->
-        <TextView
-            android:id="@+id/additionalTextField3"
-            android:layout_width="314dp"
-            android:layout_height="37dp"
-            android:layout_below="@id/textArtistTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/univers"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
-
-
 
 
         <!-- Display Leading Top Songs and Artists -->
