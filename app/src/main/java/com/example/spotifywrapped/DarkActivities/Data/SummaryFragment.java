@@ -32,6 +32,10 @@ public class SummaryFragment extends Fragment {
                 "\n4. " + WrapSwipeActivity.wrapped.getArtistList().get(3).getName() +
                 "\n5. " + WrapSwipeActivity.wrapped.getArtistList().get(4).getName());
 
+        TextView genre = rootView.findViewById(R.id.textGenreTitle);
+        genre.setText("Top Genre: \n\n" + WrapSwipeActivity.wrapped.getGenre());
+
+
         return rootView;
     }
 }

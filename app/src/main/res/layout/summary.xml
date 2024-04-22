@@ -49,7 +49,7 @@
         <TextView
             android:id="@+id/textGenreTitle"
             android:layout_width="371dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="414dp"
             android:fontFamily="@font/univers"
@@ -98,7 +98,7 @@
             android:layout_below="@id/textViewTopGenre"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="225dp"
-            android:layout_marginBottom="262dp"
+            android:layout_marginBottom="242dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             tools:ignore="NotSibling">
