@@ -24,9 +24,6 @@
             </intent-filter>
         </activity>
 
-        <!-- HomeActivity -->
-        <activity android:name=".HomeActivity" />
-
         <!-- BottomNavigationActivity -->
         <activity android:name=".BottomNavigationActivity" />
 
@@ -36,45 +33,17 @@
         <!-- PastWrapDarkActivity -->
         <activity android:name=".DarkActivities.Data.PastWrapDarkActivity" />
 
+        <!-- LandingPageActivity -->
+        <activity android:name=".DarkActivities.Data.LandingPageActivity" />
+
         <!-- PublicWrapDarkActivity -->
         <activity android:name=".DarkActivities.Data.PublicWrapDarkActivity" />
 
         <!-- SettingsDarkOneActivity -->
         <activity android:name=".DarkActivities.Settings.SettingsDarkOneActivity" />
 
-        <!-- FriendRequestDarkActivity -->
-        <activity android:name=".DarkActivities.Settings.FriendRequestDarkActivity" />
-
-        <!-- CheckFriendDarkActivity -->
-        <activity android:name=".DarkActivities.Settings.CheckFriendDarkActivity" />
-
-        <!-- SettingsLightOneActivity -->
-        <activity android:name=".LightActivities.Settings.SettingsLightOneActivity" />
-
-
-        <!-- FriendArtistCompDarkActivity -->
-        <activity android:name=".DarkActivities.Data.FriendArtistCompDarkActivity" />
-
-        <!-- FriendArtistCompLightActivity -->
-        <activity android:name=".LightActivities.Data.FriendArtistCompLightActivity" />
-
-        <!-- FriendCompDarkActivity -->
-        <activity android:name=".DarkActivities.Data.FriendCompDarkActivity" />
-
-        <!-- FriendCompLightActivity -->
-        <activity android:name=".LightActivities.Data.FriendCompLightActivity" />
-
-        <!-- TopArtistDarkActivity -->
-        <activity android:name=".DarkActivities.Data.TopArtistDarkActivity" />
-
-        <!-- TopArtistLightActivity -->
-        <activity android:name=".LightActivities.Data.TopArtistLightActivity" />
-
         <!-- WrappedDarkActivity -->
         <activity android:name=".DarkActivities.Data.WrappedDarkActivity" />
-
-        <!-- WrappedLightActivity -->
-        <activity android:name=".LightActivities.Data.WrappedLightActivity" />
 
     </application>
 

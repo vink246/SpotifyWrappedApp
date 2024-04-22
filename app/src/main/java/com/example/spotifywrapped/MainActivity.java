@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.spotifywrapped.DarkActivities.Data.LandingPageActivity;
 import com.example.spotifywrapped.DarkActivities.Data.WrappedDarkActivity;
 import com.example.spotifywrapped.firebaseServices.FirebaseProvider;
 import com.example.spotifywrapped.models.User;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
             "user-read-recently-played",
             "user-library-modify",
             "user-library-read",
-            "user-read-email"
+            "user-read-email",
+            "user-read-private"
     };
 
     @Override
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyProvider.S
             }
         });
         // Once the provider is initialized, we navigate (only if it is valid)
-        Intent homeIntent = new Intent(this, WrappedDarkActivity.class);
+        Intent homeIntent = new Intent(this, LandingPageActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeIntent);
     }

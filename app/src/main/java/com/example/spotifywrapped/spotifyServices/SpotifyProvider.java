@@ -355,8 +355,9 @@ public class SpotifyProvider {
                     String username = jsonResponse.getString("display_name");
                     String email = jsonResponse.getString("email");
                     String uri = jsonResponse.getString("uri");
+                    boolean premium = jsonResponse.getString("product").equals("premium");
 
-                    user = new SpotifyUser(username, email, uri);
+                    user = new SpotifyUser(username, email, uri, premium);
                 } else {
                     Log.d("SpotifyProvider", "GET request did not work");
                     Log.d("SpotifyProvider", "Error: "+con.getResponseCode()+", "+con.getResponseMessage());

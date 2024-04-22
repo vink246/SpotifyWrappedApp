@@ -24,6 +24,7 @@ import com.example.spotifywrapped.spotifyServices.SpotifyProvider;
 import com.example.spotifywrapped.DarkActivities.Settings.SettingsDarkOneActivity;
 import com.example.spotifywrapped.spotifyServices.SpotifyWrapped;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class WrappedDarkActivity extends AppCompatActivity {
     TextView textViewLeadingSongs;
     TextView textViewLeadingArtists;
     ImageView artistImage;
+
+    private static boolean snackbarPrevShown = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,16 @@ public class WrappedDarkActivity extends AppCompatActivity {
             }
         });
 
+        // Retrieve the selected term from the intent extras
+        String selectedTerm = getIntent().getStringExtra("selected_term");
+        // Set the spinner selection based on the selected term
+        if (selectedTerm != null) {
+            int position = adapter.getPosition(selectedTerm);
+            if (position != -1) {
+                spinner.setSelection(position);
+            }
+        }
+
         // Find the button by its ID
         Button yourButton = findViewById(R.id.saveButton);
 
@@ -108,6 +122,15 @@ public class WrappedDarkActivity extends AppCompatActivity {
                 }
             }
         });
+        provider.getMyUserInfo(info -> {
+            if (!info.isPremium() && !snackbarPrevShown) {
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "You don't have premium. Audio may be erratic", Snackbar.LENGTH_INDEFINITE);
+
+                snackbar.setAction("Dismiss", v -> snackbar.dismiss()); // Add an action to dismiss the Snackbar when clicked
+                snackbar.show();
+                snackbarPrevShown = true;
+            }
+        });
     }
 
     private synchronized void loadPage() {
@@ -119,7 +142,7 @@ public class WrappedDarkActivity extends AppCompatActivity {
                         provider.getMyUserInfo(info -> {
                             if (info != null) {
                                 if (topTracks.size() < 5 || topArtists.size() < 5) {
-                                    Toast.makeText(getApplicationContext(), "You haven't listened to enough songs to get a wrapped for this term!",
+                                    Toast.makeText(getApplicationContext(), "You haven't listened to enough songs for this term!",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     // by the time we are here, we should have top tracks, artists, and user info
@@ -171,10 +194,6 @@ public class WrappedDarkActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.navigation_home) {
             // Do nothing as we are already in WrappedDarkActivity
-        } else if (itemId == R.id.navigation_group) {
-            provider.pauseCurrentTrack();
-            startActivity(new Intent(this, FriendArtistCompDarkActivity.class));
-            finish();
         } else if (itemId == R.id.navigation_history) {
             provider.pauseCurrentTrack();
             startActivity(new Intent(this, PastWrapDarkActivity.class));
