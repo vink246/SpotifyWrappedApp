@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class LandingPageActivity extends AppCompatActivity {
 
     private Spinner spinnerTerms;
     private Button buttonProceed;
+    private ProgressBar loadingProgressBar;
 
     SpotifyProvider provider;
     SpotifyWrapped wrapped;
@@ -44,6 +46,7 @@ public class LandingPageActivity extends AppCompatActivity {
         // Initialize views
         spinnerTerms = findViewById(R.id.spinner);
         buttonProceed = findViewById(R.id.generateButton);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar); // Initialize ProgressBar
 
         // Populate spinner with term options
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -89,6 +92,9 @@ public class LandingPageActivity extends AppCompatActivity {
         buttonProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Show loading progress
+                showLoading();
+
                 // Proceed to WrappedDarkActivity regardless of term selection
                 getWrapped();
             }
@@ -105,6 +111,16 @@ public class LandingPageActivity extends AppCompatActivity {
         });
     }
 
+    private void showLoading() {
+        loadingProgressBar.setVisibility(View.VISIBLE); // Show loading ProgressBar
+        buttonProceed.setEnabled(false); // Disable the button during loading
+    }
+
+    private void hideLoading() {
+        loadingProgressBar.setVisibility(View.GONE); // Hide loading ProgressBar
+        buttonProceed.setEnabled(true); // Enable the button after loading is complete
+    }
+
     private synchronized void getWrapped() {
         provider.getTopTracks(5, 0, selectedItem, topTracks -> {
             if (topTracks != null) {
@@ -116,6 +132,7 @@ public class LandingPageActivity extends AppCompatActivity {
                                 if (topTracks.size() < 5 || topArtists.size() < 5) {
                                     Toast.makeText(getApplicationContext(), "You haven't listened to enough songs for this term!",
                                             Toast.LENGTH_SHORT).show();
+                                    hideLoading();
                                 } else {
                                     // by the time we are here, we should have top tracks, artists, and user info
                                     wrapped = new SpotifyWrapped(
@@ -124,14 +141,13 @@ public class LandingPageActivity extends AppCompatActivity {
                                             selectedItem,
                                             info.getUsername()
                                     );
+                                    hideLoading(); // Hide loading after data is ready
                                     startActivityWithSelectedTerm();
                                 }
                             }
                         });
                     }
                 });
-
-
             }
         });
     }
