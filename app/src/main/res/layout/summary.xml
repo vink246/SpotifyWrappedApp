@@ -31,24 +31,17 @@
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="-16dp">
 
-        <!-- Display Top Song -->
-
-        <!-- Display Top Artist -->
-
-
-        <!-- Display Top Genre -->
-
-        <!-- Display Leading Top Songs and Artists -->
-
 
         <TextView
             android:id="@+id/textSongTitle"
             android:layout_width="371dp"
             android:layout_height="38dp"
+            android:layout_below="@+id/textArtistTitle"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="94dp"
+            android:layout_marginTop="57dp"
             android:layout_marginEnd="80dp"
             android:layout_marginBottom="520dp"
             android:fontFamily="@font/univers"
@@ -88,6 +81,46 @@
             android:text="TOP ARTIST"
             android:textColor="@color/yellow"
             android:textSize="16sp" />
+        <!-- Additional Text Field 1 -->
+        <TextView
+            android:id="@+id/additionalTextField1"
+            android:layout_width="314dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/textArtistTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/univers"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <!-- Additional Text Field 2 -->
+        <TextView
+            android:id="@+id/additionalTextField2"
+            android:layout_width="314dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/textArtistTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/univers"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <!-- Additional Text Field 3 -->
+        <TextView
+            android:id="@+id/additionalTextField3"
+            android:layout_width="314dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/textArtistTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/univers"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+
+
+
+        <!-- Display Leading Top Songs and Artists -->
 
 
         <LinearLayout
@@ -174,6 +207,7 @@
 
     </RelativeLayout>
 
+    <!-- Save Button -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
@@ -181,10 +215,12 @@
         android:backgroundTint="@color/pink"
         android:fontFamily="@font/univers"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"/>
 
+    <!-- Return Button -->
     <Button
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
@@ -194,7 +230,8 @@
         android:text="Return"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/saveButton" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
 
 
 
