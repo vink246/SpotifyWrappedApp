@@ -58,12 +58,13 @@
 
                 <TextView
                     android:id="@+id/song2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/white"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
             </LinearLayout>
         </LinearLayout>
 
@@ -94,12 +95,13 @@
 
                 <TextView
                     android:id="@+id/song3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
             </LinearLayout>
         </LinearLayout>
 
@@ -130,12 +132,13 @@
 
                 <TextView
                     android:id="@+id/song4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/white"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
             </LinearLayout>
         </LinearLayout>
 
@@ -166,12 +169,13 @@
 
                 <TextView
                     android:id="@+id/song5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="195dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/univers"
                     android:text="TextView"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:layout_gravity="center_vertical|start"/> <!-- Adjusted layout_gravity here -->
             </LinearLayout>
 
         </LinearLayout>
