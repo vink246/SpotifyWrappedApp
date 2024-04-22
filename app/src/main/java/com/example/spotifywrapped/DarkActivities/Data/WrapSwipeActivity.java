@@ -66,7 +66,7 @@ public class WrapSwipeActivity extends AppCompatActivity {
                         return new TopGenreFragment();
                     default:
                         provider.playTrack(wrapped.getTopTrack());
-                        return new TopGenreFragment();
+                        return new SummaryFragment();
                 }
             }
 
